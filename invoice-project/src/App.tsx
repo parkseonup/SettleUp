@@ -1,3 +1,12 @@
+import { RouterProvider } from 'react-router-dom';
+import Header from './components/header/Header';
+import { routers } from './router';
+
 export default function App() {
-  return <h1>App</h1>;
+  return (
+    <>
+      <Header />
+      <RouterProvider router={routers} />
+    </>
+  );
 }
