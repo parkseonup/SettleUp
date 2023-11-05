@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { NavData } from '../../../router';
 import { css } from '@emotion/react';
+import { CSSInterpolation } from '@emotion/serialize';
 
 interface MenuListProps {
   menuData: NavData;
-  listStyle?: { [key: string]: any };
-  textStyle?: { [key: string]: any };
+  listStyle?: Array<CSSInterpolation>;
+  textStyle?: Array<CSSInterpolation>;
 }
 
 export default function MenuList({ menuData, listStyle, textStyle }: MenuListProps) {
