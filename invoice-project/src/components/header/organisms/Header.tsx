@@ -3,7 +3,7 @@ import MenuButton from '../atoms/MenuButton';
 import Menu from '../molecules/Menu';
 import HeaderTitle from '../atoms/HeaderTitle';
 import { css } from '@emotion/react';
-import { container } from '../../../styles/common/layout/container';
+import { contentPadding } from '../../../styles/common/layout/contentPadding';
 import { colors } from '../../../styles/variables/colors';
 
 export default function Header() {
@@ -15,7 +15,7 @@ export default function Header() {
 
   return (
     <header
-      css={css(container, {
+      css={css(contentPadding, {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',

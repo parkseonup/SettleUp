@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { container } from '../../../styles/common/layout/container';
+import { contentPadding } from '../../../styles/common/layout/contentPadding';
 import { zIndexes } from '../../../styles/variables/zIndexes';
 import { colors } from '../../../styles/variables/colors';
 import { NavData, navData } from '../../../router';
@@ -23,7 +23,7 @@ export default function Menu({ showMenu }: MenuProps) {
 
   return (
     <nav
-      css={css(container, {
+      css={css(contentPadding, {
         position: 'fixed',
         top: 0,
         right: showMenu ? '0' : '-100%',

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
 
-export const container = css`
+export const contentPadding = css`
   padding: 0 18px;
 `;
