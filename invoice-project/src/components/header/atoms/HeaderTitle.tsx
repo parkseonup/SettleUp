@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
-import { zIndexs } from '../../../styles/variables/zIndexs';
+import { zIndexes } from '../../../styles/variables/zIndexes';
 
 export default function HeaderTitle() {
   return (
     <h1
       css={css({
         position: 'relative',
-        zIndex: zIndexs.HEADER_TITLE,
+        zIndex: zIndexes.HEADER_TITLE,
         margin: 0,
         fontSize: '16px',
         fontWeight: 500,

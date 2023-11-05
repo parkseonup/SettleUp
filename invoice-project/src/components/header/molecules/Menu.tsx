@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { container } from '../../../styles/common/layout/container';
-import { zIndexs } from '../../../styles/variables/zIndexs';
+import { zIndexes } from '../../../styles/variables/zIndexes';
 import { colors } from '../../../styles/variables/colors';
 import { NavData, navData } from '../../../router';
 import MenuList from './MenuList';
@@ -27,7 +27,7 @@ export default function Menu({ showMenu }: MenuProps) {
         position: 'fixed',
         top: 0,
         right: showMenu ? '0' : '-100%',
-        zIndex: zIndexs.MENU_WRAPPER,
+        zIndex: zIndexes.MENU_WRAPPER,
         width: '100%',
         height: '100vh',
         paddingTop: '80px',

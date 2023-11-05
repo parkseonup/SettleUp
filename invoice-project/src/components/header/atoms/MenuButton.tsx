@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { Dispatch, SetStateAction } from 'react';
 import { BiMenu, BiX } from 'react-icons/bi';
-import { zIndexs } from '../../../styles/variables/zIndexs';
+import { zIndexes } from '../../../styles/variables/zIndexes';
 import { colors } from '../../../styles/variables/colors';
 
 interface MenuButtonProps {
@@ -16,7 +16,7 @@ export default function MenuButton({ showMenu, setShowMenu }: MenuButtonProps) {
       aria-label="메뉴 보기"
       css={css({
         position: 'relative',
-        zIndex: zIndexs.MENU_BUTTON,
+        zIndex: zIndexes.MENU_BUTTON,
         fontSize: '24px',
         color: showMenu ? colors.WHITE : colors.BLACK,
       })}
