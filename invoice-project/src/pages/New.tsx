@@ -1,5 +1,5 @@
 import ContentTitle from '../components/ContentTitle/molecules/ContentTitle';
-import PageLayout from '../components/PageLayout/moleculess/PageLayout';
+import PageLayout from '../components/PageLayout/moleculess/PageLayoutMain';
 
 export default function New() {
   return (
