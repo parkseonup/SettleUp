@@ -39,7 +39,7 @@ export default function Menu({ showMenu }: MenuProps) {
       <MenuList
         menuData={defaultMenu}
         textStyle={{
-          fontSize: '24px',
+          fontSize: '20px',
           color: colors.WHITE,
         }}
       />
@@ -51,7 +51,7 @@ export default function Menu({ showMenu }: MenuProps) {
           borderTop: `1px solid ${colors.LIGHT_GRAY}`,
         }}
         textStyle={{
-          fontSize: '16px',
+          fontSize: '15px',
           color: colors.LIGHT_GRAY,
         }}
       />

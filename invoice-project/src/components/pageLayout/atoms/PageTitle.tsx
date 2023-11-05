@@ -13,7 +13,7 @@ export default function PageTitle({ value, style }: PageTitleProps) {
       css={css(
         {
           margin: 0,
-          fontSize: '24px',
+          fontSize: '20px',
           fontWeight: 500,
           color: colors.BLACK,
         },
