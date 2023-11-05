@@ -1,3 +1,3 @@
 import { CSSInterpolation } from '@emotion/serialize';
 
-export type Style = Array<CSSInterpolation>;
+export type Style = CSSInterpolation;
