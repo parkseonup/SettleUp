@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import GlobalHeader from '../components/globalHeader/organisms/GlobalHeader';
+import GlobalHeader from '../components/GlobalHeader/organisms/GlobalHeader';
 import { Global } from '@emotion/react';
 import { globalStyle } from '../styles/globalStyle.style';
 
