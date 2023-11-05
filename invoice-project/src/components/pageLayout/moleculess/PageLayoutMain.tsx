@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { css } from '@emotion/react';
-import getCompositionComponent from '../../../utils/getCompositionComponent';
+import getChildComponent from '../../../utils/getChildComponent';
 import PageTitleDescription from '../atoms/PageTitleDescription';
 import PageTitle from '../atoms/PageTitle';
 import PageContent from '../atoms/PageContent';
@@ -11,9 +11,9 @@ interface PageLayoutMainProps {
 }
 
 export default function PageLayoutMain({ children }: PageLayoutMainProps) {
-  const title = getCompositionComponent(children, PageTitle);
-  const description = getCompositionComponent(children, PageTitleDescription);
-  const content = getCompositionComponent(children, PageContent);
+  const title = getChildComponent(children, PageTitle);
+  const description = getChildComponent(children, PageTitleDescription);
+  const content = getChildComponent(children, PageContent);
 
   return (
     <section
