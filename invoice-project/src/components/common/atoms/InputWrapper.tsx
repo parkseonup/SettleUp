@@ -8,7 +8,7 @@ interface Props {
   style?: Style;
 }
 
-export default function InputGroup({ children, style }: Props) {
+export default function InputWrapper({ children, style }: Props) {
   const [isActive, setIsActive] = useState(false);
 
   const onFocus = ({ target }: { target: HTMLElement }) => {
