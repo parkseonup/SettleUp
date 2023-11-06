@@ -4,10 +4,10 @@ import { Style } from '../../../types/Style';
 
 interface ContentTitleOptionProps {
   value?: string;
-  style?: Style;
+  customStyle?: Style;
 }
 
-export default function ContentTitleOption({ value, style }: ContentTitleOptionProps) {
+export default function ContentTitleOption({ value, customStyle }: ContentTitleOptionProps) {
   return (
     <em
       css={css(
@@ -18,7 +18,7 @@ export default function ContentTitleOption({ value, style }: ContentTitleOptionP
           fontStyle: 'normal',
           color: colors.DARK_GRAY,
         },
-        style,
+        customStyle,
       )}
     >
       {value}

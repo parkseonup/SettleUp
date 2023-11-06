@@ -4,10 +4,10 @@ import { Style } from '../../../types/Style';
 
 export interface PageTitleDescriptionProps {
   value: string;
-  style?: Style;
+  customStyle?: Style;
 }
 
-export default function PageTitleDescription({ value, style }: PageTitleDescriptionProps) {
+export default function PageTitleDescription({ value, customStyle }: PageTitleDescriptionProps) {
   return (
     <p
       css={css(
@@ -17,7 +17,7 @@ export default function PageTitleDescription({ value, style }: PageTitleDescript
           fontWeight: 400,
           color: colors.DARK_GRAY,
         },
-        style,
+        customStyle,
       )}
     >
       {value}

@@ -10,14 +10,14 @@ interface Props {
 }
 
 export default function ContentTitle({ as: Title, value, option }: Props) {
-  const style = css({
+  const customStyle = css({
     padding: 0,
     margin: 0,
     fontSize: '15px',
     fontWeight: 500,
     color: colors.BLACK,
   });
-  const cssProp = typeof Title === 'function' ? { style } : { css: style };
+  const cssProp = typeof Title === 'function' ? { customStyle } : { css: customStyle };
 
   return (
     <Title {...cssProp}>
@@ -26,10 +26,3 @@ export default function ContentTitle({ as: Title, value, option }: Props) {
     </Title>
   );
 }
-
-/**
- * Title을 컴포넌트로 전달할 경우, 컴포넌트 선언부 예시
- * function Label({ children, style }: { children: ReactNode; style: SerializedStyles }) {
-  return <label css={css(style)}>{children}</label>;
-}
- */
