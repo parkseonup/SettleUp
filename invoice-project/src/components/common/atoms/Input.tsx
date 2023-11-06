@@ -1,26 +1,25 @@
 import { css } from '@emotion/react';
 import { Style } from '../../../types/Style';
-import { HTMLAttributes, InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes } from 'react';
+import getFilteredProps from '../../../utils/getFilteredProps';
 
-export interface Props {
-  id?: HTMLAttributes<HTMLInputElement>['id'];
-  type?: InputHTMLAttributes<HTMLInputElement>['type'];
-  attributes?: Omit<InputHTMLAttributes<HTMLInputElement>, 'id' | 'type'>;
-  style?: Style;
+export interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  customStyle?: Style;
   showLabel?: boolean;
 }
 
-export default function Input({ id, type, attributes, showLabel = true, style }: Props) {
+export default function Input(props: Props) {
+  const filteredProps = getFilteredProps(props, ['showLabel', 'customStyle']);
+
   return (
     <input
-      id={id}
-      type={type || 'text'}
-      {...attributes}
+      {...filteredProps}
+      type={props.type || 'text'}
       css={css(
         {
-          paddingLeft: showLabel ? '140px' : '16px',
+          paddingLeft: props.showLabel ? '140px' : '16px',
         },
-        style,
+        props.customStyle,
       )}
     />
   );

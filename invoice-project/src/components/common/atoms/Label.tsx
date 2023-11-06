@@ -2,19 +2,22 @@ import { css } from '@emotion/react';
 import { LabelHTMLAttributes, ReactNode } from 'react';
 import { colors } from '../../../styles/variables/colors';
 import { visibilityHidden } from '../../../styles/common/display/visibilityHidden';
+import { Style } from '../../../types/Style';
+import getFilteredProps from '../../../utils/getFilteredProps';
 
-interface Props {
-  htmlFor?: LabelHTMLAttributes<HTMLLabelElement>['htmlFor'];
-  attributes?: Omit<LabelHTMLAttributes<HTMLLabelElement>, 'htmlFor'>;
+interface Props extends LabelHTMLAttributes<HTMLLabelElement> {
   children?: ReactNode;
   showLabel?: boolean;
+  customStyle?: Style;
 }
 
-export default function Label({ htmlFor, attributes, children, showLabel = true }: Props) {
+export default function Label(props: Props) {
+  const filteredProps = getFilteredProps(props, ['children', 'showLabel', 'customStyle']);
+  const showLabel = props.showLabel === undefined || props.showLabel ? null : visibilityHidden;
+
   return (
     <label
-      htmlFor={htmlFor}
-      {...attributes}
+      {...filteredProps}
       css={css(
         {
           position: 'absolute',
@@ -24,10 +27,11 @@ export default function Label({ htmlFor, attributes, children, showLabel = true 
           color: colors.LIGHT_GRAY,
           transform: 'translateY(-50%)',
         },
-        showLabel ? null : visibilityHidden,
+        showLabel,
+        props.customStyle,
       )}
     >
-      {children}
+      {props.children}
     </label>
   );
 }
