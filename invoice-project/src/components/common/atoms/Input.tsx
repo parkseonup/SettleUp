@@ -5,22 +5,10 @@ import getFilteredProps from '../../../utils/getFilteredProps';
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   customStyle?: Style;
-  showLabel?: boolean;
 }
 
 export default function Input(props: Props) {
-  const filteredProps = getFilteredProps(props, ['showLabel', 'customStyle']);
+  const filteredProps = getFilteredProps(props, ['customStyle']);
 
-  return (
-    <input
-      {...filteredProps}
-      type={props.type || 'text'}
-      css={css(
-        {
-          paddingLeft: props.showLabel ? '140px' : '16px',
-        },
-        props.customStyle,
-      )}
-    />
-  );
+  return <input {...filteredProps} type={props.type || 'text'} css={css(props.customStyle)} />;
 }
