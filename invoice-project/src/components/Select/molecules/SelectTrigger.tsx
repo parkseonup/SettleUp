@@ -8,6 +8,7 @@ import { visibilityHidden } from '../../../styles/common/display/visibilityHidde
 import getFilteredProps from '../../../utils/getFilteredProps';
 
 interface Props extends InputProps {
+  id: string;
   label?: string;
   isActive?: boolean;
   showLabel?: boolean;
