@@ -5,7 +5,6 @@ import { visibilityHidden } from '../../../styles/common/display/visibilityHidde
 import InputWrapper from '../../common/atoms/InputWrapper';
 
 export interface Props extends InputProps {
-  id: string;
   label?: string;
   showLabel?: boolean;
 }
