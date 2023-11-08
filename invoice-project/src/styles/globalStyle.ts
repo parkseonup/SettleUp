@@ -37,14 +37,17 @@ export const globalStyle = css(emotionNormalize, {
   input: {
     width: '100%',
     height: '100%',
-    padding: '0 16px',
     fontSize: '14px',
-    color: colors.DARK_GRAY,
-    textOverflow: 'ellipsis',
     backgroundColor: 'transparent',
-    border: 0,
     outline: 'none',
     appearance: 'none',
+    border: 0,
+  },
+
+  'input[type!="checkbox"], input[type!="radio"]': {
+    padding: '0 16px',
+    color: colors.DARK_GRAY,
+    textOverflow: 'ellipsis',
     overflow: 'hidden',
 
     '&::placeholder': {
