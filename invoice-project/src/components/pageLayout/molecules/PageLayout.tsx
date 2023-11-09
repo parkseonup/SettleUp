@@ -1,19 +1,19 @@
 import { ReactNode } from 'react';
 import { css } from '@emotion/react';
 import getChildComponent from '../../../utils/getChildComponent';
-import PageTitleDescription from '../atoms/PageTitleDescription';
-import PageTitle from '../atoms/PageTitle';
-import PageContent from '../atoms/PageContent';
+import TitleDescription from '../atoms/TitleDescription';
+import Title from '../atoms/Title';
+import Content from '../atoms/Content';
 import { contentPadding } from '../../../styles/common/layout/contentPadding';
 
 interface Props {
   children: ReactNode;
 }
 
-function PageLayoutMain({ children }: Props) {
-  const title = getChildComponent(children, PageTitle);
-  const description = getChildComponent(children, PageTitleDescription);
-  const content = getChildComponent(children, PageContent);
+function Layout({ children }: Props) {
+  const title = getChildComponent(children, Title);
+  const description = getChildComponent(children, TitleDescription);
+  const content = getChildComponent(children, Content);
 
   return (
     <section
@@ -35,10 +35,10 @@ function PageLayoutMain({ children }: Props) {
   );
 }
 
-const PageLayout = Object.assign(PageLayoutMain, {
-  Title: PageTitle,
-  Description: PageTitleDescription,
-  Content: PageContent,
+const PageLayout = Object.assign(Layout, {
+  Title: Title,
+  Description: TitleDescription,
+  Content: Content,
 });
 
 export default PageLayout;

@@ -8,7 +8,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-export default function SelectOptionWrapper(props: Props) {
+export default function OptionWrapper(props: Props) {
   const filteredProps = getFilteredProps(props, ['children']);
 
   return (

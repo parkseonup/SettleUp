@@ -13,7 +13,7 @@ interface Props extends InputProps {
   showLabel?: boolean;
 }
 
-export default function SelectTrigger(props: Props) {
+export default function Trigger(props: Props) {
   const inputProps = getFilteredProps(props, ['label', 'isActive', 'showLabel']);
   const showLabel = !!props.label && (props.showLabel === undefined || props.showLabel);
 

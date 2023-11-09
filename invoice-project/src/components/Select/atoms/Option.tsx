@@ -9,7 +9,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   customStyle?: Style;
 }
 
-export default function SelectOption(props: Props) {
+export default function Option(props: Props) {
   const filteredProps = getFilteredProps(props, ['children', 'customStyle']);
 
   return (

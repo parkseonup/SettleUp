@@ -2,25 +2,25 @@ import { css } from '@emotion/react';
 import { colors } from '../../../styles/variables/colors';
 import { Style } from '../../../types/Style';
 
-export interface PageTitleProps {
+export interface TitleDescriptionProps {
   value: string;
   customStyle?: Style;
 }
 
-export default function PageTitle({ value, customStyle }: PageTitleProps) {
+export default function TitleDescription({ value, customStyle }: TitleDescriptionProps) {
   return (
-    <h2
+    <p
       css={css(
         {
-          margin: 0,
-          fontSize: '20px',
-          fontWeight: 500,
-          color: colors.BLACK,
+          marginTop: '8px',
+          fontSize: '14px',
+          fontWeight: 400,
+          color: colors.DARK_GRAY,
         },
         customStyle,
       )}
     >
       {value}
-    </h2>
+    </p>
   );
 }

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import MenuButton from '../atoms/MenuButton';
 import Menu from '../molecules/Menu';
-import HeaderTitle from '../atoms/HeaderTitle';
 import { css } from '@emotion/react';
 import { contentPadding } from '../../../styles/common/layout/contentPadding';
 import { colors } from '../../../styles/variables/colors';
+import Title from '../atoms/Title';
 
 export default function Header() {
   const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -23,7 +23,7 @@ export default function Header() {
         color: showMenu ? colors.WHITE : colors.BLACK,
       })}
     >
-      <HeaderTitle />
+      <Title />
       <MenuButton showMenu={showMenu} setShowMenu={setShowMenu} />
       <Menu showMenu={showMenu} />
     </header>

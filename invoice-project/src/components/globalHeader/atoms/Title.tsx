@@ -7,9 +7,8 @@ export default function HeaderTitle() {
       css={css({
         position: 'relative',
         zIndex: zIndexes.HEADER_TITLE,
-        margin: 0,
         fontSize: '16px',
-        fontWeight: 500,
+        fontWeight: 600,
       })}
     >
       정산하자

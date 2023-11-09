@@ -1,17 +1,17 @@
 import { ReactNode } from 'react';
 import getChildComponent from '../../../utils/getChildComponent';
-import SelectTrigger from './SelectTrigger';
-import SelectOption from '../atoms/SelectOption';
-import SelectOptionWrapper from '../atoms/SelectOptionWrapper';
+import Trigger from './Trigger';
+import Option from '../atoms/Option';
+import OptionWrapper from '../atoms/OptionWrapper';
 import { css } from '@emotion/react';
 
 interface Props {
   children: ReactNode;
 }
 
-function SelectWrapperMain({ children }: Props) {
-  const selectTrigger = getChildComponent(children, SelectTrigger);
-  const selectOptionWrapper = getChildComponent(children, SelectOptionWrapper);
+function Wrapper({ children }: Props) {
+  const trigger = getChildComponent(children, Trigger);
+  const optionWrapper = getChildComponent(children, OptionWrapper);
 
   return (
     <div
@@ -19,16 +19,16 @@ function SelectWrapperMain({ children }: Props) {
         position: 'relative',
       })}
     >
-      {selectTrigger}
-      {selectOptionWrapper}
+      {trigger}
+      {optionWrapper}
     </div>
   );
 }
 
-const SelectWrapper = Object.assign(SelectWrapperMain, {
-  Trigger: SelectTrigger,
-  OptionWrapper: SelectOptionWrapper,
-  Option: SelectOption,
+const SelectWrapper = Object.assign(Wrapper, {
+  Trigger: Trigger,
+  OptionWrapper: OptionWrapper,
+  Option: Option,
 });
 
 export default SelectWrapper;
