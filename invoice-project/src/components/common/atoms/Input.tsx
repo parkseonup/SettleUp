@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
 import { Style } from '../../../types/Style';
-import { InputHTMLAttributes } from 'react';
+import { ForwardedRef, InputHTMLAttributes, forwardRef } from 'react';
 import getFilteredProps from '../../../utils/getFilteredProps';
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   customStyle?: Style;
 }
 
-export default function Input(props: Props) {
+export default forwardRef(function Input(props: Props, ref?: ForwardedRef<HTMLInputElement>) {
   const filteredProps = getFilteredProps(props, ['customStyle']);
 
-  return <input {...filteredProps} type={props.type || 'text'} css={css(props.customStyle)} />;
-}
+  return <input ref={ref || null} {...filteredProps} type={props.type || 'text'} css={css(props.customStyle)} />;
+});
