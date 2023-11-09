@@ -8,7 +8,6 @@ interface Props {
 }
 
 export default function Cover({ isOpen, onClick }: Props) {
-  console.log('[cover]');
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : 'visible';
   }, [isOpen]);
