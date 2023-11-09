@@ -1,13 +1,14 @@
 import { css } from '@emotion/react';
 import { colors } from '../../../styles/variables/colors';
 import { Style } from '../../../types/Style';
+import { ReactNode } from 'react';
 
 interface ContentTitleOptionProps {
-  value?: string;
+  children: ReactNode;
   customStyle?: Style;
 }
 
-export default function ContentTitleOption({ value, customStyle }: ContentTitleOptionProps) {
+export default function ContentTitleOption({ children, customStyle }: ContentTitleOptionProps) {
   return (
     <em
       css={css(
@@ -21,7 +22,7 @@ export default function ContentTitleOption({ value, customStyle }: ContentTitleO
         customStyle,
       )}
     >
-      {value}
+      {children}
     </em>
   );
 }
