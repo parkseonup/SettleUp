@@ -6,16 +6,27 @@ export const globalStyle = css(emotionNormalize, {
   body: {
     fontFamily:
       '"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif',
+    '-webkit-font-smoothing': 'antialiased',
+    '-moz-osx-font-smoothing': 'grayscale',
   },
 
   '*::before, *::after, body *, body *::before, body *::after': {
     boxSizing: 'border-box',
   },
 
-  'ul, ol': {
+  'h1, h2, h3, h4, h5, h6': {
+    margin: 0,
+    fontSize: 'inherit',
+  },
+
+  'ul, ol, dl': {
     margin: 0,
     padding: 0,
     listStyle: 'none',
+  },
+
+  dd: {
+    margin: 0,
   },
 
   a: {
@@ -42,9 +53,6 @@ export const globalStyle = css(emotionNormalize, {
     outline: 'none',
     appearance: 'none',
     border: 0,
-  },
-
-  'input[type!="checkbox"], input[type!="radio"]': {
     padding: '0 16px',
     color: colors.DARK_GRAY,
     textOverflow: 'ellipsis',
@@ -54,4 +62,6 @@ export const globalStyle = css(emotionNormalize, {
       color: colors.LIGHT_GRAY,
     },
   },
+
+  'input:not(input[type="checkbox"]), input:not(input[type="radio"])': {},
 });
