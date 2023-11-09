@@ -8,6 +8,7 @@ import { visibilityHidden } from '../../../styles/common/display/visibilityHidde
 interface Props extends InputProps {
   id: string;
   label: string;
+  value: string;
   customStyle?: Style;
 }
 
@@ -31,7 +32,7 @@ export default function Checkbox(props: Props) {
             height: '32px',
             padding: '0 16px',
             fontSize: '14px',
-            color: colors.BLACK,
+            color: colors.DARK_GRAY,
             textAlign: 'center',
             backgroundColor: colors.WHITE,
             border: `1px solid ${colors.LIGHT_GRAY}`,
