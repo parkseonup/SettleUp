@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { colors } from '../../../styles/variables/colors';
 import Content from '../atoms/Content';
-import Title from '../atoms/Title';
+import Title from '../../common/atoms/Title';
 import { ReactNode } from 'react';
 import Footer from '../atoms/Footer';
 import getChildComponent from '../../../utils/getChildComponent';
