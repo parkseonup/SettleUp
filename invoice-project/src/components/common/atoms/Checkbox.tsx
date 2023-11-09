@@ -6,9 +6,7 @@ import getFilteredProps from '../../../utils/getFilteredProps';
 import { visibilityHidden } from '../../../styles/common/display/visibilityHidden';
 
 interface Props extends InputProps {
-  id: string;
   label: string;
-  value: string;
   customStyle?: Style;
 }
 
@@ -16,14 +14,9 @@ export default function Checkbox(props: Props) {
   const inputProps = getFilteredProps(props, ['label', 'customStyle']);
 
   return (
-    <div
-      css={css({
-        display: 'inline-block',
-      })}
-    >
-      <Input type="checkbox" {...inputProps} css={css(visibilityHidden)} />
-      <label
-        htmlFor={props.id}
+    <label>
+      <Input type="checkbox" {...inputProps} value={props.label} css={css(visibilityHidden)} />
+      <span
         css={css(
           {
             display: 'inline-flex',
@@ -49,7 +42,7 @@ export default function Checkbox(props: Props) {
         )}
       >
         {props.label}
-      </label>
-    </div>
+      </span>
+    </label>
   );
 }
