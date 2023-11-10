@@ -13,9 +13,6 @@ export default function Select({ id, label, options }: Props) {
   const [selectedValue, setSelectedValue] = useState('');
   const [isActive, setIsActive] = useState(false);
 
-  console.log('[isActive]', isActive);
-  console.log('[selectedValue]', selectedValue);
-
   const deactivate = () => {
     setIsActive(false);
   };

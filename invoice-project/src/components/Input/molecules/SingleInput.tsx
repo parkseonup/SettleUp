@@ -17,7 +17,6 @@ export default function SingleInput(props: Props) {
   const [isActive, setIsActive] = useState(false);
   const inputProps = getFilteredProps(props, ['label', 'showLabel', 'children']);
   const showLabel = !!props.label && (props.showLabel === undefined || props.showLabel);
-  console.log(showLabel);
 
   return (
     <InputWrapper isActive={isActive} customStyle={css(props.customStyle)}>
