@@ -1,10 +1,9 @@
 import { css } from '@emotion/react';
-import uesCalendar from '../atoms/useCalendar';
 import Title from '../../common/atoms/Title';
 import { ElementType } from 'react';
 import ButtonToMoveMonth from '../atoms/ButtonToMoveMonth';
-import { getDate, getDateToString } from '../atoms/date-utils';
 import { colors } from '../../../styles/variables/colors';
+import { useCalendar, getDate, getDateToString } from '@seonup/use-calendar';
 
 interface Props {
   onSelect: (date: Date) => any;
@@ -23,7 +22,7 @@ export default function DatePicker({ onSelect, selectedDate, titleAs }: Props) {
     },
     body: { value: monthly, today },
     view: { movePrevMonth, moveNextMonth },
-  } = uesCalendar({ showFixedNumberOfWeeks: 6, locale: 'ko-KR' });
+  } = useCalendar({ showFixedNumberOfWeeks: 6, locale: 'ko-KR' });
 
   return (
     <section
@@ -100,6 +99,7 @@ export default function DatePicker({ onSelect, selectedDate, titleAs }: Props) {
             <tr key={key} css={css({})}>
               {weekly.map(({ value: date, key, status }) => {
                 const fullDateString = getDateToString(date);
+                const selectedDateString = selectedDate ? getDateToString(selectedDate) : null;
 
                 return (
                   <td key={key}>
@@ -117,12 +117,12 @@ export default function DatePicker({ onSelect, selectedDate, titleAs }: Props) {
                           width: '32px',
                           height: '32px',
                           color:
-                            date === selectedDate
+                            fullDateString === selectedDateString
                               ? colors.WHITE
                               : status === 'thisMonth'
                               ? colors.DARK_GRAY
                               : colors.LIGHT_GRAY,
-                          backgroundColor: date === selectedDate ? colors.BLACK : 'transparent',
+                          backgroundColor: fullDateString === selectedDateString ? colors.BLACK : 'transparent',
                           border: `1px solid ${
                             getDateToString(today) === fullDateString ? colors.LIGHT_GRAY : 'transparent'
                           }`,
