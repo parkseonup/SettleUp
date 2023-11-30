@@ -9,7 +9,7 @@ interface Props {
   options?: string[];
 }
 
-export default function Select({ id, label, options }: Props) {
+export default function SelectField({ id, label, options }: Props) {
   const [selectedValue, setSelectedValue] = useState('');
   const [isActive, setIsActive] = useState(false);
 

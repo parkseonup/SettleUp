@@ -13,7 +13,7 @@ export interface Props extends InputProps {
   customStyle?: Style;
 }
 
-export default function SingleInput(props: Props) {
+export default function SingleInputField(props: Props) {
   const [isActive, setIsActive] = useState(false);
   const inputProps = getFilteredProps(props, ['label', 'showLabel', 'children']);
   const showLabel = !!props.label && (props.showLabel === undefined || props.showLabel);
