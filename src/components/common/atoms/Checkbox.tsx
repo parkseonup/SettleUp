@@ -1,21 +1,19 @@
-import Input, { Props as InputProps } from './Input';
 import { Style } from '../../../types/Style';
 import { css } from '@emotion/react';
 import { colors } from '../../../styles/variables/colors';
-import getFilteredProps from '../../../utils/getFilteredProps';
 import { visibilityHidden } from '../../../styles/common/display/visibilityHidden';
+import { InputHTMLAttributes } from 'react';
 
-interface Props extends InputProps {
+interface Props {
   label: string;
+  checked: InputHTMLAttributes<HTMLInputElement>['checked'];
   customStyle?: Style;
 }
 
-export default function Checkbox(props: Props) {
-  const inputProps = getFilteredProps(props, ['label', 'customStyle']);
-
+export default function Checkbox({ label, checked, customStyle }: Props) {
   return (
     <label>
-      <Input type="checkbox" {...inputProps} value={props.label} css={css(visibilityHidden)} />
+      <input type="checkbox" value={label} checked={checked} css={css(visibilityHidden)} />
       <span
         css={css(
           {
@@ -38,10 +36,10 @@ export default function Checkbox(props: Props) {
               borderColor: colors.BLACK,
             },
           },
-          props.customStyle,
+          customStyle,
         )}
       >
-        {props.label}
+        {label}
       </span>
     </label>
   );
