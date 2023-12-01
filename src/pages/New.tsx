@@ -3,6 +3,7 @@ import { colors } from '../styles/variables/colors';
 import { css } from '@emotion/react';
 import InputField from '../components/InputField/molecules/InputField';
 
+// 샘플 코드
 export default function New() {
   return (
     <form>
