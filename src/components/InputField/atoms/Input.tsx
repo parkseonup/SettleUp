@@ -1,44 +1,29 @@
 import { ForwardedRef, InputHTMLAttributes, forwardRef } from 'react';
-import { Style } from '../../../types/Style';
-import { css } from '@emotion/react';
 import { colors } from '../../../styles/variables/colors';
 
-interface Props {
-  type?: InputHTMLAttributes<HTMLInputElement>['type'];
-  readOnly?: InputHTMLAttributes<HTMLInputElement>['readOnly'];
-  placeholder?: InputHTMLAttributes<HTMLInputElement>['placeholder'];
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   isActive?: boolean;
-  customStyle?: Style;
-  onFocus?: InputHTMLAttributes<HTMLInputElement>['onFocus'];
-  onBlur?: InputHTMLAttributes<HTMLInputElement>['onBlur'];
 }
 
-export default forwardRef(function Input(
-  { type, readOnly, placeholder, isActive, customStyle, onFocus, onBlur }: Props,
-  ref?: ForwardedRef<HTMLInputElement>,
-) {
+export default forwardRef(function Input({ isActive, ...props }: Props, ref?: ForwardedRef<HTMLInputElement>) {
   return (
     <input
       ref={ref}
-      type={type ?? 'text'}
-      placeholder={placeholder}
-      readOnly={readOnly}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      css={css(
-        {
-          width: '100%',
-          height: '100%',
-          padding: 0,
-          color: colors.DARK_GRAY,
-          backgroundColor: isActive ? colors.BG_GRAY : 'transparent',
+      type="text"
+      css={{
+        width: '100%',
+        height: '100%',
+        padding: '0 16px',
+        color: colors.DARK_GRAY,
+        backgroundColor: 'transparent',
+        border: `1px solid ${isActive ? colors.DARK_GRAY : colors.LIGHT_GRAY}`,
+        borderRadius: '20px',
 
-          '&::placeholder': {
-            color: colors.LIGHT_GRAY,
-          },
+        '&::placeholder': {
+          color: colors.LIGHT_GRAY,
         },
-        customStyle,
-      )}
+      }}
+      {...props}
     />
   );
 });

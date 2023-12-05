@@ -1,24 +1,24 @@
-import { ReactNode } from 'react';
-import { Style } from '../../../types/Style';
-import { css } from '@emotion/react';
+import { LabelHTMLAttributes } from 'react';
 import { colors } from '../../../styles/variables/colors';
 
-interface Props {
-  children: ReactNode;
+interface Props extends LabelHTMLAttributes<HTMLLabelElement> {
   isActive?: boolean;
-  customStyle?: Style;
 }
 
-export default function Label({ children, isActive, customStyle }: Props) {
+export default function Label({ children, isActive, ...props }: Props) {
   return (
     <label
-      css={css(
-        {
-          fontSize: '14px',
-          color: isActive ? colors.DARK_GRAY : colors.LIGHT_GRAY,
-        },
-        customStyle,
-      )}
+      css={{
+        position: 'absolute',
+        top: '50%',
+        left: '16px',
+        width: '72px',
+        fontSize: '14px',
+        color: isActive ? colors.DARK_GRAY : colors.LIGHT_GRAY,
+        transform: 'translateY(-50%)',
+        pointerEvents: 'none',
+      }}
+      {...props}
     >
       {children}
     </label>
