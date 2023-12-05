@@ -48,12 +48,12 @@ export const globalStyle = css(emotionNormalize, {
   input: {
     width: '100%',
     height: '100%',
+    padding: 0,
     fontSize: '14px',
     backgroundColor: 'transparent',
     outline: 'none',
     appearance: 'none',
     border: 0,
-    padding: '0 16px',
     color: colors.DARK_GRAY,
     textOverflow: 'ellipsis',
     overflow: 'hidden',
