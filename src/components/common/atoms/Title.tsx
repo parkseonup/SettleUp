@@ -1,23 +1,12 @@
-import { ElementType, ReactNode } from 'react';
-import { css } from '@emotion/react';
-import { colors } from '../../../styles/variables/colors';
-import { Style } from '../../../types/Style';
+import { HTMLAttributes, ReactNode } from 'react';
+import { title } from '../../../styles/variables/font';
 
-interface Props {
-  as: ElementType;
+interface Props extends HTMLAttributes<HTMLHeadingElement> {
+  as: 'h1' | 'h2' | 'h3' | 'h4';
+  font: keyof typeof title;
   children: ReactNode;
-  customStyle?: Style;
 }
 
-export default function Title({ as: Title, children, customStyle }: Props) {
-  const style = css(
-    {
-      fontWeight: 500,
-      color: colors.BLACK,
-    },
-    customStyle,
-  );
-  const cssProp = typeof Title === 'function' ? { customStyle: style } : { css: style };
-
-  return <Title {...cssProp}>{children}</Title>;
+export default function Title({ as: Title, font, children }: Props) {
+  return <Title css={title[font]}>{children}</Title>;
 }

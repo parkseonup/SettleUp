@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import InputField from '../components/InputField/molecules/InputField';
 import Select from '../components/common/molecules/Select';
+import PageLayout from '../components/pageLayout/organisms/PageLayout';
 
 // 샘플 코드
 export default function New() {
@@ -8,13 +9,15 @@ export default function New() {
   const [selectedBank, setSelectedBank] = useState('');
 
   return (
-    <form>
-      <InputField label="예금주 이름">
-        <InputField.Input />
-      </InputField>
+    <PageLayout title="정산 만들기" description="클라이밍 원정">
+      <form>
+        <InputField label="예금주 이름">
+          <InputField.Input />
+        </InputField>
 
-      <Select label="은행 선택" options={bankList} value={selectedBank} setValue={setSelectedBank} />
-    </form>
+        <Select label="은행 선택" options={bankList} value={selectedBank} setValue={setSelectedBank} />
+      </form>
+    </PageLayout>
   );
 }
 
