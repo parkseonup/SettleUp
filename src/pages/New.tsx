@@ -1,65 +1,21 @@
-import { BiDotsHorizontalRounded, BiX } from 'react-icons/bi';
-import { colors } from '../styles/variables/colors';
-import { css } from '@emotion/react';
+import { useState } from 'react';
 import InputField from '../components/InputField/molecules/InputField';
+import Select from '../components/common/molecules/Select';
 
 // 샘플 코드
 export default function New() {
+  const [bankList] = useState(defaultBankList);
+  const [selectedBank, setSelectedBank] = useState('');
+
   return (
     <form>
-      <InputField>
-        <InputField.Input placeholder="ex) 클라이밍 회식" />
+      <InputField label="예금주 이름">
+        <InputField.Input />
       </InputField>
 
-      <InputField isActive>
-        <InputField.Label isActive>예금주 이름</InputField.Label>
-        <InputField.Input isActive />
-      </InputField>
-
-      <InputField isActive>
-        <InputField.Input placeholder="장소명" isActive />
-        <InputField.Input placeholder="0000원" />
-        <InputField.Controls>
-          <button>
-            <BiDotsHorizontalRounded
-              css={css({
-                fontSize: '16px',
-                color: colors.LIGHT_GRAY,
-              })}
-            />
-          </button>
-          <button>
-            <BiX
-              css={css({
-                fontSize: '20px',
-                color: colors.LIGHT_GRAY,
-              })}
-            />
-          </button>
-        </InputField.Controls>
-      </InputField>
-
-      <InputField isActive>
-        <InputField.Input placeholder="장소명" isActive />
-        <InputField.Controls>
-          <button>
-            <BiDotsHorizontalRounded
-              css={css({
-                fontSize: '16px',
-                color: colors.LIGHT_GRAY,
-              })}
-            />
-          </button>
-          <button>
-            <BiX
-              css={css({
-                fontSize: '20px',
-                color: colors.LIGHT_GRAY,
-              })}
-            />
-          </button>
-        </InputField.Controls>
-      </InputField>
+      <Select label="은행 선택" options={bankList} value={selectedBank} setValue={setSelectedBank} />
     </form>
   );
 }
+
+const defaultBankList = ['카카오페이', '계좌'];
