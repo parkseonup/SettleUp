@@ -1,7 +1,16 @@
-import { HTMLAttributes } from 'react';
+import { ReactNode } from 'react';
+import { DropdownContextValue, useDropdownContext } from './Context';
 
-interface Props extends HTMLAttributes<HTMLDivElement> {}
+interface ChildrenArgs extends DropdownContextValue {
+  setIsActive: (isActive: DropdownContextValue['isActive']) => void;
+}
 
-export default function Trigger({ children }: Props) {
-  return <div>{children}</div>;
+interface Props {
+  children: ({ isActive, setIsActive }: ChildrenArgs) => ReactNode;
+}
+
+export default function Trigger({ children, ...props }: Props) {
+  const { isActive, setIsActive } = useDropdownContext();
+
+  return <div {...props}>{children({ isActive, setIsActive })}</div>;
 }

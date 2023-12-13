@@ -1,51 +1,47 @@
-import { Dispatch, HTMLAttributes, useEffect, useRef } from 'react';
-import Modal from '../atoms/Modal';
-import getChildComponent from '../../../utils/getChildComponent';
+import { HTMLAttributes, useEffect, useRef, useState } from 'react';
+import Portal from '../atoms/Portal';
 import Trigger from '../atoms/Trigger';
-import { SetStateAction } from 'jotai';
+import { DropdownContext } from '../atoms/Context';
+import Close from '../atoms/Close';
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
-  isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<Props['isOpen']>>;
-}
+export interface Props extends HTMLAttributes<HTMLDivElement> {}
 
-export default function Dropdown({ children, isOpen, setIsOpen }: Props) {
+export default function Dropdown({ children, ...props }: Props) {
+  const [isActive, setIsActive] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
-
-  const trigger = getChildComponent(children, Trigger);
-  const modal = getChildComponent(children, Modal);
 
   const handleClickOutside = (e: Event) => {
     e.stopPropagation();
-    if (modalRef.current && !modalRef.current.contains(e.target as HTMLElement) && isOpen === true) {
-      setIsOpen(false);
-    }
+
+    if (!modalRef.current) return;
+    if (modalRef.current.contains(e.target as HTMLElement)) return;
+    if (setIsActive === undefined || !isActive) return;
+    console.log('[handleClickOutside]');
+
+    setIsActive(false);
   };
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
+
     return () => document.removeEventListener('click', handleClickOutside);
   });
 
   return (
-    <div
-      ref={modalRef}
-      css={{
-        position: 'relative',
-      }}
-    >
-      {trigger}
-
+    <DropdownContext.Provider value={{ isActive, setIsActive }}>
       <div
+        ref={modalRef}
         css={{
-          display: isOpen ? 'block' : 'none',
+          position: 'relative',
         }}
+        {...props}
       >
-        {modal}
+        {children}
       </div>
-    </div>
+    </DropdownContext.Provider>
   );
 }
 
 Dropdown.Trigger = Trigger;
-Dropdown.Modal = Modal;
+Dropdown.Portal = Portal;
+Dropdown.Close = Close;
