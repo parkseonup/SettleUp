@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import InputField from '../components/InputField/molecules/InputField';
-import Select from '../components/common/molecules/Select';
 import PageLayout from '../components/pageLayout/organisms/PageLayout';
+import Select from '../components/common/molecules/Select';
 
 // 샘플 코드
 export default function New() {
