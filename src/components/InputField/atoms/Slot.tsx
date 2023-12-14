@@ -4,7 +4,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
 }
 
-export default function Control({ children, disabled }: Props) {
+export default function Slot({ children, disabled, ...props }: Props) {
   return (
     <div
       css={{
@@ -19,6 +19,7 @@ export default function Control({ children, disabled }: Props) {
         transform: 'translateY(-50%)',
         pointerEvents: disabled ? 'none' : 'all',
       }}
+      {...props}
     >
       {children}
     </div>

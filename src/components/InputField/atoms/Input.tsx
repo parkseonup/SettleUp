@@ -1,11 +1,9 @@
 import { ForwardedRef, InputHTMLAttributes, forwardRef } from 'react';
 import { colors } from '../../../styles/variables/colors';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  isActive?: boolean;
-}
+interface Props extends InputHTMLAttributes<HTMLInputElement> {}
 
-export default forwardRef(function Input({ isActive, ...props }: Props, ref?: ForwardedRef<HTMLInputElement>) {
+export default forwardRef(function Input({ ...props }: Props, ref?: ForwardedRef<HTMLInputElement>) {
   return (
     <input
       ref={ref}
@@ -16,11 +14,15 @@ export default forwardRef(function Input({ isActive, ...props }: Props, ref?: Fo
         padding: '0 16px',
         color: colors.DARK_GRAY,
         backgroundColor: 'transparent',
-        border: `1px solid ${isActive ? colors.DARK_GRAY : colors.LIGHT_GRAY}`,
+        border: `1px solid ${colors.LIGHT_GRAY}`,
         borderRadius: '20px',
 
         '&::placeholder': {
           color: colors.LIGHT_GRAY,
+        },
+
+        '&:focus, &:active': {
+          borderColor: colors.DARK_GRAY,
         },
       }}
       {...props}

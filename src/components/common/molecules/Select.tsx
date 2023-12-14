@@ -24,26 +24,22 @@ export default forwardRef(function Select(
       <Dropdown.Trigger>
         {({ isActive, setIsActive }) => {
           return (
-            <InputField
-              label={label}
-              isActive={isActive}
-              controlAs={
+            <InputField label={label}>
+              <InputField.Input
+                ref={ref}
+                onClick={() => setIsActive(!isActive)}
+                value={value}
+                css={{ textAlign: 'center', paddingRight: '48px', cursor: 'pointer' }}
+                readOnly
+              />
+              <InputField.Slot css={{ pointerEvents: 'none' }}>
                 <BiChevronRight
                   css={{
                     fontSize: '16px',
-                    color: isActive ? colors.DARK_GRAY : colors.LIGHT_GRAY,
+                    color: colors.LIGHT_GRAY,
                   }}
                 />
-              }
-            >
-              <InputField.Input
-                ref={ref}
-                isActive={isActive}
-                onClick={() => setIsActive(!isActive)}
-                value={value}
-                css={{ textAlign: 'center' }}
-                readOnly
-              />
+              </InputField.Slot>
             </InputField>
           );
         }}

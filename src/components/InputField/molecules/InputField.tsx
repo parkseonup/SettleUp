@@ -1,15 +1,15 @@
-import { HTMLAttributes, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import Input from '../atoms/Input';
 import Label from '../atoms/Label';
-import Control from '../atoms/Control';
+import Slot from '../atoms/Slot';
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+interface Props {
   label?: ReactNode;
-  isActive?: boolean;
   controlAs?: ReactNode;
+  children: ReactNode;
 }
 
-export default function InputField({ label, isActive, children, controlAs, ...props }: Props) {
+export default function InputField({ label, children }: Props) {
   return (
     <div
       css={{
@@ -19,18 +19,13 @@ export default function InputField({ label, isActive, children, controlAs, ...pr
         '& > label ~ input': {
           paddingLeft: '104px',
         },
-
-        '& > div ~ input': {
-          paddingRight: '64px',
-        },
       }}
-      {...props}
     >
-      {label ? <Label isActive={isActive}>{label}</Label> : null}
-      {controlAs ? <Control>{controlAs}</Control> : null}
+      {label ? <Label>{label}</Label> : null}
       {children}
     </div>
   );
 }
 
 InputField.Input = Input;
+InputField.Slot = Slot;
