@@ -15,8 +15,7 @@ export default function Dropdown({ children, ...props }: Props) {
 
     if (!modalRef.current) return;
     if (modalRef.current.contains(e.target as HTMLElement)) return;
-    if (setIsActive === undefined || !isActive) return;
-    console.log('[handleClickOutside]');
+    if (!isActive) return;
 
     setIsActive(false);
   };

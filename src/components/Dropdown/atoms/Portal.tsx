@@ -1,12 +1,14 @@
-import { HTMLAttributes } from 'react';
-import { useDropdownContext } from './Context';
+import { HTMLAttributes, ReactNode } from 'react';
+import { UseDropdownContextValue, useDropdownContext } from './Context';
 import { colors } from '../../../styles/variables/colors';
 import { zIndexes } from '../../../styles/variables/zIndexes';
 
-interface Props extends HTMLAttributes<HTMLDivElement> {}
+interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
+  children: ReactNode | (({ isActive, setIsActive }: UseDropdownContextValue) => ReactNode);
+}
 
 export default function Portal({ children, ...props }: Props) {
-  const { isActive } = useDropdownContext();
+  const { isActive, setIsActive } = useDropdownContext();
 
   return isActive ? (
     <div
@@ -23,7 +25,7 @@ export default function Portal({ children, ...props }: Props) {
       }}
       {...props}
     >
-      {children}
+      {typeof children === 'function' ? children({ isActive, setIsActive }) : children}
     </div>
   ) : null;
 }

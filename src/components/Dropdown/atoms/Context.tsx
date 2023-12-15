@@ -5,16 +5,25 @@ export interface DropdownContextValue {
   setIsActive?: (isActive: DropdownContextValue['isActive']) => void;
 }
 
+export interface UseDropdownContextValue extends DropdownContextValue {
+  setIsActive: (isActive: DropdownContextValue['isActive']) => void;
+}
+
 export const DropdownContext = createContext<DropdownContextValue>({ isActive: false });
 
-export function useDropdownContext() {
-  const contextValue = useContext(DropdownContext);
+export function useDropdownContext(): UseDropdownContextValue {
+  const context = useContext(DropdownContext);
 
-  (Object.keys(contextValue) as (keyof typeof contextValue)[]).forEach((key) => {
-    if (contextValue[key] === undefined) {
-      throw new Error('Context 내부에 setIsActive가 정의되지 않았습니다.');
-    }
-  });
+  if (!context) {
+    throw new Error('Dropdown 컴파운드 컴포넌트는 Dropdown 컴포넌트 외부에서 사용하실 수 없습니다.');
+  }
 
-  return contextValue;
+  if (!context.setIsActive) {
+    throw new Error('Context 내부에 setIsActive가 정의되지 않았습니다.');
+  }
+
+  return {
+    isActive: context.isActive,
+    setIsActive: context.setIsActive,
+  };
 }

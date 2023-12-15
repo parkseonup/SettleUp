@@ -1,16 +1,12 @@
 import { ReactNode } from 'react';
-import { DropdownContextValue, useDropdownContext } from './Context';
-
-interface ChildrenArgs extends DropdownContextValue {
-  setIsActive: (isActive: DropdownContextValue['isActive']) => void;
-}
+import { UseDropdownContextValue, useDropdownContext } from './Context';
 
 interface Props {
-  children: ({ isActive, setIsActive }: ChildrenArgs) => ReactNode;
+  children: ReactNode | (({ isActive, setIsActive }: UseDropdownContextValue) => ReactNode);
 }
 
 export default function Trigger({ children, ...props }: Props) {
   const { isActive, setIsActive } = useDropdownContext();
 
-  return <div {...props}>{children({ isActive, setIsActive })}</div>;
+  return <div {...props}>{typeof children === 'function' ? children({ isActive, setIsActive }) : children}</div>;
 }
