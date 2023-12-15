@@ -29,7 +29,15 @@ export default forwardRef(function Select(
                 ref={ref}
                 onClick={() => setIsActive(!isActive)}
                 value={value}
-                css={{ textAlign: 'center', paddingRight: '48px', cursor: 'pointer' }}
+                css={{
+                  textAlign: 'center',
+                  paddingRight: '48px',
+                  cursor: 'pointer',
+
+                  '&:focus, &:active': {
+                    borderColor: isActive ? colors.DARK_GRAY : colors.LIGHT_GRAY,
+                  },
+                }}
                 readOnly
               />
               <InputField.Slot css={{ pointerEvents: 'none' }}>
