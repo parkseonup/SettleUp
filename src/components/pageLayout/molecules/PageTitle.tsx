@@ -17,7 +17,7 @@ export default function PageTitle({ title, description, ...props }: Props) {
       }}
       {...props}
     >
-      <Title as="h2" font="size90">
+      <Title as="h2" font="size900">
         {title}
       </Title>
       <Description>{description}</Description>

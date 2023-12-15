@@ -73,7 +73,7 @@ export default function Menu({ ...props }: Props) {
                     key={path}
                     to={path}
                     css={{
-                      ...title.size90,
+                      ...title.size900,
                       color: colors.WHITE,
                     }}
                   >
@@ -97,7 +97,7 @@ export default function Menu({ ...props }: Props) {
                     key={path}
                     to={path}
                     css={{
-                      ...title.size10,
+                      ...title.size100,
                       color: colors.LIGHT_GRAY,
                     }}
                   >
