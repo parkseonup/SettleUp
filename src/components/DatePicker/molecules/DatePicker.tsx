@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import Title from '../../common/atoms/Title';
-import { ElementType } from 'react';
 import ButtonToMoveMonth from '../atoms/ButtonToMoveMonth';
 import { colors } from '../../../styles/variables/colors';
 import { useCalendar, getDate, getDateToString } from '@seonup/use-calendar';
@@ -10,12 +9,11 @@ interface Props {
   selectedDate: Date | null;
   startDate?: Date;
   endDate?: Date;
-  titleAs: ElementType;
 }
 
 const days = ['일', '월', '화', '수', '목', '금', '토'];
 
-export default function DatePicker({ onSelect, selectedDate, titleAs }: Props) {
+export default function DatePicker({ onSelect, selectedDate }: Props) {
   const {
     headers: {
       current: { year, month },
@@ -41,12 +39,7 @@ export default function DatePicker({ onSelect, selectedDate, titleAs }: Props) {
           textAlign: 'center',
         })}
       >
-        <Title
-          as={titleAs}
-          customStyle={{
-            fontWeight: 600,
-          }}
-        >
+        <Title as="h4" font="size200">
           {year}년 {month + 1}월
         </Title>
 
@@ -104,6 +97,7 @@ export default function DatePicker({ onSelect, selectedDate, titleAs }: Props) {
                 return (
                   <td key={key}>
                     <button
+                      type="button"
                       onClick={() => {
                         onSelect(date);
                       }}
