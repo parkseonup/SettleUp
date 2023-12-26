@@ -24,7 +24,7 @@ export default forwardRef(function Select(
       <Dropdown.Trigger>
         {({ isActive, setIsActive }) => {
           return (
-            <InputField label={label}>
+            <InputField isActive={isActive} label={label}>
               <InputField.Input
                 ref={ref}
                 onClick={() => setIsActive(!isActive)}
@@ -33,10 +33,6 @@ export default forwardRef(function Select(
                   textAlign: 'center',
                   paddingRight: '48px',
                   cursor: 'pointer',
-
-                  '&:focus, &:active': {
-                    borderColor: isActive ? colors.DARK_GRAY : colors.LIGHT_GRAY,
-                  },
                 }}
                 readOnly
               />
