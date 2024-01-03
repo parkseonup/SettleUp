@@ -22,4 +22,8 @@ export const title = {
     ...titleBasic,
     fontSize: '15px',
   },
+  size50: {
+    ...titleBasic,
+    fontSize: '14px',
+  },
 };
