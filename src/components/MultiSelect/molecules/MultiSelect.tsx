@@ -1,30 +1,46 @@
-import { css } from '@emotion/react';
-import Checkbox from '../../common/atoms/Checkbox';
-import InputToAddOption from './InputToAddOption';
+import AddInput from './AddInput';
+import { ReactNode } from 'react';
+import Content from './Content';
+import { colors } from '../../../styles/variables/colors';
+import Title from '../../common/atoms/Title';
 
 interface Props {
-  options: any[];
-  addOptionProps?: {
-    label: string;
-    addOption: (newOption: any) => void;
-  };
+  title: string;
+  summary?: string | number | null;
+  children?: ReactNode;
 }
 
-export default function MultiSelect({ options, addOptionProps }: Props) {
+export default function MultiSelect({ title, summary, children }: Props) {
   return (
     <div
-      css={css({
-        display: 'flex',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        gap: '4px',
-      })}
+      css={{
+        position: 'relative',
+        padding: '16px',
+        border: `1px solid ${colors.LIGHT_GRAY}`,
+        borderRadius: '20px',
+      }}
     >
-      {options.map((option) => (
-        <Checkbox key={option} label={option} />
-      ))}
+      <Title as="h4" font="size50">
+        {title}
+      </Title>
 
-      {addOptionProps ? <InputToAddOption label={addOptionProps.label} addOption={addOptionProps.addOption} /> : null}
+      {children}
+
+      <div
+        css={{
+          position: 'absolute',
+          top: '16px',
+          right: '16px',
+          fontSize: '14px',
+          color: colors.DARK_GRAY,
+          textAlign: 'right',
+        }}
+      >
+        <p>{summary ?? null}</p>
+      </div>
     </div>
   );
 }
+
+MultiSelect.Content = Content;
+MultiSelect.AddInput = AddInput;

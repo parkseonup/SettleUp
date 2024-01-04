@@ -1,30 +1,23 @@
-import { css } from '@emotion/react';
 import { BiPlus } from 'react-icons/bi';
 import { colors } from '../../../styles/variables/colors';
 import { ButtonHTMLAttributes } from 'react';
 
-interface Props {
-  isActive: boolean;
-  onClick: ButtonHTMLAttributes<HTMLButtonElement>['onClick'];
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  isActive?: boolean;
 }
 
-export default function ButtonToAddOption({ isActive, onClick }: Props) {
+export default function ButtonToAddOption({ isActive, ...props }: Props) {
   return (
     <button
       type="button"
-      onClick={onClick}
-      css={css({
-        position: 'absolute',
-        top: '50%',
-        right: '0',
+      css={{
         display: 'block',
         height: '100%',
-        paddingRight: '10px',
         fontSize: '14px',
         color: isActive ? colors.DARK_GRAY : colors.LIGHT_GRAY,
-        transform: 'translateY(-50%)',
-      })}
+      }}
       aria-label="추가"
+      {...props}
     >
       <BiPlus />
     </button>
