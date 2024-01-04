@@ -1,10 +1,14 @@
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
+  isActive?: boolean;
   disabled?: boolean;
+  children: ReactNode | ((isActive: Props['isActive']) => ReactNode);
 }
 
-export default function Slot({ children, disabled, ...props }: Props) {
+export default function Slot({ isActive, disabled, children, ...props }: Props) {
+  const element = typeof children === 'function' ? children(isActive) : children;
+
   return (
     <div
       css={{
@@ -21,7 +25,7 @@ export default function Slot({ children, disabled, ...props }: Props) {
       }}
       {...props}
     >
-      {children}
+      {element}
     </div>
   );
 }

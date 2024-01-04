@@ -1,5 +1,5 @@
 import { BiChevronRight } from 'react-icons/bi';
-import { ForwardedRef, InputHTMLAttributes, forwardRef } from 'react';
+import { ForwardedRef, InputHTMLAttributes, KeyboardEvent, forwardRef } from 'react';
 import { colors } from '../../../styles/variables/colors';
 import InputField from '../../InputField/molecules/InputField';
 import Dropdown from '../../Dropdown/molecules/Dropdown';
@@ -22,31 +22,35 @@ export default forwardRef(function Select(
   return (
     <Dropdown>
       <Dropdown.Trigger>
-        {({ isActive, setIsActive }) => {
-          return (
-            <InputField isActive={isActive} label={label}>
-              <InputField.Input
-                ref={ref}
-                onClick={() => setIsActive(!isActive)}
-                value={value}
+        {({ setIsActive }) => (
+          <InputField label={label}>
+            <InputField.Input
+              ref={ref}
+              value={value}
+              css={{
+                textAlign: 'center',
+                paddingRight: '48px',
+                cursor: 'pointer',
+              }}
+              onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => {
+                if (e.nativeEvent.isComposing || e.keyCode === 229) return;
+                if (e.code !== 'Enter') return;
+
+                setIsActive(true);
+              }}
+              onClick={() => setIsActive(true)}
+              readOnly
+            />
+            <InputField.Slot css={{ pointerEvents: 'none' }}>
+              <BiChevronRight
                 css={{
-                  textAlign: 'center',
-                  paddingRight: '48px',
-                  cursor: 'pointer',
+                  fontSize: '16px',
+                  color: colors.LIGHT_GRAY,
                 }}
-                readOnly
               />
-              <InputField.Slot css={{ pointerEvents: 'none' }}>
-                <BiChevronRight
-                  css={{
-                    fontSize: '16px',
-                    color: colors.LIGHT_GRAY,
-                  }}
-                />
-              </InputField.Slot>
-            </InputField>
-          );
-        }}
+            </InputField.Slot>
+          </InputField>
+        )}
       </Dropdown.Trigger>
 
       <Dropdown.Portal>

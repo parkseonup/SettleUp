@@ -1,17 +1,17 @@
-import { ReactNode } from 'react';
+import { HTMLAttributes, ReactNode, useState } from 'react';
 import Input from '../atoms/Input';
 import Label from '../atoms/Label';
 import Slot from '../atoms/Slot';
 import getChildComponent from '../../../utils/getChildComponent';
 import cloneElement from '../../../utils/cloneElement';
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   label?: ReactNode;
-  isActive?: boolean;
   children: ReactNode;
 }
 
-export default function InputField({ label, isActive, children }: Props) {
+export default function InputField({ label, children, ...props }: Props) {
+  const [isActive, setIsActive] = useState(false);
   const input = getChildComponent(children, Input);
   const slot = getChildComponent(children, Slot);
 
@@ -23,12 +23,15 @@ export default function InputField({ label, isActive, children }: Props) {
         position: 'relative',
         height: '40px',
       }}
+      {...props}
     >
       {label ? (
         <>
           <Label isActive={isActive}>{label}</Label>
           {cloneElement(input, {
             isActive,
+            onFocus: () => setIsActive(true),
+            onBlur: () => setIsActive(false),
             css: [
               input.props.css,
               {
@@ -38,9 +41,17 @@ export default function InputField({ label, isActive, children }: Props) {
           })}
         </>
       ) : (
-        input
+        cloneElement(input, {
+          isActive,
+          onFocus: () => setIsActive(true),
+          onBlur: () => setIsActive(false),
+        })
       )}
-      {slot ? slot : null}
+      {slot
+        ? cloneElement(slot, {
+            isActive,
+          })
+        : null}
     </div>
   );
 }
