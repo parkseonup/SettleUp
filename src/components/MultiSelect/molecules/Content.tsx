@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import Option from '../atoms/Option';
 import getChildComponent from '../../../utils/getChildComponent';
 import MultiSelect from './MultiSelect';
-import SublistItem from '../../common/atoms/SublistItem';
+import SublistItem from '../../common/molecules/SublistItem';
 
 interface BasicProps {
   title?: string;
