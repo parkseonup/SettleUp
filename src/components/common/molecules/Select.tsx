@@ -1,8 +1,9 @@
 import { BiChevronRight } from 'react-icons/bi';
-import { ForwardedRef, InputHTMLAttributes, KeyboardEvent, forwardRef } from 'react';
+import { ForwardedRef, InputHTMLAttributes, forwardRef } from 'react';
 import { colors } from '../../../styles/variables/colors';
 import InputField from '../../InputField/molecules/InputField';
 import Dropdown from '../../Dropdown/molecules/Dropdown';
+import { getId } from '../../../utils/getId';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -12,33 +13,32 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export default forwardRef(function Select(
-  { label, value, options, setValue }: Props,
+  { label, value, options, setValue, ...props }: Props,
   ref: ForwardedRef<HTMLInputElement>,
 ) {
+  const id = props.id ?? getId('input');
   const handleSelect = (value: Props['value']) => {
     setValue(value);
   };
 
   return (
-    <Dropdown>
+    <Dropdown
+      css={{
+        cursor: 'pointer',
+      }}
+    >
       <Dropdown.Trigger>
-        {({ setIsActive }) => (
-          <InputField label={label}>
+        {({ isActive }) => (
+          <InputField isActive={isActive}>
+            <InputField.Label htmlFor={id}>{label}</InputField.Label>
             <InputField.Input
+              id={id}
               ref={ref}
               value={value}
               css={{
                 textAlign: 'center',
-                paddingRight: '48px',
                 cursor: 'pointer',
               }}
-              onKeyDown={(e: KeyboardEvent<HTMLInputElement>) => {
-                if (e.nativeEvent.isComposing || e.keyCode === 229) return;
-                if (e.code !== 'Enter') return;
-
-                setIsActive(true);
-              }}
-              onClick={() => setIsActive(true)}
               readOnly
             />
             <InputField.Slot css={{ pointerEvents: 'none' }}>

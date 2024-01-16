@@ -1,60 +1,42 @@
-import { HTMLAttributes, ReactNode, useState } from 'react';
+import { ForwardedRef, HTMLAttributes, ReactNode, forwardRef } from 'react';
 import Input from '../atoms/Input';
 import Label from '../atoms/Label';
 import Slot from '../atoms/Slot';
-import getChildComponent from '../../../utils/getChildComponent';
-import cloneElement from '../../../utils/cloneElement';
+import { colors } from '../../../styles/variables/colors';
+import { InputFieldContext } from '../atoms/InputFieldContext';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
-  label?: ReactNode;
+  isActive?: boolean;
   children: ReactNode;
 }
 
-export default function InputField({ label, children, ...props }: Props) {
-  const [isActive, setIsActive] = useState(false);
-  const input = getChildComponent(children, Input);
-  const slot = getChildComponent(children, Slot);
-
-  if (!input) throw new Error('InputField에 Input이 정의되지 않았습니다.');
-
+const InputFieldContainer = forwardRef(function InputFieldContainer(
+  { isActive = false, children, ...props }: Props,
+  ref?: ForwardedRef<HTMLDivElement>,
+) {
   return (
-    <div
-      css={{
-        position: 'relative',
-        height: '40px',
-      }}
-      {...props}
-    >
-      {label ? (
-        <>
-          <Label isActive={isActive}>{label}</Label>
-          {cloneElement(input, {
-            isActive,
-            onFocus: () => setIsActive(true),
-            onBlur: () => setIsActive(false),
-            css: [
-              input.props.css,
-              {
-                paddingLeft: '104px',
-              },
-            ],
-          })}
-        </>
-      ) : (
-        cloneElement(input, {
-          isActive,
-          onFocus: () => setIsActive(true),
-          onBlur: () => setIsActive(false),
-        })
-      )}
-      {slot
-        ? cloneElement(slot, {
-            isActive,
-          })
-        : null}
-    </div>
+    <InputFieldContext.Provider value={{ isActive }}>
+      <div
+        ref={ref}
+        css={{
+          position: 'relative',
+          display: 'flex',
+          height: '40px',
+          padding: '0 16px',
+          border: `1px solid ${isActive ? colors.DARK_GRAY : colors.LIGHT_GRAY}`,
+          borderRadius: '20px',
+        }}
+        {...props}
+      >
+        {children}
+      </div>
+    </InputFieldContext.Provider>
   );
-}
+});
 
-InputField.Input = Input;
-InputField.Slot = Slot;
+const InputField = Object.assign(InputFieldContainer, {
+  Label: Label,
+  Input: Input,
+  Slot: Slot,
+});
+export default InputField;

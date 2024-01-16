@@ -1,4 +1,4 @@
-import { useRef, KeyboardEvent } from 'react';
+import { useRef, KeyboardEvent, useState } from 'react';
 import InputField from '../../InputField/molecules/InputField';
 import ButtonToAddOption from '../atoms/ButtonToAddOption';
 import { colors } from '../../../styles/variables/colors';
@@ -9,6 +9,7 @@ interface Props {
 }
 
 export default function AddInput({ label, addOption }: Props) {
+  const [isActive, setIsActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleAddOption = () => {
@@ -30,22 +31,30 @@ export default function AddInput({ label, addOption }: Props) {
 
   return (
     <InputField
+      isActive={isActive}
+      onFocus={() => setIsActive(true)}
+      onBlur={() => setIsActive(false)}
       css={{
-        display: 'block',
-        width: '104px',
+        width: '112px',
         height: '32px',
       }}
     >
-      <InputField.Input ref={inputRef} placeholder={label} onKeyDown={handleKeydownInput} />
+      <InputField.Input
+        ref={inputRef}
+        placeholder={label}
+        onKeyDown={handleKeydownInput}
+      />
       <InputField.Slot
         css={{
-          right: 0,
+          width: '32px',
         }}
       >
         {(isActive) => (
           <ButtonToAddOption
             onClick={handleAddOption}
-            css={{ paddingRight: '16px', color: isActive ? colors.DARK_GRAY : colors.LIGHT_GRAY }}
+            css={{
+              color: isActive ? colors.DARK_GRAY : colors.LIGHT_GRAY,
+            }}
           />
         )}
       </InputField.Slot>
