@@ -1,15 +1,20 @@
 import { colors } from '../../../styles/variables/colors';
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { BiSubdirectoryRight } from 'react-icons/bi';
-import Title from './Title';
+import Title from '../atoms/Title';
+import cloneElement from '../../../utils/cloneElement';
 
-export interface Props {
+interface TitleProps {
   title: string;
-  titleAs?: 'h3' | 'h4' | 'h5';
-  children?: ReactNode;
 }
 
-export default function SublistItem({ title, titleAs, children }: Props) {
+interface AsProps {
+  as: ReactElement;
+}
+
+export type Props = { children?: ReactNode } & (TitleProps | AsProps);
+
+export default function SublistItem({ children, ...props }: Props) {
   return (
     <div
       css={{
@@ -36,19 +41,22 @@ export default function SublistItem({ title, titleAs, children }: Props) {
             color: colors.LIGHT_GRAY,
           }}
         />
-        <Title
-          as={titleAs || 'h4'}
-          css={{
-            fontSize: '12px',
-            fontWeight: 500,
-            color: colors.DARK_GRAY,
-          }}
-        >
-          {title}
-        </Title>
+        {'as' in props ? (
+          cloneElement(props.as, { css: titleStyle })
+        ) : (
+          <Title as="h4" css={titleStyle}>
+            {props.title}
+          </Title>
+        )}
       </div>
 
       {children}
     </div>
   );
 }
+
+const titleStyle = {
+  fontSize: '12px',
+  fontWeight: 500,
+  color: colors.DARK_GRAY,
+};
