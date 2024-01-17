@@ -1,8 +1,9 @@
-import { HTMLAttributes, useEffect, useRef, useState } from 'react';
+import { FocusEvent, HTMLAttributes, useRef, useState } from 'react';
 import Portal from '../atoms/Portal';
 import Trigger from '../atoms/Trigger';
 import { DropdownContext } from '../atoms/Context';
 import Close from '../atoms/Close';
+import useOutsideClick from '../../../hooks/useOutsideClick';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {}
 
@@ -10,21 +11,14 @@ export default function Dropdown({ children, ...props }: Props) {
   const [isActive, setIsActive] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const handleClickOutside = (e: Event) => {
-    e.stopPropagation();
-
-    if (!modalRef.current) return;
-    if (modalRef.current.contains(e.target as HTMLElement)) return;
-    if (!isActive) return;
-
+  useOutsideClick(modalRef, () => {
     setIsActive(false);
-  };
-
-  useEffect(() => {
-    document.addEventListener('click', handleClickOutside);
-
-    return () => document.removeEventListener('click', handleClickOutside);
   });
+
+  const onBlur = (e: FocusEvent) => {
+    if (e.relatedTarget !== null && !modalRef.current?.contains(e.relatedTarget))
+      setIsActive(false);
+  };
 
   return (
     <DropdownContext.Provider value={{ isActive, setIsActive }}>
@@ -33,6 +27,7 @@ export default function Dropdown({ children, ...props }: Props) {
         css={{
           position: 'relative',
         }}
+        onBlur={onBlur}
         {...props}
       >
         {children}
