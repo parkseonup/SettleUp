@@ -1,5 +1,5 @@
 import { colors } from '../../../styles/variables/colors';
-import { ReactElement, ReactNode } from 'react';
+import { HTMLAttributes, ReactElement } from 'react';
 import { BiSubdirectoryRight } from 'react-icons/bi';
 import Title from '../atoms/Title';
 import cloneElement from '../../../utils/cloneElement';
@@ -12,7 +12,7 @@ interface AsProps {
   as: ReactElement;
 }
 
-export type Props = { children?: ReactNode } & (TitleProps | AsProps);
+export type Props = HTMLAttributes<HTMLDivElement> & (TitleProps | AsProps);
 
 export default function SublistItem({ children, ...props }: Props) {
   return (
@@ -26,6 +26,7 @@ export default function SublistItem({ children, ...props }: Props) {
         fontWeight: 400,
         color: colors.DARK_GRAY,
       }}
+      {...props}
     >
       <div
         css={{
