@@ -10,9 +10,10 @@ export default function Label({ children, ...props }: Props) {
   return (
     <label
       css={{
+        flexShrink: 0,
         display: 'flex',
         alignItems: 'center',
-        width: '104px',
+        width: '80px',
         fontSize: '14px',
         color: isActive ? colors.DARK_GRAY : colors.LIGHT_GRAY,
       }}

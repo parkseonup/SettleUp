@@ -21,6 +21,7 @@ const InputFieldContainer = forwardRef(function InputFieldContainer(
         css={{
           position: 'relative',
           display: 'flex',
+          gap: '16px',
           height: '40px',
           padding: '0 16px',
           border: `1px solid ${isActive ? colors.DARK_GRAY : colors.LIGHT_GRAY}`,

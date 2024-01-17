@@ -44,9 +44,18 @@ export default function SingleInput({ label, ...props }: Props) {
       ref={containerRef}
       onFocus={handleFocus}
       onBlur={handleBlur}
+      css={{
+        paddingRight: '32px',
+      }}
     >
       {label ? <InputField.Label htmlFor={id}>{label}</InputField.Label> : null}
-      <InputField.Input id={id} {...props} />
+      <InputField.Input
+        id={id}
+        css={{
+          textAlign: label ? 'center' : 'left',
+        }}
+        {...props}
+      />
     </InputField>
   );
 }

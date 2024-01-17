@@ -23,6 +23,10 @@ export default function Option({ children, ...props }: Props) {
           borderRadius: '100px',
           cursor: 'pointer',
 
+          'input:focus  + &, input:active  + &': {
+            borderColor: colors.DARK_GRAY,
+          },
+
           'input:checked + &': {
             color: colors.WHITE,
             backgroundColor: colors.BLACK,
