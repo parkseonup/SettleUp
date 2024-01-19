@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import { ButtonHTMLAttributes } from 'react';
 import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import { colors } from '../../../styles/variables/colors';
@@ -14,11 +13,11 @@ export default function ButtonToMoveMonth({ label, direction, ...props }: Props)
   return (
     <button type="button" {...props} aria-label={label}>
       <ChevonIcon
-        css={css({
+        css={{
           fontSize: '18px',
           color: colors.LIGHT_GRAY,
           pointerEvents: 'none',
-        })}
+        }}
       />
     </button>
   );

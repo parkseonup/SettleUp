@@ -22,7 +22,7 @@ export default function Footer({ label, value, customStyle }: Props) {
         customStyle,
       )}
     >
-      <dt css={css(visibilityHidden)}>{label}</dt>
+      <dt css={visibilityHidden}>{label}</dt>
       <dd>{value}</dd>
     </dl>
   );

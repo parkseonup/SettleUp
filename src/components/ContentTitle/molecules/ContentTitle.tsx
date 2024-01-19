@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import { css } from '@emotion/react';
 import { colors } from '../../../styles/variables/colors';
 import ContentTitleOption from '../atoms/ContentTitleOption';
 
@@ -11,11 +10,11 @@ interface Props {
 export default function ContentTitle({ children, option }: Props) {
   return (
     <h3
-      css={css({
+      css={{
         fontSize: '15px',
         fontWeight: 600,
         color: colors.BLACK,
-      })}
+      }}
     >
       {children}
       {option ? <ContentTitleOption>{option}</ContentTitleOption> : null}
