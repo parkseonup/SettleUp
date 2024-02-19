@@ -2,17 +2,12 @@ import Title from '../../common/atoms/Title';
 import ButtonToMoveMonth from '../atoms/ButtonToMoveMonth';
 import { colors } from '../../../styles/variables/colors';
 import { useCalendar, getDate, getDateToString } from '@seonup/use-calendar';
-
-interface Props {
-  onSelect: (date: Date) => any;
-  selectedDate: Date | null;
-  startDate?: Date;
-  endDate?: Date;
-}
+import { visibilityHidden } from '../../../styles/common/display/visibilityHidden';
 
 const days = ['일', '월', '화', '수', '목', '금', '토'];
 
-export default function DatePicker({ onSelect, selectedDate }: Props) {
+// TODO: 오늘 이후로 클릭 안되게 endDate 추가하기
+export default function DatePicker() {
   const {
     headers: {
       current: { year, month },
@@ -99,47 +94,43 @@ export default function DatePicker({ onSelect, selectedDate }: Props) {
             <tr key={key}>
               {weekly.map(({ value: date, key, status }) => {
                 const fullDateString = getDateToString(date);
-                const selectedDateString = selectedDate
-                  ? getDateToString(selectedDate)
-                  : null;
+                const todayString = getDateToString(today);
 
                 return (
                   <td key={key}>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        onSelect(date);
+                    <input
+                      type="radio"
+                      id={fullDateString}
+                      name="date"
+                      css={visibilityHidden}
+                      value={fullDateString}
+                      defaultChecked={fullDateString === todayString}
+                    />
+                    <label
+                      htmlFor={fullDateString}
+                      css={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '32px',
+                        height: '32px',
+                        color:
+                          todayString === fullDateString
+                            ? colors.POINT
+                            : status === 'thisMonth'
+                            ? colors.DARK_GRAY
+                            : colors.LIGHT_GRAY,
+                        backgroundColor: 'transparent',
+                        borderRadius: '100px',
+
+                        'input:checked + &': {
+                          color: colors.WHITE,
+                          backgroundColor: colors.BLACK,
+                        },
                       }}
                     >
-                      <time
-                        dateTime={fullDateString}
-                        css={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          width: '32px',
-                          height: '32px',
-                          color:
-                            fullDateString === selectedDateString
-                              ? colors.WHITE
-                              : status === 'thisMonth'
-                              ? colors.DARK_GRAY
-                              : colors.LIGHT_GRAY,
-                          backgroundColor:
-                            fullDateString === selectedDateString
-                              ? colors.BLACK
-                              : 'transparent',
-                          border: `1px solid ${
-                            getDateToString(today) === fullDateString
-                              ? colors.LIGHT_GRAY
-                              : 'transparent'
-                          }`,
-                          borderRadius: '100px',
-                        }}
-                      >
-                        {getDate(date)}
-                      </time>
-                    </button>
+                      {getDate(date)}
+                    </label>
                   </td>
                 );
               })}
