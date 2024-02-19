@@ -1,8 +1,10 @@
 import { colors } from '../../../styles/variables/colors';
-import { HTMLAttributes, ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { BiSubdirectoryRight } from 'react-icons/bi';
 import Title from '../atoms/Title';
 import cloneElement from '../../../utils/cloneElement';
+import { Style } from '../../../types/Style';
+import { css } from '@emotion/react';
 
 interface TitleProps {
   title: string;
@@ -12,21 +14,23 @@ interface AsProps {
   as: ReactElement;
 }
 
-export type Props = HTMLAttributes<HTMLDivElement> & (TitleProps | AsProps);
+export type Props = { children: ReactNode; insideStyle?: Style } & (TitleProps | AsProps);
 
-export default function SublistItem({ children, ...props }: Props) {
+export default function SublistItem({ insideStyle, children, ...props }: Props) {
   return (
     <div
-      css={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: '16px',
-        fontSize: '12px',
-        fontWeight: 400,
-        color: colors.DARK_GRAY,
-      }}
-      {...props}
+      css={css(
+        {
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '16px',
+          fontSize: '12px',
+          fontWeight: 400,
+          color: colors.DARK_GRAY,
+        },
+        insideStyle,
+      )}
     >
       <div
         css={{
