@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { KeyboardEvent, ReactNode } from 'react';
 import Option from '../atoms/Option';
 import getChildComponent from '../../../utils/getChildComponent';
 import MultiSelect from './MultiSelect';
@@ -29,6 +29,13 @@ export default function Content({
 }: Props) {
   const addInput = getChildComponent(children, MultiSelect.AddInput);
 
+  const onEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.nativeEvent.isComposing) return;
+    if (e.key !== 'Enter') return;
+
+    onChange((e.target as HTMLInputElement).value);
+  };
+
   return (
     <div
       css={{
@@ -58,6 +65,7 @@ export default function Content({
             value={option}
             checked={value.includes(option)}
             onChange={(e) => onChange(e.target.value)}
+            onKeyDown={onEnter}
           >
             {option}
           </Option>
