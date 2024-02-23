@@ -1,21 +1,23 @@
 import { colors } from '../../../styles/variables/colors';
-import { Dispatch, FocusEvent, useRef, useState } from 'react';
+import { Dispatch, FocusEvent, useEffect, useRef, useState } from 'react';
 import AmountInput from '../atoms/AmountInput';
 import DeleteButton from '../atoms/DeleteButton';
 import TitleInput from '../atoms/TitleInput';
 import AddButton from '../atoms/AddButton';
-import { PlaceItem } from '../PlaceFields.type';
-import { Action } from '../reducer/PlaceReducer.type';
+import { PlaceItem } from '../../../types/Settlement';
 import SubPlaceField from './SubPlaceField';
+import { Action } from '../../Create/useCreationReducer.type';
 
 interface Props {
   data: PlaceItem;
+  disabledDelete?: boolean;
   dispatch: Dispatch<Action>;
 }
 
-export default function PlaceField({ data, dispatch }: Props) {
+export default function PlaceField({ data, disabledDelete, dispatch }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isActive, setIsActive] = useState(false);
+  const titleInputRef = useRef<HTMLInputElement>(null);
 
   const toggleFocus = (e: FocusEvent, force?: boolean) => {
     if (!containerRef.current) return;
@@ -23,6 +25,10 @@ export default function PlaceField({ data, dispatch }: Props) {
 
     setIsActive(force ?? !isActive);
   };
+
+  useEffect(() => {
+    if (titleInputRef.current) titleInputRef.current.focus();
+  }, []);
 
   return (
     <div
@@ -45,23 +51,31 @@ export default function PlaceField({ data, dispatch }: Props) {
         }}
       >
         <TitleInput
+          ref={titleInputRef}
+          name={`placeTitle-${data.id}`}
           value={data.title}
           placeholder="장소명"
           onChange={(e) =>
-            dispatch({ type: 'change', data: { ...data, title: e.target.value } })
+            dispatch({
+              type: 'changePlaceTitle',
+              data: { ...data, title: e.target.value },
+            })
           }
+          required={true}
         />
         <AmountInput
+          name={`placeAmount-${data.id}`}
           amount={data.amount}
           insideStyle={{
             fontSize: '14px',
           }}
           onChange={(e) => {
             dispatch({
-              type: 'change',
+              type: 'changePlaceAmount',
               data: { ...data, amount: +e.target.value },
             });
           }}
+          required={true}
         />
 
         <div
@@ -75,15 +89,17 @@ export default function PlaceField({ data, dispatch }: Props) {
           {data.sub.length === 0 ? (
             <AddButton
               isActive={isActive}
-              onClick={() => dispatch({ type: 'addSub', id: data.id })}
+              onClick={() => dispatch({ type: 'addSubPlace', id: data.id })}
             />
           ) : null}
-          <DeleteButton
-            isActive={isActive}
-            onClick={() => {
-              dispatch({ type: 'delete', id: data.id });
-            }}
-          />
+          {disabledDelete ? null : (
+            <DeleteButton
+              isActive={isActive}
+              onClick={() => {
+                dispatch({ type: 'deletePlace', id: data.id });
+              }}
+            />
+          )}
         </div>
       </div>
 
@@ -99,27 +115,12 @@ export default function PlaceField({ data, dispatch }: Props) {
           <SubPlaceField
             key={subItem.id}
             data={subItem}
-            parentId={data.id}
-            buttonAs={
-              i === data.sub.length - 1 ? (
-                <DeleteButton
-                  isActive={isActive}
-                  css={{
-                    width: '16px',
-                    height: '16px',
-                  }}
-                  onClick={() =>
-                    dispatch({
-                      type: 'deleteSub',
-                      id: data.id,
-                      subId: data.id,
-                    })
-                  }
-                />
-              ) : null
-            }
+            placeId={data.id}
+            disabledDelete={data.sub.length - 1 !== i}
+            isActive={isActive}
+            setIsActive={setIsActive}
             dispatch={dispatch}
-          ></SubPlaceField>
+          />
         ))}
       </div>
     </div>

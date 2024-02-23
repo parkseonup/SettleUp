@@ -1,18 +1,28 @@
-import { Dispatch, ReactNode } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import SublistItem from '../../common/molecules/SublistItem';
 import AmountInput from '../atoms/AmountInput';
 import TitleInput from '../atoms/TitleInput';
-import { PlaceInfo } from '../PlaceFields.type';
-import { Action } from '../reducer/PlaceReducer.type';
+import { PlaceInfo } from '../../../types/Settlement';
+import { Action } from '../../Create/useCreationReducer.type';
+import DeleteButton from '../atoms/DeleteButton';
 
 interface Props {
   data: PlaceInfo;
-  parentId: PlaceInfo['id'];
-  buttonAs: ReactNode;
+  placeId: PlaceInfo['id'];
+  disabledDelete?: boolean;
+  isActive: boolean;
+  setIsActive: Dispatch<SetStateAction<Props['isActive']>>;
   dispatch: Dispatch<Action>;
 }
 
-export default function SubPlaceField({ data, parentId, buttonAs, dispatch }: Props) {
+export default function SubPlaceField({
+  data,
+  placeId,
+  disabledDelete,
+  isActive,
+  setIsActive,
+  dispatch,
+}: Props) {
   return (
     <SublistItem
       insideStyle={{
@@ -21,31 +31,34 @@ export default function SubPlaceField({ data, parentId, buttonAs, dispatch }: Pr
       }}
       as={
         <TitleInput
+          name={`placeSubTitle-${placeId}-${data.id}`}
           value={data.title}
           placeholder="분류명"
           onChange={(e) => {
-            console.log(e.target.value);
             dispatch({
-              type: 'changeSub',
-              id: parentId,
+              type: 'changeSubPlaceTitle',
+              id: placeId,
               subItem: { ...data, title: e.target.value },
             });
           }}
+          required={true}
         />
       }
     >
       <AmountInput
+        name={`placeSubAmount-${placeId}-${data.id}`}
         amount={data.amount}
-        onChange={(e) =>
+        onChange={(e) => {
           dispatch({
-            type: 'changeSub',
-            id: parentId,
+            type: 'changeSubPlaceAmount',
+            id: placeId,
             subItem: { ...data, amount: +e.target.value },
-          })
-        }
+          });
+        }}
         css={{
           fontSize: '12px',
         }}
+        required={true}
       />
 
       <div
@@ -56,7 +69,23 @@ export default function SubPlaceField({ data, parentId, buttonAs, dispatch }: Pr
           gap: '4px',
         }}
       >
-        {buttonAs}
+        {disabledDelete ? null : (
+          <DeleteButton
+            isActive={isActive}
+            css={{
+              width: '16px',
+              height: '16px',
+            }}
+            onClick={() => {
+              dispatch({
+                type: 'deleteSubPlace',
+                id: placeId,
+                subId: data.id,
+              });
+              setIsActive(false);
+            }}
+          />
+        )}
       </div>
     </SublistItem>
   );
