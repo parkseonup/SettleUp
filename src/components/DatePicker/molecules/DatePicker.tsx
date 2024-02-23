@@ -3,18 +3,24 @@ import ButtonToMoveMonth from '../atoms/ButtonToMoveMonth';
 import { colors } from '../../../styles/variables/colors';
 import { useCalendar, getDate, getDateToString } from '@seonup/use-calendar';
 import { visibilityHidden } from '../../../styles/common/display/visibilityHidden';
+import { SyntheticEvent } from 'react';
 
 const days = ['일', '월', '화', '수', '목', '금', '토'];
 
+interface Props {
+  seletedDate: string;
+  onChange: (e: SyntheticEvent) => void;
+}
+
 // TODO: 오늘 이후로 클릭 안되게 endDate 추가하기
-export default function DatePicker() {
+export default function DatePicker({ seletedDate, onChange }: Props) {
   const {
     headers: {
       current: { year, month },
     },
     body: { value: monthly, today },
     view: { movePrevMonth, moveNextMonth },
-  } = useCalendar({ showFixedNumberOfWeeks: 6, locale: 'ko-KR' });
+  } = useCalendar({ showDate: seletedDate, showFixedNumberOfWeeks: 6, locale: 'ko-KR' });
 
   return (
     <section
@@ -89,12 +95,12 @@ export default function DatePicker() {
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody onChange={onChange}>
           {monthly.map(({ value: weekly, key }) => (
             <tr key={key}>
               {weekly.map(({ value: date, key, status }) => {
                 const fullDateString = getDateToString(date);
-                const todayString = getDateToString(today);
+                const _seletedDate = seletedDate || getDateToString(today);
 
                 return (
                   <td key={key}>
@@ -104,7 +110,7 @@ export default function DatePicker() {
                       name="date"
                       css={visibilityHidden}
                       value={fullDateString}
-                      defaultChecked={fullDateString === todayString}
+                      defaultChecked={fullDateString === _seletedDate}
                     />
                     <label
                       htmlFor={fullDateString}
@@ -115,7 +121,7 @@ export default function DatePicker() {
                         width: '32px',
                         height: '32px',
                         color:
-                          todayString === fullDateString
+                          _seletedDate === fullDateString
                             ? colors.POINT
                             : status === 'thisMonth'
                             ? colors.DARK_GRAY
