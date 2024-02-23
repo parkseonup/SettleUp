@@ -17,7 +17,8 @@ export default forwardRef(function Select(
   ref: ForwardedRef<HTMLInputElement>,
 ) {
   const id = props.id ?? getId('input');
-  const handleSelect = (value: Props['value']) => {
+
+  const onSelect = (value: Props['value']) => {
     setValue(value);
   };
 
@@ -58,7 +59,7 @@ export default forwardRef(function Select(
           <Dropdown.Close key={option}>
             <button
               type="button"
-              onClick={() => handleSelect(option)}
+              onClick={() => onSelect(option)}
               css={{
                 display: 'flex',
                 alignItems: 'center',
