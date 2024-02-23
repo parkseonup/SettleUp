@@ -2,7 +2,7 @@ export interface PlaceInfo {
   id: string;
   title: string;
   amount: number;
-  participants: Set<string>;
+  participants: string[];
 }
 
 export type SubPlaceList = PlaceInfo[];

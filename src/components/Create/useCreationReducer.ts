@@ -13,9 +13,6 @@ export default function useCreationReducer(): [
   const [data, dispatch] = useReducer(CreactionReducer, defaultSettlement);
   const service = new CreationService<Settlement>();
 
-  // 로컬에 저장하고, dispatch 실행
-  // 로컬에 늘 저장해야해? ㄴㄴ -> 다음 페이지 넘어갈 때
-
   useEffect(() => {
     const _data = service.get();
     if (_data) dispatch({ type: 'set', data: _data });
@@ -63,7 +60,7 @@ function CreactionReducer(settlement: Settlement, action: Action) {
             id: `place_${getId()}`,
             title: '',
             amount: 0,
-            participants: new Set<string>(),
+            participants: [],
             sub: [],
           },
         ],
@@ -92,18 +89,18 @@ function CreactionReducer(settlement: Settlement, action: Action) {
     case 'togglePlaceParticipant': {
       return {
         ...settlement,
-        place: settlement.place.map((item) => {
-          if (item.id === action.id) {
-            if (item.participants.has(action.participant)) {
-              item.participants.delete(action.participant);
-              return item;
-            }
-
-            return { ...item, participants: item.participants.add(action.participant) };
-          }
-
-          return item;
-        }),
+        place: settlement.place.map((item) =>
+          item.id === action.id
+            ? item.participants.includes(action.participant)
+              ? {
+                  ...item,
+                  participants: item.participants.filter(
+                    (participant) => participant !== action.participant,
+                  ),
+                }
+              : { ...item, participants: [...item.participants, action.participant] }
+            : item,
+        ),
       };
     }
     case 'deletePlace': {
@@ -130,7 +127,7 @@ function CreactionReducer(settlement: Settlement, action: Action) {
                         item.amount,
                         item.sub.map(({ amount }) => amount),
                       ),
-                    participants: new Set<string>(),
+                    participants: [],
                   },
                 ],
               }
@@ -191,7 +188,7 @@ function CreactionReducer(settlement: Settlement, action: Action) {
                     id: `place_${getId()}`,
                     title: '',
                     amount: remainderAmount,
-                    participants: new Set<string>(),
+                    participants: [],
                   },
                 ],
               };
@@ -212,21 +209,21 @@ function CreactionReducer(settlement: Settlement, action: Action) {
           item.id === action.id
             ? {
                 ...item,
-                sub: item.sub.map((subItem) => {
-                  if (subItem.id === action.subId) {
-                    if (subItem.participants.has(action.participant)) {
-                      subItem.participants.delete(action.participant);
-                      return subItem;
-                    }
-
-                    return {
-                      ...subItem,
-                      participants: subItem.participants.add(action.participant),
-                    };
-                  }
-
-                  return subItem;
-                }),
+                sub: item.sub.map((subItem) =>
+                  subItem.id === action.subId
+                    ? subItem.participants.includes(action.participant)
+                      ? {
+                          ...item,
+                          participants: subItem.participants.filter(
+                            (participant) => participant !== action.participant,
+                          ),
+                        }
+                      : {
+                          ...subItem,
+                          participants: [...subItem.participants, action.participant],
+                        }
+                    : subItem,
+                ),
               }
             : item,
         ),
@@ -277,7 +274,7 @@ const defaultSettlement: Settlement = {
       id: '',
       title: '',
       amount: 0,
-      participants: new Set<string>(),
+      participants: [],
       sub: [],
     },
   ],
