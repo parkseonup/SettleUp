@@ -37,6 +37,7 @@ export default function AddInput({ label, addOption }: Props) {
       css={{
         width: '112px',
         height: '32px',
+        gap: '4px',
       }}
     >
       <InputField.Input
