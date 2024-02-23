@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
-import New from './pages/New';
 import GeneralLayout from './layout/GeneralLayout';
+import Create from './pages/Create';
 
 interface RouterBase {
   path: string;
@@ -22,15 +22,18 @@ export type NavData = Omit<RouterBase & Omit<UserRouterData, 'withAuth'>, 'eleme
 
 const routerData: RouterData[] = [
   {
-    path: '/',
+    path: '/create/:index',
     label: '정산 만들기',
-    element: <New />,
+    element: <Create />,
     withAuth: false,
   },
 ];
 
 export const router = createBrowserRouter(
-  routerData.map((router) => ({ path: router.path, element: <GeneralLayout>{router.element}</GeneralLayout> })),
+  routerData.map((router) => ({
+    path: router.path,
+    element: <GeneralLayout>{router.element}</GeneralLayout>,
+  })),
 );
 
 export const navData: NavData = routerData.map((router) => ({
