@@ -6,7 +6,7 @@ export default function PageLayout({ title, description, children, ...props }: P
   return (
     <div
       css={{
-        padding: '20px 16px',
+        padding: '20px 18px',
       }}
       {...props}
     >
