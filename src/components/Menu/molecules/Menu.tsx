@@ -1,6 +1,6 @@
 import { zIndexes } from '../../../styles/variables/zIndexes';
 import { colors } from '../../../styles/variables/colors';
-import { visibilityHidden } from '../../../styles/common/display/visibilityHidden';
+import { visibilityHidden } from '../../../styles/common/displays';
 import { NavData, navData } from '../../../router';
 import { title } from '../../../styles/variables/font';
 import Dropdown from '../../Dropdown/molecules/Dropdown';
@@ -39,7 +39,11 @@ export default function Menu({ ...props }: Props) {
               }}
               onClick={() => setIsActive(!isActive)}
             >
-              {isActive ? <BiX css={{ pointerEvents: 'none' }} /> : <BiMenu css={{ pointerEvents: 'none' }} />}
+              {isActive ? (
+                <BiX css={{ pointerEvents: 'none' }} />
+              ) : (
+                <BiMenu css={{ pointerEvents: 'none' }} />
+              )}
             </button>
           );
         }}

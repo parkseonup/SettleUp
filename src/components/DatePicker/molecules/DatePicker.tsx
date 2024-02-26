@@ -2,7 +2,7 @@ import Title from '../../common/atoms/Title';
 import ButtonToMoveMonth from '../atoms/ButtonToMoveMonth';
 import { colors } from '../../../styles/variables/colors';
 import { useCalendar, getDate, getDateToString } from '@seonup/use-calendar';
-import { visibilityHidden } from '../../../styles/common/display/visibilityHidden';
+import { visibilityHidden } from '../../../styles/common/displays';
 import { SyntheticEvent } from 'react';
 
 const days = ['일', '월', '화', '수', '목', '금', '토'];
