@@ -1,15 +1,18 @@
-import { KeyboardEvent, ReactNode } from 'react';
-import Option from '../atoms/Option';
-import getChildComponent from '../../../utils/getChildComponent';
+import { ReactNode } from 'react';
+import Option from './Option';
+import getChildComponent from '../../utils/getChildComponent';
 import MultiSelect from './MultiSelect';
-import SublistItem from '../../common/molecules/SublistItem';
+import SublistItem from '../common/molecules/SublistItem';
+import { visibilityHidden } from '../../styles/common/displays';
+import { useMultiSelectContext } from './MultiSelectContext';
 
 interface BasicProps {
   title?: string;
   value: string[];
   options: string[];
-  onChange: (value: string) => void;
+  required?: boolean;
   children?: ReactNode;
+  onChange: (value: string) => void;
 }
 
 interface UseSummaryProps extends BasicProps {
@@ -28,13 +31,7 @@ export default function Content({
   ...props
 }: Props) {
   const addInput = getChildComponent(children, MultiSelect.AddInput);
-
-  const onEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.nativeEvent.isComposing) return;
-    if (e.key !== 'Enter') return;
-
-    onChange((e.target as HTMLInputElement).value);
-  };
+  const { required } = useMultiSelectContext();
 
   return (
     <div
@@ -59,13 +56,19 @@ export default function Content({
           gap: '4px',
         }}
       >
+        <input
+          type="text"
+          css={visibilityHidden}
+          defaultValue={value}
+          required={required}
+        />
+
         {options.map((option) => (
           <Option
             key={option}
             value={option}
-            checked={value.includes(option)}
-            onChange={(e) => onChange(e.target.value)}
-            onKeyDown={onEnter}
+            isActive={value?.includes(option)}
+            onClick={(e) => onChange((e.target as HTMLButtonElement).value)}
           >
             {option}
           </Option>

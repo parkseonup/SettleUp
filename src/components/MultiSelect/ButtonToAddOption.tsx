@@ -1,5 +1,5 @@
 import { BiPlus } from 'react-icons/bi';
-import { colors } from '../../../styles/variables/colors';
+import { colors } from '../../styles/variables/colors';
 import { ButtonHTMLAttributes } from 'react';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
