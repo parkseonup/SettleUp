@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes } from 'react';
-import { buttonColors } from '../../../styles/variables/colors';
+import { buttonColors } from '../../../styles/common/colors';
 
 interface Props extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'style'> {
   style?: keyof typeof buttonColors;
