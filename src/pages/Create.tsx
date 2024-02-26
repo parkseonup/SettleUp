@@ -1,10 +1,10 @@
 import { FormEvent, useEffect, useState } from 'react';
-import PageLayout from '../components/pageLayout/organisms/PageLayout';
 import useCreationReducer from '../components/Create/useCreationReducer';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Default from '../components/Create/Default';
 import Participants from '../components/Create/Participants';
 import Payment from '../components/Create/Payment';
+import PageLayout from '../components/common/pageLayout/PageLayout';
 
 const steps = ['기본정보', '참가자', '송금정보'] as const;
 const stepInfo = {
@@ -44,7 +44,6 @@ export default function Create() {
     }
 
     // 2. 다음 페이지가 없다면
-    
   };
 
   return (

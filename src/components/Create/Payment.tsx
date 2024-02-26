@@ -1,12 +1,12 @@
 import { Dispatch, KeyboardEvent, useState } from 'react';
 import { Settlement } from '../../types/Settlement';
-import Button from '../common/atoms/Button';
-import ButtonWrapper from '../common/atoms/ButtonWrapper';
-import Section from '../common/molecules/Section';
-import Select from '../common/molecules/Select';
-import SingleInput from '../common/molecules/SingleInput';
-import MultiSelect from '../MultiSelect/MultiSelect';
+import Button from '../common/Button';
+import ButtonWrapper from '../common/ButtonWrapper';
+import Section from '../common/Section';
+import Select from '../common/Select';
+import SingleInput from '../common/SingleInput';
 import { Action } from './useCreationReducer.type';
+import MultiSelect from '../common/MultiSelect/MultiSelect';
 
 interface Props {
   data: Settlement;

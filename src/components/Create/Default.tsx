@@ -1,12 +1,12 @@
 import { Dispatch } from 'react';
 import { Settlement } from '../../types/Settlement';
 import { Action } from './useCreationReducer.type';
-import Section from '../common/molecules/Section';
-import SingleInput from '../common/molecules/SingleInput';
-import DatePicker from '../DatePicker/molecules/DatePicker';
-import PlaceField from '../PlaceField/molecules/PlaceField';
-import Button from '../common/atoms/Button';
-import ButtonWrapper from '../common/atoms/ButtonWrapper';
+import Section from '../common/Section';
+import SingleInput from '../common/SingleInput';
+import Button from '../common/Button';
+import ButtonWrapper from '../common/ButtonWrapper';
+import DatePicker from '../common/DatePicker/DatePicker';
+import PlaceField from '../common/PlaceField/PlaceField';
 
 interface Props {
   data: Settlement;

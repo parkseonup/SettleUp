@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Global } from '@emotion/react';
 import { globalStyle } from '../styles/globalStyle';
-import GlobalHeader from '../components/common/organisms/GlobalHeader';
+import GlobalHeader from '../components/common/GlobalHeader';
 
 export default function GeneralLayout({ children }: { children: ReactNode }) {
   return (

@@ -1,10 +1,10 @@
 import { Dispatch } from 'react';
 import { Settlement } from '../../types/Settlement';
 import { Action } from './useCreationReducer.type';
-import Section from '../common/molecules/Section';
-import MultiSelect from '../MultiSelect/MultiSelect';
-import ButtonWrapper from '../common/atoms/ButtonWrapper';
-import Button from '../common/atoms/Button';
+import Section from '../common/Section';
+import ButtonWrapper from '../common/ButtonWrapper';
+import Button from '../common/Button';
+import MultiSelect from '../common/MultiSelect/MultiSelect';
 
 interface Props {
   data: Settlement;
