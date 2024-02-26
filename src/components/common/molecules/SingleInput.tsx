@@ -49,13 +49,7 @@ export default function SingleInput({ label, ...props }: Props) {
       }}
     >
       {label ? <InputField.Label htmlFor={id}>{label}</InputField.Label> : null}
-      <InputField.Input
-        id={id}
-        css={{
-          textAlign: label ? 'center' : 'left',
-        }}
-        {...props}
-      />
+      <InputField.Input id={id} {...props} />
     </InputField>
   );
 }
