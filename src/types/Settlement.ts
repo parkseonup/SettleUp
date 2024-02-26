@@ -13,17 +13,21 @@ export interface PlaceItem extends PlaceInfo {
 
 export type PlaceList = PlaceItem[];
 
+export interface BankTransfer {
+  bankName: string;
+  accountNumber: string;
+}
+
+export type PaymentMethods = string[];
+
 export interface Settlement {
   title: string;
   date: string;
   place: PlaceList;
-  transfer: {
-    account: {
-      bankName: string;
-      accountHolderName: string;
-      accountNumber: number;
-    };
-    kakaoPay: boolean;
-    toss: boolean;
+  payment: {
+    payer: string;
+    paymentMethods: PaymentMethods;
+    selectedPaymentMethods: PaymentMethods;
+    bankTransfer: BankTransfer;
   };
 }

@@ -1,24 +1,13 @@
-import { Dispatch, useEffect, useReducer } from 'react';
+import { Dispatch, useReducer } from 'react';
 import { Settlement } from '../../types/Settlement';
 import { getId } from '../../utils/getId';
 import { substract } from '../../utils/substract';
 import { Action } from './useCreationReducer.type';
-import CreationService, { CreationServiceType } from '../../services/CreationService';
 
-export default function useCreationReducer(): [
-  Settlement,
-  Dispatch<Action>,
-  CreationServiceType<Settlement>,
-] {
+export default function useCreationReducer(): [Settlement, Dispatch<Action>] {
   const [data, dispatch] = useReducer(CreactionReducer, defaultSettlement);
-  const service = new CreationService<Settlement>();
 
-  useEffect(() => {
-    const _data = service.get();
-    if (_data) dispatch({ type: 'set', data: _data });
-  }, []);
-
-  return [data, dispatch, service];
+  return [data, dispatch];
 }
 
 function CreactionReducer(settlement: Settlement, action: Action) {
@@ -41,13 +30,6 @@ function CreactionReducer(settlement: Settlement, action: Action) {
       return {
         ...settlement,
         date: action.date,
-      };
-    }
-    // transfer
-    case 'changeTransfer': {
-      return {
-        ...settlement,
-        transfer: action.transfer,
       };
     }
     // place
@@ -86,7 +68,7 @@ function CreactionReducer(settlement: Settlement, action: Action) {
         ),
       };
     }
-    case 'togglePlaceParticipant': {
+    case 'toggleSelectedPlaceParticipant': {
       return {
         ...settlement,
         place: settlement.place.map((item) =>
@@ -119,7 +101,7 @@ function CreactionReducer(settlement: Settlement, action: Action) {
                 sub: [
                   ...item.sub,
                   {
-                    id: `place_${getId()}`,
+                    id: `place_sub_${getId()}`,
                     title: action.subTitle ?? '',
                     amount:
                       action.subAmount ??
@@ -185,7 +167,7 @@ function CreactionReducer(settlement: Settlement, action: Action) {
                   ...item.sub.slice(0, changedIndex),
                   action.subItem,
                   {
-                    id: `place_${getId()}`,
+                    id: `place_sub_${getId()}`,
                     title: '',
                     amount: remainderAmount,
                     participants: [],
@@ -202,7 +184,7 @@ function CreactionReducer(settlement: Settlement, action: Action) {
         }),
       };
     }
-    case 'toggleSubPlaceParticipant': {
+    case 'toggleSelectedSubPlaceParticipant': {
       return {
         ...settlement,
         place: settlement.place.map((item) =>
@@ -213,7 +195,7 @@ function CreactionReducer(settlement: Settlement, action: Action) {
                   subItem.id === action.subId
                     ? subItem.participants.includes(action.participant)
                       ? {
-                          ...item,
+                          ...subItem,
                           participants: subItem.participants.filter(
                             (participant) => participant !== action.participant,
                           ),
@@ -263,6 +245,40 @@ function CreactionReducer(settlement: Settlement, action: Action) {
         }),
       };
     }
+    // payment
+    case 'changePayer': {
+      return {
+        ...settlement,
+        payment: {
+          ...settlement.payment,
+          payer: action.payer,
+        },
+      };
+    }
+    case 'toggleSelectedPaymentMethod': {
+      const { selectedPaymentMethods } = settlement.payment;
+
+      return {
+        ...settlement,
+        payment: {
+          ...settlement.payment,
+          selectedPaymentMethods: selectedPaymentMethods.includes(action.paymentMethod)
+            ? selectedPaymentMethods.filter(
+                (paymentMethod) => paymentMethod !== action.paymentMethod,
+              )
+            : [...selectedPaymentMethods, action.paymentMethod],
+        },
+      };
+    }
+    case 'changeBankTransfer': {
+      return {
+        ...settlement,
+        payment: {
+          ...settlement.payment,
+          bankTransfer: action.data,
+        },
+      };
+    }
   }
 }
 
@@ -271,20 +287,20 @@ const defaultSettlement: Settlement = {
   date: '',
   place: [
     {
-      id: '',
+      id: `place_${getId()}`,
       title: '',
       amount: 0,
       participants: [],
       sub: [],
     },
   ],
-  transfer: {
-    account: {
+  payment: {
+    payer: '',
+    paymentMethods: ['계좌송금', '카카오페이', '토스'],
+    selectedPaymentMethods: ['계좌송금'],
+    bankTransfer: {
       bankName: '',
-      accountHolderName: '',
-      accountNumber: 0,
+      accountNumber: '',
     },
-    kakaoPay: true,
-    toss: true,
   },
 };

@@ -4,6 +4,7 @@ import useCreationReducer from '../components/Create/useCreationReducer';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Default from '../components/Create/Default';
 import Participants from '../components/Create/Participants';
+import Payment from '../components/Create/Payment';
 
 const steps = ['기본정보', '참가자', '송금정보'] as const;
 const stepInfo = {
@@ -22,10 +23,8 @@ export default function Create() {
   const location = useLocation();
   const stepIndex = +location.pathname.replace('/create/', '');
   const [step, setStep] = useState<(typeof steps)[number]>(steps[stepIndex - 1]);
-  const [data, dispatch, creationService] = useCreationReducer();
+  const [data, dispatch] = useCreationReducer();
   const navigate = useNavigate();
-
-  console.log('[step]', step);
 
   useEffect(() => {
     setStep(steps[stepIndex - 1]);
@@ -34,29 +33,29 @@ export default function Create() {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    // 다음 페이지가 있다면
+    // 1. 다음 페이지가 있다면
     const { nextStep } = stepInfo[step];
 
     if (nextStep !== null) {
-      // 로컬스토리지에 data 저장
-      creationService.set(data);
-
       // setStep 해서 컴포넌트 체인지. 이때 history 남길것
       setStep(nextStep);
       navigate(`/create/${steps.indexOf(nextStep) + 1}`);
       return;
     }
+
+    // 2. 다음 페이지가 없다면
+    
   };
 
   return (
-    <PageLayout title="정산 만들기" description="클라이밍 원정">
+    <PageLayout title="정산 만들기">
       <form onSubmit={onSubmit}>
         {step === '기본정보' ? (
           <Default data={data} dispatch={dispatch} />
         ) : step === '참가자' ? (
           <Participants data={data} dispatch={dispatch} />
         ) : step === '송금정보' ? (
-          <p>송금정보</p>
+          <Payment data={data} dispatch={dispatch} />
         ) : null}
       </form>
     </PageLayout>

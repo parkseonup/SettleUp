@@ -2,7 +2,7 @@ import { Dispatch } from 'react';
 import { Settlement } from '../../types/Settlement';
 import { Action } from './useCreationReducer.type';
 import Section from '../common/molecules/Section';
-import MultiSelect from '../MultiSelect/molecules/MultiSelect';
+import MultiSelect from '../MultiSelect/MultiSelect';
 import ButtonWrapper from '../common/atoms/ButtonWrapper';
 import Button from '../common/atoms/Button';
 
@@ -33,13 +33,14 @@ export default function Participants({ data, dispatch }: Props) {
                 key={placeItem.id}
                 title={placeItem.title}
                 summary={placeItem.participants.length || null}
+                required={true}
               >
                 <MultiSelect.Content
                   options={allParticipants}
                   value={placeItem.participants}
                   onChange={(participant) =>
                     dispatch({
-                      type: 'togglePlaceParticipant',
+                      type: 'toggleSelectedPlaceParticipant',
                       id: placeItem.id,
                       participant,
                     })
@@ -49,7 +50,7 @@ export default function Participants({ data, dispatch }: Props) {
                     label="이름 입력"
                     addOption={(participant) => {
                       dispatch({
-                        type: 'togglePlaceParticipant',
+                        type: 'toggleSelectedPlaceParticipant',
                         id: placeItem.id,
                         participant,
                       });
@@ -60,7 +61,12 @@ export default function Participants({ data, dispatch }: Props) {
             );
           } else {
             return (
-              <MultiSelect key={placeItem.id} title={placeItem.title}>
+              <MultiSelect
+                key={placeItem.id}
+                title={placeItem.title}
+                summary={allParticipants.length}
+                required={true}
+              >
                 {placeItem.sub.map((subItem) => (
                   <MultiSelect.Content
                     key={subItem.id}
@@ -70,7 +76,7 @@ export default function Participants({ data, dispatch }: Props) {
                     value={subItem.participants}
                     onChange={(participant) =>
                       dispatch({
-                        type: 'toggleSubPlaceParticipant',
+                        type: 'toggleSelectedSubPlaceParticipant',
                         id: placeItem.id,
                         subId: subItem.id,
                         participant,
@@ -81,7 +87,7 @@ export default function Participants({ data, dispatch }: Props) {
                       label="이름 입력"
                       addOption={(participant) => {
                         dispatch({
-                          type: 'toggleSubPlaceParticipant',
+                          type: 'toggleSelectedSubPlaceParticipant',
                           id: placeItem.id,
                           subId: subItem.id,
                           participant,
