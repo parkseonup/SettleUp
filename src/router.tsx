@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import GeneralLayout from './layout/GeneralLayout';
 import Create from './pages/Create';
+import Result from './pages/Result';
 
 interface RouterBase {
   path: string;
@@ -25,6 +26,12 @@ const routerData: RouterData[] = [
     path: '/create/:index',
     label: '정산 만들기',
     element: <Create />,
+    withAuth: false,
+  },
+  {
+    path: '/result',
+    label: '정산 결과',
+    element: <Result />,
     withAuth: false,
   },
 ];
