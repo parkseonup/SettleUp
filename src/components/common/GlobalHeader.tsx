@@ -1,4 +1,3 @@
-import { colors } from '../../styles/variables/colors';
 import Menu from '../Menu/Menu';
 import Title from './Title';
 
@@ -11,10 +10,16 @@ export default function GlobalHeader() {
         justifyContent: 'space-between',
         height: '64px',
         padding: '0 18px',
-        color: colors.BLACK,
+        color: 'inherit',
       }}
     >
-      <Title as="h1" font="size200">
+      <Title
+        as="h1"
+        font="size200"
+        insideStyle={{
+          color: 'inherit',
+        }}
+      >
         정산하자
       </Title>
       <Menu />

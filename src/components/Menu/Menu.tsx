@@ -12,6 +12,7 @@ import Dropdown from '../common/Dropdown/Dropdown';
 
 interface Props {}
 
+// FIXME: 메뉴 열렸을 때 스크롤 안되게 하기
 export default function Menu({ ...props }: Props) {
   const [defaultMenu, userMenu] = useMemo(
     () =>
@@ -36,7 +37,7 @@ export default function Menu({ ...props }: Props) {
                 position: 'relative',
                 zIndex: zIndexes.MENU_BUTTON,
                 fontSize: '24px',
-                color: isActive ? colors.WHITE : colors.BLACK,
+                color: isActive ? colors.WHITE : 'inherit',
               }}
               onClick={() => setIsActive(!isActive)}
             >
