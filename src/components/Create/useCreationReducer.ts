@@ -1,11 +1,14 @@
 import { Dispatch, useReducer } from 'react';
 import { Settlement } from '../../types/Settlement';
 import { getId } from '../../utils/getId';
-import { substract } from '../../utils/substract';
+import { substractNumbers } from '../../utils/math';
 import { Action } from './useCreationReducer.type';
+import { getDateToString } from '@seonup/use-calendar';
 
-export default function useCreationReducer(): [Settlement, Dispatch<Action>] {
-  const [data, dispatch] = useReducer(CreactionReducer, defaultSettlement);
+export default function useCreationReducer(
+  defaultData?: Settlement,
+): [Settlement, Dispatch<Action>] {
+  const [data, dispatch] = useReducer(CreactionReducer, defaultData || defaultSettlement);
 
   return [data, dispatch];
 }
@@ -62,8 +65,12 @@ function CreactionReducer(settlement: Settlement, action: Action) {
         place: settlement.place.map((item) =>
           item.id === action.data.id
             ? action.data.amount > 0
-              ? { ...item, ...action.data }
-              : item
+              ? { ...item, ...action.data, sub: [] }
+              : {
+                  ...item,
+                  amount: 0,
+                  sub: [],
+                }
             : item,
         ),
       };
@@ -105,7 +112,7 @@ function CreactionReducer(settlement: Settlement, action: Action) {
                     title: action.subTitle ?? '',
                     amount:
                       action.subAmount ??
-                      substract(
+                      substractNumbers(
                         item.amount,
                         item.sub.map(({ amount }) => amount),
                       ),
@@ -137,8 +144,6 @@ function CreactionReducer(settlement: Settlement, action: Action) {
         ...settlement,
         place: settlement.place.map((item) => {
           if (item.id === action.id) {
-            if (action.subItem.amount <= 0) return item;
-
             // 변경될 sub의 index를 구하고, 해당 subItem의 값을 변경한다.
             const changedIndex = item.sub.findIndex(
               (sub) => sub.id === action.subItem.id,
@@ -147,7 +152,7 @@ function CreactionReducer(settlement: Settlement, action: Action) {
             // 2. 변경될 값이 amount인 경우
 
             // 총 금액에서 sub의 0부터 changedIndex까지의 금액을 뺀다.
-            const remainderAmount = substract(item.amount, [
+            const remainderAmount = substractNumbers(item.amount, [
               ...item.sub.slice(0, changedIndex).map(({ amount }) => amount),
               action.subItem.amount,
             ]);
@@ -284,7 +289,7 @@ function CreactionReducer(settlement: Settlement, action: Action) {
 
 const defaultSettlement: Settlement = {
   title: '',
-  date: '',
+  date: getDateToString(new Date()),
   place: [
     {
       id: `place_${getId()}`,
