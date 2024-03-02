@@ -25,6 +25,7 @@ export default function SublistItem({ insideStyle, children, ...props }: Props) 
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: '16px',
+          paddingLeft: '8px',
           fontSize: '12px',
           fontWeight: 400,
           color: colors.DARK_GRAY,
@@ -37,7 +38,7 @@ export default function SublistItem({ insideStyle, children, ...props }: Props) 
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '4px',
+          gap: '2px',
         }}
       >
         <BiSubdirectoryRight

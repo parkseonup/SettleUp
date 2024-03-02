@@ -28,7 +28,6 @@ export default function AmountInput({ amount, insideStyle, ...props }: Props) {
         display: 'flex',
         justifyContent: 'flex-end',
         gap: '4px',
-        backgroundColor: isActive ? colors.LIGHT_GRAY : 'transparent',
       }}
     >
       <input
@@ -58,6 +57,7 @@ export default function AmountInput({ amount, insideStyle, ...props }: Props) {
             fontSize: '12px',
             color: amount ? colors.DARK_GRAY : colors.LIGHT_GRAY,
             textAlign: 'right',
+            backgroundColor: isActive ? colors.LIGHT_GRAY : 'transparent',
             pointerEvents: 'none',
           },
           insideStyle,
