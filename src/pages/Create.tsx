@@ -23,7 +23,7 @@ export default function Create() {
   const location = useLocation();
   const stepIndex = +location.pathname.replace('/create/', '');
   const [step, setStep] = useState<(typeof steps)[number]>(steps[stepIndex - 1]);
-  const [data, dispatch] = useCreationReducer();
+  const [data, dispatch] = useCreationReducer(location.state);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,10 +44,11 @@ export default function Create() {
     }
 
     // 2. 다음 페이지가 없다면
+    navigate('/result', { state: data });
   };
 
   return (
-    <PageLayout title="정산 만들기">
+    <PageLayout title={`정산 만들기 (${stepIndex}/${steps.length})`}>
       <form onSubmit={onSubmit}>
         {step === '기본정보' ? (
           <Default data={data} dispatch={dispatch} />
