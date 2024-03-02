@@ -11,7 +11,7 @@ type PlaceActions =
   | { type: 'changePlaceAmount'; data: PlaceInfo }
   | { type: 'toggleSelectedPlaceParticipant'; id: PlaceInfo['id']; participant: string }
   | { type: 'deletePlace'; id: PlaceInfo['id'] }
-  | { type: 'addSubPlace'; id: PlaceInfo['id']; subTitle?: string; subAmount?: number }
+  | { type: 'addSubPlace'; id: PlaceInfo['id']; subTitle?: PlaceInfo['title']; subAmount?: PlaceInfo['amount'] }
   | { type: 'changeSubPlaceTitle'; id: PlaceInfo['id']; subItem: PlaceInfo }
   | { type: 'changeSubPlaceAmount'; id: PlaceInfo['id']; subItem: PlaceInfo }
   | {
