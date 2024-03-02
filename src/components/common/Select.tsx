@@ -4,6 +4,7 @@ import { colors } from '../../styles/variables/colors';
 import { getId } from '../../utils/getId';
 import Dropdown from './Dropdown/Dropdown';
 import InputField from './InputField/InputField';
+import { visibilityHidden } from '../../styles/common/displays';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -33,7 +34,12 @@ export default forwardRef(function Select(
           <InputField isActive={isActive}>
             <InputField.Label htmlFor={id}>{label}</InputField.Label>
             <InputField.Input
+              css={visibilityHidden}
+              defaultValue={value}
+              {...props}
               id={id}
+            />
+            <InputField.Input
               ref={ref}
               value={value}
               css={{
