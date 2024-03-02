@@ -18,16 +18,18 @@ export interface BankTransfer {
   accountNumber: string;
 }
 
+export interface Payment {
+  payer: string;
+  paymentMethods: PaymentMethods;
+  selectedPaymentMethods: PaymentMethods;
+  bankTransfer: BankTransfer;
+}
+
 export type PaymentMethods = string[];
 
 export interface Settlement {
   title: string;
   date: string;
   place: PlaceList;
-  payment: {
-    payer: string;
-    paymentMethods: PaymentMethods;
-    selectedPaymentMethods: PaymentMethods;
-    bankTransfer: BankTransfer;
-  };
+  payment: Payment;
 }
