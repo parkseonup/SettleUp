@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState } from 'react';
 import useCreationReducer from '../components/Create/useCreationReducer';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Default from '../components/Create/Default';
 import Participants from '../components/Create/Participants';
 import Payment from '../components/Create/Payment';
@@ -19,9 +19,12 @@ const stepInfo = {
   },
 } as const;
 
+// TODO: url로 접근할 경우, 첫 페이지로 돌리기
+// TODO: /, /create, /create/, /create/1 url 통일하기
 export default function Create() {
+  const params = useParams();
   const location = useLocation();
-  const stepIndex = +location.pathname.replace('/create/', '');
+  const stepIndex = params.stepIndex ? +params.stepIndex : 1;
   const [step, setStep] = useState<(typeof steps)[number]>(steps[stepIndex - 1]);
   const [data, dispatch] = useCreationReducer(location.state);
   const navigate = useNavigate();
