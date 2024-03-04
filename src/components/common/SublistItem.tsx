@@ -62,7 +62,7 @@ export default function SublistItem({ insideStyle, children, ...props }: Props) 
 }
 
 const titleStyle = {
-  fontSize: '12px',
+  fontSize: 'inherite',
   fontWeight: 500,
   color: colors.DARK_GRAY,
 };
