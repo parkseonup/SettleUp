@@ -1,33 +1,18 @@
 import { zIndexes } from '../../styles/variables/zIndexes';
 import { colors } from '../../styles/variables/colors';
 import { visibilityHidden } from '../../styles/common/displays';
-import { NavData, navData } from '../../router';
+import { navData } from '../../router/router';
 import { title } from '../../styles/variables/font';
 
 import { BiMenu, BiX } from 'react-icons/bi';
 import List from './List';
 import Item from './Item';
-import { useMemo } from 'react';
 import Dropdown from '../common/Dropdown/Dropdown';
 
-interface Props {}
-
 // FIXME: 메뉴 열렸을 때 스크롤 안되게 하기
-export default function Menu({ ...props }: Props) {
-  const [defaultMenu, userMenu] = useMemo(
-    () =>
-      navData.reduce<[NavData, NavData]>(
-        (result, data) => {
-          data.aboutUser ? result[1].push(data) : result[0].push(data);
-          return result;
-        },
-        [[], []],
-      ),
-    [navData],
-  );
-
+export default function Menu() {
   return (
-    <Dropdown {...props}>
+    <Dropdown>
       <Dropdown.Trigger>
         {({ isActive, setIsActive }) => {
           return (
@@ -74,37 +59,13 @@ export default function Menu({ ...props }: Props) {
                   gap: '16px',
                 }}
               >
-                {defaultMenu.map(({ path, label }) => (
+                {navData.map(({ path, label }) => (
                   <Item
                     key={path}
                     to={path}
                     css={{
                       ...title.size900,
                       color: colors.WHITE,
-                    }}
-                  >
-                    {label}
-                  </Item>
-                ))}
-              </List>
-
-              <List
-                css={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '16px',
-                  paddingTop: '20px',
-                  marginTop: '20px',
-                  borderTop: `1px solid ${colors.LIGHT_GRAY}`,
-                }}
-              >
-                {userMenu.map(({ path, label }) => (
-                  <Item
-                    key={path}
-                    to={path}
-                    css={{
-                      ...title.size100,
-                      color: colors.LIGHT_GRAY,
                     }}
                   >
                     {label}

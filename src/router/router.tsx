@@ -48,6 +48,7 @@ const routerData: RouterBase[] = [
   },
 ];
 
+// THINK: eslint 무시하는거 말고 다른 방법은 없을까?
 export const router = createBrowserRouter(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   routerData.map(({ label, ...router }) => ({
@@ -56,6 +57,11 @@ export const router = createBrowserRouter(
   })),
 );
 
+interface NavData {
+  path: string;
+  label: string;
+}
+
 export const navData = routerData
-  .filter(({ label }) => label)
+  .filter((data): data is NavData => !!data.label)
   .map(({ path, label }) => ({ path, label }));
