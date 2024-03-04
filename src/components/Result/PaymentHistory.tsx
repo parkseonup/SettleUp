@@ -1,13 +1,11 @@
-import { PlaceList } from '../../types/Settlement';
 import { separateComma } from '../../utils/separateComma';
 import Section from '../common/Section';
 import SublistItem from '../common/SublistItem';
+import { useResultContext } from './ResultContext';
 
-interface Props {
-  place: PlaceList;
-}
+export default function PaymentHistory() {
+  const { place } = useResultContext();
 
-export default function PaymentHistory({ place }: Props) {
   return (
     <Section title="결제 내역" type="underline">
       <ul

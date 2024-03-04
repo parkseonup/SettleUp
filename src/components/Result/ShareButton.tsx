@@ -1,23 +1,15 @@
 import html2canvas from 'html2canvas';
 import Button from '../common/Button';
 import { convertCanvasToFile } from '../../utils/convertCanvasToFile';
-import { Payment, Settlement } from '../../types/Settlement';
 import { colors } from '../../styles/variables/colors';
 import { separateComma } from '../../utils/separateComma';
-import { PersonalAmountData } from '../../pages/Result';
-
-interface Data extends Omit<Settlement, 'place'> {
-  hasAccount: boolean;
-  etcPaymentMethods: Payment['selectedPaymentMethods'];
-  personalAmountList: PersonalAmountData;
-}
+import { useResultContext } from './ResultContext';
 
 interface Props {
-  data: Data;
   captureElement: HTMLElement | null;
 }
 
-export default function ShareButton({ data, captureElement }: Props) {
+export default function ShareButton({ captureElement }: Props) {
   const {
     title,
     date,
@@ -25,7 +17,7 @@ export default function ShareButton({ data, captureElement }: Props) {
     hasAccount,
     etcPaymentMethods,
     personalAmountList,
-  } = data;
+  } = useResultContext();
 
   const getCaptureFile = async () => {
     if (!captureElement) return;

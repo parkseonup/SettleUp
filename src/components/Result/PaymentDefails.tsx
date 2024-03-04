@@ -1,17 +1,16 @@
 import { colors } from '../../styles/variables/colors';
-import { Payment } from '../../types/Settlement';
+import { useResultContext } from './ResultContext';
 
-interface Props extends Pick<Payment, 'payer' | 'bankTransfer'> {
-  hasAccount: boolean;
-  etcPaymentMethods: Payment['selectedPaymentMethods'];
-}
+export default function PaymentDetails() {
+  const {
+    payment: {
+      payer,
+      bankTransfer: { bankName, accountNumber },
+    },
+    hasAccount,
+    etcPaymentMethods,
+  } = useResultContext();
 
-export default function PaymentDetails({
-  payer,
-  hasAccount,
-  etcPaymentMethods,
-  bankTransfer: { bankName, accountNumber },
-}: Props) {
   return (
     <ul
       css={{

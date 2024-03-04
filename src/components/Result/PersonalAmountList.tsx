@@ -1,12 +1,11 @@
-import { PersonalAmountData } from '../../pages/Result';
 import { colors } from '../../styles/variables/colors';
+import { Entries } from '../../types/Entries';
 import { separateComma } from '../../utils/separateComma';
+import { PersonalAmountData, useResultContext } from './ResultContext';
 
-interface Props {
-  data: PersonalAmountData;
-}
+export default function PersonalAmountList() {
+  const { personalAmountList } = useResultContext();
 
-export default function PersonalAmountList({ data }: Props) {
   return (
     <ul
       css={{
@@ -18,18 +17,20 @@ export default function PersonalAmountList({ data }: Props) {
         borderTop: `1px solid ${colors.LIGHT_GRAY}`,
       }}
     >
-      {Object.entries(data).map(([person, amount]) => (
-        <li
-          key={person}
-          css={{
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}
-        >
-          <p>{person}</p>
-          <p>{separateComma(amount)} 원</p>
-        </li>
-      ))}
+      {(Object.entries(personalAmountList) as Entries<PersonalAmountData>).map(
+        ([person, amount]) => (
+          <li
+            key={person}
+            css={{
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
+          >
+            <p>{person}</p>
+            <p>{separateComma(amount)} 원</p>
+          </li>
+        ),
+      )}
     </ul>
   );
 }
