@@ -28,6 +28,7 @@ export interface Payment {
 export type PaymentMethods = string[];
 
 export interface Settlement {
+  id: string;
   title: string;
   date: string;
   place: PlaceList;

@@ -262,16 +262,26 @@ function CreactionReducer(settlement: Settlement, action: Action) {
     }
     case 'toggleSelectedPaymentMethod': {
       const { selectedPaymentMethods } = settlement.payment;
+      const willDeletePaymentMethod = selectedPaymentMethods.includes(
+        action.paymentMethod,
+      );
 
       return {
         ...settlement,
         payment: {
           ...settlement.payment,
-          selectedPaymentMethods: selectedPaymentMethods.includes(action.paymentMethod)
+          selectedPaymentMethods: willDeletePaymentMethod
             ? selectedPaymentMethods.filter(
                 (paymentMethod) => paymentMethod !== action.paymentMethod,
               )
             : [...selectedPaymentMethods, action.paymentMethod],
+          bankTransfer:
+            action.paymentMethod === '계좌송금' && willDeletePaymentMethod
+              ? {
+                  bankName: '',
+                  accountNumber: '',
+                }
+              : settlement.payment.bankTransfer,
         },
       };
     }
@@ -288,6 +298,7 @@ function CreactionReducer(settlement: Settlement, action: Action) {
 }
 
 const defaultSettlement: Settlement = {
+  id: `settlement_${getId()}`,
   title: '',
   date: getDateToString(new Date()),
   place: [
