@@ -3,17 +3,19 @@ import GeneralLayout from '../layout/GeneralLayout';
 import Create from '../pages/Create';
 import Result from '../pages/Result';
 import History from '../pages/History';
-import HistoryItem from '../pages/HistoryItem';
-import { historyItemLoader } from './historyItemLoader';
+import HistoryDetail from '../pages/HistoryDetail';
+import { historyDetailLoader } from './historyDetailLoader';
 
 type RouterBase = RouteObject & {
-  label?: string;
+  label: string;
+  showMenu: boolean;
 };
 
 const routerData: RouterBase[] = [
   {
     path: '/',
     label: '정산 만들기',
+    showMenu: true,
     element: <Create />,
     children: [
       {
@@ -31,6 +33,7 @@ const routerData: RouterBase[] = [
   {
     path: '/result',
     label: '정산 결과',
+    showMenu: false,
     element: <Result />,
     errorElement: (
       <Link to="/create">생성된 정산 내역이 없습니다. 정산 만들기부터 진행해주세요.</Link>
@@ -39,19 +42,22 @@ const routerData: RouterBase[] = [
   {
     path: '/history',
     label: '정산 목록',
+    showMenu: true,
     element: <History />,
   },
   {
     path: '/history/:id',
-    element: <HistoryItem />,
-    loader: historyItemLoader,
+    label: '정산 내역',
+    showMenu: false,
+    element: <HistoryDetail />,
+    loader: historyDetailLoader,
   },
 ];
 
 // THINK: eslint 무시하는거 말고 다른 방법은 없을까?
 export const router = createBrowserRouter(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  routerData.map(({ label, ...router }) => ({
+  routerData.map(({ label, showMenu, ...router }) => ({
     ...router,
     element: <GeneralLayout>{router.element}</GeneralLayout>,
   })),
@@ -60,8 +66,9 @@ export const router = createBrowserRouter(
 interface NavData {
   path: string;
   label: string;
+  showMenu: true;
 }
 
 export const navData = routerData
-  .filter((data): data is NavData => !!data.label)
+  .filter((data): data is NavData => !!data.showMenu)
   .map(({ path, label }) => ({ path, label }));
