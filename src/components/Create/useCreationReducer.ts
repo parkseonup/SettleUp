@@ -8,9 +8,7 @@ import { getDateToString } from '@seonup/use-calendar';
 export default function useCreationReducer(
   defaultData?: Settlement,
 ): [Settlement, Dispatch<Action>] {
-  const [data, dispatch] = useReducer(CreactionReducer, defaultData || defaultSettlement);
-
-  return [data, dispatch];
+  return useReducer(CreactionReducer, defaultData || defaultSettlement);
 }
 
 function CreactionReducer(settlement: Settlement, action: Action) {
@@ -298,7 +296,7 @@ function CreactionReducer(settlement: Settlement, action: Action) {
 }
 
 const defaultSettlement: Settlement = {
-  id: `settlement_${getId()}`,
+  id: `settlement_${+new Date()}_${getId()}`,
   title: '',
   date: getDateToString(new Date()),
   place: [
