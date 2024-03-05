@@ -75,6 +75,15 @@ export default forwardRef(function ResultMain(
         >
           <PaymentDetails />
           <PersonalAmountList />
+
+          <small
+            css={{
+              display: 'block',
+              marginTop: '16px',
+            }}
+          >
+            * 1원 단위는 올림 처리되었습니다.
+          </small>
         </div>
       </Section>
     </main>
