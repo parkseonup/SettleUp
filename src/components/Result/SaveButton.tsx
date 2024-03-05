@@ -29,8 +29,10 @@ export default function SaveButton({ data }: Props) {
 
         const newDatas =
           targetLocalDataIndex > -1
-            ? localDatas.map((localData) => (localData.id === data.id ? data : localData))
-            : [...localDatas, data];
+            ? localDatas.map((localData) =>
+                localData.id === copyData.id ? copyData : localData,
+              )
+            : [...localDatas, copyData];
 
         localStorage.setItem('SETTLE_UP', JSON.stringify(newDatas));
         navigate('/history');
