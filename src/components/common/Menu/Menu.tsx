@@ -1,13 +1,12 @@
-import { zIndexes } from '../../styles/variables/zIndexes';
-import { colors } from '../../styles/variables/colors';
-import { visibilityHidden } from '../../styles/common/displays';
-import { navData } from '../../router/router';
-import { title } from '../../styles/variables/font';
-
 import { BiMenu, BiX } from 'react-icons/bi';
 import List from './List';
 import Item from './Item';
-import Dropdown from '../common/Dropdown/Dropdown';
+import Dropdown from '../Dropdown/Dropdown';
+import { zIndexes } from '../../../styles/variables/zIndexes';
+import { colors } from '../../../styles/variables/colors';
+import { visibilityHidden } from '../../../styles/common/displays';
+import { navData } from '../../../router/router';
+import { title } from '../../../styles/variables/font';
 
 // FIXME: 메뉴 열렸을 때 스크롤 안되게 하기
 export default function Menu() {

@@ -1,4 +1,4 @@
-import Menu from '../Menu/Menu';
+import Menu from './Menu/Menu';
 import Title from './Title';
 
 export default function GlobalHeader() {
