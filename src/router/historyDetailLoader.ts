@@ -1,7 +1,7 @@
 import { Params } from 'react-router-dom';
 import { Settlement } from '../types/Settlement';
 
-export const historyItemLoader = ({ params }: { params: Params<string> }) => {
+export const historyDetailLoader = ({ params }: { params: Params<string> }) => {
   const localData = localStorage.getItem('SETTLE_UP');
 
   if (!localData) throw new Error('저장 목록에 저장된 내용이 없습니다.');

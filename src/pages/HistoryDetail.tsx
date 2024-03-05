@@ -12,7 +12,7 @@ export interface PersonalAmountData {
   [key: PlaceInfo['participants'][number]]: PlaceInfo['amount'];
 }
 
-export default function HistoryItem() {
+export default function HistoryDetail() {
   const navigate = useNavigate();
   const captureElementRef = useRef<HTMLElement>(null);
   const { data } = useLoaderData() as { data: Settlement };
