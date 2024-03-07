@@ -7,10 +7,12 @@ import { colors } from '../styles/variables/colors';
 import ButtonWrapper from '../components/common/ButtonWrapper';
 import Button from '../components/common/Button';
 import { Link, useNavigate } from 'react-router-dom';
+import Modal from '../components/common/Modal/Modal';
 
 export default function History() {
-  const [list, setList] = useState<Settlement[]>([]);
   const navigate = useNavigate();
+  const [list, setList] = useState<Settlement[]>([]);
+  const [showResetModal, setShowResetModal] = useState(false);
 
   list.sort((a, b) => +new Date(a.date) - +new Date(b.date));
 
@@ -22,85 +24,100 @@ export default function History() {
 
   // TODO: id 만들기
   return (
-    <PageLayout title="정산 목록">
-      <ul
-        css={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '12px',
-        }}
-      >
-        {list.map((item) => (
-          <li
-            key={item.id}
-            css={{
-              padding: '16px',
-              fontSize: '14px',
-              border: `1px solid ${colors.LIGHT_GRAY}`,
-              borderRadius: '20px',
-            }}
-          >
-            <Link to={`/history/${item.id}`}>
-              <div
-                css={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                }}
-              >
-                <h3
-                  css={{
-                    fontWeight: 500,
-                    color: colors.BLACK,
-                  }}
-                >
-                  {item.title}
-                </h3>
-                <p
-                  css={{
-                    color: colors.DARK_GRAY,
-                  }}
-                >
-                  {item.date}
-                </p>
-              </div>
-              <ul
-                css={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '8px',
-                  marginTop: '12px',
-                }}
-              >
-                {item.place.map((placeItem) => (
-                  <SublistItem key={placeItem.id} title={placeItem.title}>
-                    {separateComma(placeItem.amount)} 원
-                  </SublistItem>
-                ))}
-              </ul>
-            </Link>
-          </li>
-        ))}
-      </ul>
-
-      <ButtonWrapper>
-        <Button
-          style="point"
-          onClick={() => {
-            navigate('/create');
+    <>
+      <PageLayout title="정산 목록">
+        <ul
+          css={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '12px',
           }}
         >
-          정산 추가하기
-        </Button>
-        {list.length > 0 ? (
+          {list.map((item) => (
+            <li
+              key={item.id}
+              css={{
+                padding: '16px',
+                fontSize: '14px',
+                border: `1px solid ${colors.LIGHT_GRAY}`,
+                borderRadius: '20px',
+              }}
+            >
+              <Link to={`/history/${item.id}`}>
+                <div
+                  css={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <h3
+                    css={{
+                      fontWeight: 500,
+                      color: colors.BLACK,
+                    }}
+                  >
+                    {item.title}
+                  </h3>
+                  <p
+                    css={{
+                      color: colors.DARK_GRAY,
+                    }}
+                  >
+                    {item.date}
+                  </p>
+                </div>
+                <ul
+                  css={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '8px',
+                    marginTop: '12px',
+                  }}
+                >
+                  {item.place.map((placeItem) => (
+                    <SublistItem key={placeItem.id} title={placeItem.title}>
+                      {separateComma(placeItem.amount)} 원
+                    </SublistItem>
+                  ))}
+                </ul>
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <ButtonWrapper>
           <Button
+            style="point"
             onClick={() => {
-              localStorage.removeItem('SETTLE_UP');
+              navigate('/create');
             }}
           >
-            목록 초기화
+            정산 추가하기
           </Button>
-        ) : null}
-      </ButtonWrapper>
-    </PageLayout>
+          {list.length > 0 ? (
+            <Button onClick={() => setShowResetModal(true)}>목록 초기화</Button>
+          ) : null}
+        </ButtonWrapper>
+      </PageLayout>
+
+      <Modal
+        isOpen={showResetModal}
+        footer={
+          <Button
+            style="point"
+            onClick={() => {
+              localStorage.removeItem('SETTLE_UP');
+              setList([]);
+              setShowResetModal(false);
+            }}
+          >
+            초기화 하기
+          </Button>
+        }
+        onClose={() => setShowResetModal(false)}
+      >
+        <p>목록을 초기화 하시겠습니까?</p>
+      </Modal>
+    </>
   );
 }

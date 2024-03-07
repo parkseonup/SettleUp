@@ -4,6 +4,8 @@ import { convertCanvasToFile } from '../../utils/convertCanvasToFile';
 import { colors } from '../../styles/variables/colors';
 import { separateComma } from '../../utils/separateComma';
 import { useResultContext } from './ResultContext';
+import { useState } from 'react';
+import Modal from '../common/Modal/Modal';
 
 interface Props {
   captureElement: HTMLElement | null;
@@ -18,6 +20,8 @@ export default function ShareButton({ captureElement }: Props) {
     etcPaymentMethods,
     personalAmountList,
   } = useResultContext();
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   const getCaptureFile = async () => {
     if (!captureElement) return;
@@ -64,12 +68,22 @@ export default function ShareButton({ captureElement }: Props) {
       // TODO: 복사되었습니다 modal 띄우기
       try {
         await navigator.clipboard.writeText(text);
-        console.log('복사 성공');
+        setShowSuccessModal(true);
       } catch (error) {
-        console.error(error, '공유하기가 지원되지 않는 환경 입니다.');
+        setShowErrorModal(true);
       }
     }
   };
 
-  return <Button onClick={onClick}>정산 결과 공유하기</Button>;
+  return (
+    <>
+      <Button onClick={onClick}>정산 결과 공유하기</Button>
+      <Modal isOpen={showSuccessModal} onClose={() => setShowSuccessModal(false)}>
+        <p>클립보드에 복사되었습니다.</p>
+      </Modal>
+      <Modal isOpen={showErrorModal} onClose={() => setShowErrorModal(false)}>
+        <p>공유 기능을 사용할 수 없는 기기입니다.</p>
+      </Modal>
+    </>
+  );
 }
