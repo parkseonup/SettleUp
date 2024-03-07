@@ -1,4 +1,4 @@
-import { Dispatch } from 'react';
+import { Dispatch, useEffect, useRef } from 'react';
 import { Settlement } from '../../types/Settlement';
 import { Action } from './useCreationReducer.type';
 import Section from '../common/Section';
@@ -14,6 +14,12 @@ interface Props {
 }
 
 export default function Default({ data, dispatch }: Props) {
+  const firstInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (firstInputRef.current) firstInputRef.current.focus();
+  }, []);
+
   return (
     <>
       <div
@@ -25,6 +31,7 @@ export default function Default({ data, dispatch }: Props) {
       >
         <Section title="1. 모임 이름 입력">
           <SingleInput
+            ref={firstInputRef}
             placeholder="ex) 클라이밍"
             name="title"
             value={data.title}

@@ -1,6 +1,5 @@
 import { getId } from '../../utils/getId';
-import { FocusEvent, useRef, useState } from 'react';
-import useOutsideClick from '../../hooks/useOutsideClick';
+import { ForwardedRef, forwardRef, useRef, useState } from 'react';
 import InputField from './InputField/InputField';
 import { Props as InputProps } from './InputField/Input';
 
@@ -8,28 +7,19 @@ interface Props extends Omit<InputProps, 'isActive'> {
   label?: string;
 }
 
-export default function SingleInput({ label, ...props }: Props) {
+export default forwardRef(function SingleInput(
+  { label, ...props }: Props,
+  ref: ForwardedRef<HTMLInputElement>,
+) {
   const [isActive, setIsActive] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const id = props.id ?? getId('input');
 
-  useOutsideClick(containerRef, () => {
-    if (setIsActive) setIsActive(false);
-  });
-
   const handleFocus = () => {
-    if (!containerRef.current) return;
-    if (!setIsActive) return;
-
     setIsActive(true);
   };
 
-  const handleBlur = (e: FocusEvent<HTMLDivElement, Element>) => {
-    if (!containerRef.current) return;
-    if (!e.relatedTarget) return;
-    if (containerRef.current.contains(e.relatedTarget)) return;
-    if (!setIsActive) return;
-
+  const handleBlur = () => {
     setIsActive(false);
   };
 
@@ -44,7 +34,7 @@ export default function SingleInput({ label, ...props }: Props) {
       }}
     >
       {label ? <InputField.Label htmlFor={id}>{label}</InputField.Label> : null}
-      <InputField.Input id={id} {...props} />
+      <InputField.Input ref={ref} id={id} {...props} />
     </InputField>
   );
-}
+});
