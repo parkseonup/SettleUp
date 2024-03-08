@@ -36,6 +36,7 @@ export default forwardRef(function Select(
             <InputField.Input
               css={visibilityHidden}
               defaultValue={value}
+              tabIndex={-1}
               {...props}
               id={id}
             />

@@ -15,6 +15,10 @@ export default function Dropdown({ children, ...props }: Props) {
     setIsActive(false);
   });
 
+  const onFocus = () => {
+    setIsActive(true);
+  };
+
   const onBlur = (e: FocusEvent) => {
     if (e.relatedTarget !== null && !modalRef.current?.contains(e.relatedTarget))
       setIsActive(false);
@@ -27,6 +31,7 @@ export default function Dropdown({ children, ...props }: Props) {
         css={{
           position: 'relative',
         }}
+        onFocus={onFocus}
         onBlur={onBlur}
         {...props}
       >
