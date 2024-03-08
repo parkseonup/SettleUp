@@ -1,10 +1,11 @@
-import { Link, RouteObject, createBrowserRouter } from 'react-router-dom';
+import { RouteObject, createBrowserRouter } from 'react-router-dom';
 import GeneralLayout from '../layout/GeneralLayout';
 import Create from '../pages/Create';
 import Result from '../pages/Result';
 import History from '../pages/History';
 import HistoryDetail from '../pages/HistoryDetail';
 import { historyDetailLoader } from './historyDetailLoader';
+import ResultErrorBoundary from '../components/Result/ResultErrorBoundary';
 
 type RouterBase = RouteObject & {
   label: string;
@@ -36,7 +37,9 @@ const routerData: RouterBase[] = [
     showMenu: false,
     element: <Result />,
     errorElement: (
-      <Link to="/create">생성된 정산 내역이 없습니다. 정산 만들기부터 진행해주세요.</Link>
+      <GeneralLayout>
+        <ResultErrorBoundary />
+      </GeneralLayout>
     ),
   },
   {
