@@ -1,5 +1,6 @@
-import { HTMLAttributes, useEffect } from 'react';
+import { HTMLAttributes } from 'react';
 import { zIndexes } from '../../../styles/variables/zIndexes';
+import useBlockingScroll from '../../../hooks/useBlockingScroll';
 
 interface Props {
   isOpen: boolean;
@@ -7,13 +8,7 @@ interface Props {
 }
 
 export default function BackDrop({ isOpen, onClick }: Props) {
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : 'visible';
-
-    return () => {
-      document.body.style.overflow = 'visible';
-    };
-  }, [isOpen]);
+  useBlockingScroll(isOpen);
 
   return (
     <div
