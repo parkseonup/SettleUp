@@ -30,6 +30,12 @@ export default function Create() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // url로 접근했을 때 첫번째 스텝이 아니면 리다이렉트
+    if (stepIndex !== 1 && !location.state) {
+      navigate('/create');
+      return;
+    }
+
     setStep(steps[stepIndex - 1]);
   }, [location]);
 
@@ -42,7 +48,7 @@ export default function Create() {
     if (nextStep !== null) {
       // setStep 해서 컴포넌트 체인지. 이때 history 남길것
       setStep(nextStep);
-      navigate(`/create/${steps.indexOf(nextStep) + 1}`);
+      navigate(`/create/${steps.indexOf(nextStep) + 1}`, { state: data });
       return;
     }
 
