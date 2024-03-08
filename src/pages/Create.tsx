@@ -19,7 +19,6 @@ const stepInfo = {
   },
 } as const;
 
-// TODO: url로 접근할 경우, 첫 페이지로 돌리기
 // TODO: /, /create, /create/, /create/1 url 통일하기
 export default function Create() {
   const params = useParams();
@@ -29,6 +28,7 @@ export default function Create() {
   const [data, dispatch] = useCreationReducer(location.state);
   const navigate = useNavigate();
 
+  /** location 체크해서 현재 step 결정 */
   useEffect(() => {
     // url로 접근했을 때 첫번째 스텝이 아니면 리다이렉트
     if (stepIndex !== 1 && !location.state) {
@@ -36,9 +36,23 @@ export default function Create() {
       return;
     }
 
+    // 현재 페이지에 따라 step 이동
     setStep(steps[stepIndex - 1]);
   }, [location]);
 
+  /** input에서 Enter키 입력시 발생하는 submit 이벤트 방지 */
+  useEffect(() => {
+    const preventEnterSubmit = (e: KeyboardEvent) => {
+      if ((e.target as HTMLElement).matches('input') && e.code === 'Enter')
+        e.preventDefault();
+    };
+
+    document.addEventListener('keydown', preventEnterSubmit);
+
+    return () => document.removeEventListener('keydown', preventEnterSubmit);
+  });
+
+  /** submit 이벤트 핸들러 */
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
 
