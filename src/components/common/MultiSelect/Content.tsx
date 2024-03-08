@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { MouseEvent, ReactNode, useState } from 'react';
 import Option from './Option';
 import MultiSelect from './MultiSelect';
 import { useMultiSelectContext } from './MultiSelectContext';
@@ -32,6 +32,12 @@ export default function Content({
 }: Props) {
   const addInput = getChildComponent(children, MultiSelect.AddInput);
   const { required } = useMultiSelectContext();
+  const [inputKey, setInputKey] = useState<number>(() => Date.now());
+
+  const _onChange = (e: MouseEvent<HTMLButtonElement>) => {
+    setInputKey(Date.now());
+    onChange((e.target as HTMLButtonElement).value);
+  };
 
   return (
     <div
@@ -57,6 +63,7 @@ export default function Content({
         }}
       >
         <input
+          key={inputKey}
           type="text"
           css={visibilityHidden}
           defaultValue={value}
@@ -68,7 +75,7 @@ export default function Content({
             key={option}
             value={option}
             isActive={value?.includes(option)}
-            onClick={(e) => onChange((e.target as HTMLButtonElement).value)}
+            onClick={_onChange}
           >
             {option}
           </Option>
