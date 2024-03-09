@@ -7,49 +7,62 @@ import { title } from '../../../styles/variables/font';
 import useBlockingScroll from '../../../hooks/useBlockingScroll';
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import { useRef } from 'react';
+import { screenSize } from '../../../styles/common/screenSize';
 
 interface Props {
   onClose: (e: Event) => void;
 }
 
 export default function Menu({ onClose }: Props) {
-  const LinksRef = useRef<HTMLUListElement>(null);
+  const navRef = useRef<HTMLUListElement>(null);
 
   useBlockingScroll(true);
-  useOutsideClick(LinksRef, onClose);
+  useOutsideClick(navRef, onClose);
 
   return (
     <div
       css={{
         position: 'fixed',
         top: 0,
-        right: 0,
+        left: '50%',
         zIndex: zIndexes.MENU_WRAPPER,
-        width: '100%',
+        ...screenSize,
         height: '100vh',
-        padding: '120px 18px 20px',
+        padding: '120px 0 20px',
         backgroundColor: colors.POINT,
+        transform: 'translateX(-50%)',
       }}
     >
-      <h2 css={visibilityHidden}>메뉴</h2>
-
-      <ul
-        ref={LinksRef}
-        css={{ display: 'inline-flex', flexDirection: 'column', gap: '16px' }}
+      <nav
+        ref={navRef}
+        css={{
+          padding: screenSize.paddingLeft,
+          display: 'inline-block',
+        }}
       >
-        {navData.map(({ path, label }) => (
-          <Item
-            key={path}
-            to={path}
-            css={{
-              ...title.size900,
-              color: colors.WHITE,
-            }}
-          >
-            {label}
-          </Item>
-        ))}
-      </ul>
+        <h2 css={visibilityHidden}>메뉴</h2>
+
+        <ul
+          css={{
+            display: 'inline-flex',
+            flexDirection: 'column',
+            gap: '16px',
+          }}
+        >
+          {navData.map(({ path, label }) => (
+            <Item
+              key={path}
+              to={path}
+              css={{
+                ...title.size900,
+                color: colors.WHITE,
+              }}
+            >
+              {label}
+            </Item>
+          ))}
+        </ul>
+      </nav>
     </div>
   );
 }

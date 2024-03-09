@@ -1,6 +1,7 @@
 import { HTMLAttributes } from 'react';
 import { zIndexes } from '../../../styles/variables/zIndexes';
 import useBlockingScroll from '../../../hooks/useBlockingScroll';
+import { screenSize } from '../../../styles/common/screenSize';
 
 interface Props {
   isOpen: boolean;
@@ -21,9 +22,9 @@ export default function BackDrop({ isOpen, onClick }: Props) {
         left: 0,
         zIndex: zIndexes.BACKDROP,
         display: isOpen ? 'block' : 'none',
-        width: '100%',
         height: '100%',
         backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        ...screenSize,
       }}
     ></div>
   );

@@ -1,3 +1,4 @@
+import { screenSize } from '../../../styles/common/screenSize';
 import { colors } from '../../../styles/variables/colors';
 import GlobalHeader from '../GlobalHeader';
 import PageTitle, { Props as TitleProps } from './PageTitle';
@@ -25,11 +26,11 @@ export default function PageLayout({
   ...props
 }: Props) {
   return (
-    <div css={modeColor[mode]} {...props}>
+    <div css={{ ...modeColor[mode], ...screenSize }} {...props}>
       <GlobalHeader />
       <div
         css={{
-          padding: '20px 18px',
+          padding: '20px 0',
         }}
       >
         <PageTitle
