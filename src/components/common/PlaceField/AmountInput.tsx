@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, KeyboardEvent, useState } from 'react';
+import { InputHTMLAttributes, KeyboardEvent } from 'react';
 import { css } from '@emotion/react';
 import { Style } from '../../../types/Style';
 import { colors } from '../../../styles/variables/colors';
@@ -10,8 +10,6 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export default function AmountInput({ amount, insideStyle, ...props }: Props) {
-  const [isActive, setIsActive] = useState(false);
-
   const preventKeydown = (e: KeyboardEvent) => {
     if (
       ['e', 'E', '+', '-'].includes(e.key) ||
@@ -38,16 +36,13 @@ export default function AmountInput({ amount, insideStyle, ...props }: Props) {
           left: 0,
           width: '100%',
           height: '100%',
+          paddingRight: '16px',
           color: 'transparent',
-
-          '&::selection, &:focus': {
-            backgroundColor: 'transparent',
-          },
+          textAlign: 'right',
+          caretColor: colors.DARK_GRAY,
         }}
         value={amount || ''}
         onKeyDown={preventKeydown}
-        onFocus={() => setIsActive(true)}
-        onBlur={() => setIsActive(false)}
         {...props}
       />
       <p
@@ -57,7 +52,6 @@ export default function AmountInput({ amount, insideStyle, ...props }: Props) {
             fontSize: '12px',
             color: amount ? colors.DARK_GRAY : colors.LIGHT_GRAY,
             textAlign: 'right',
-            backgroundColor: isActive ? colors.LIGHT_GRAY : 'transparent',
             pointerEvents: 'none',
           },
           insideStyle,
