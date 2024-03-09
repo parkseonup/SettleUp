@@ -40,6 +40,12 @@ export default function AmountInput({ amount, insideStyle, ...props }: Props) {
           color: 'transparent',
           textAlign: 'right',
           caretColor: colors.DARK_GRAY,
+          appearance: 'none',
+
+          '&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {
+            margin: 0,
+            appearance: 'none',
+          },
         }}
         value={amount || ''}
         onKeyDown={preventKeydown}
