@@ -1,11 +1,15 @@
 import { RouteObject, createBrowserRouter } from 'react-router-dom';
 import GeneralLayout from '../layout/GeneralLayout';
-import Create from '../pages/Create';
-import Result from '../pages/Result';
-import History from '../pages/History';
-import HistoryDetail from '../pages/HistoryDetail';
 import { historyDetailLoader } from './historyDetailLoader';
-import ResultErrorBoundary from '../components/Result/ResultErrorBoundary';
+import { lazy } from 'react';
+
+const Create = lazy(() => import('../pages/Create'));
+const Result = lazy(() => import('../pages/Result'));
+const History = lazy(() => import('../pages/History'));
+const HistoryDetail = lazy(() => import('../pages/HistoryDetail'));
+const ResultErrorBoundary = lazy(
+  () => import('../components/Result/ResultErrorBoundary'),
+);
 
 type RouterBase = RouteObject & {
   label: string;
