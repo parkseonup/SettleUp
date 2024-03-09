@@ -7,12 +7,7 @@ import PaymentDetails from './PaymentDefails';
 import PersonalAmountList from './PersonalAmountList';
 import { useResultContext } from './ResultContext';
 
-interface Props {}
-
-export default forwardRef(function ResultMain(
-  props: Props,
-  ref: ForwardedRef<HTMLElement>,
-) {
+export default forwardRef(function ResultMain(_props, ref: ForwardedRef<HTMLElement>) {
   const DECORATION_RADIUS = 4;
   const { title, date } = useResultContext();
 
