@@ -1,12 +1,13 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { colors } from '../../styles/variables/colors';
 import { zIndexes } from '../../styles/variables/zIndexes';
 import Menu from './Menu/Menu';
 import Title from './Title';
 import { BiMenu, BiX } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function GlobalHeader() {
+  const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 
@@ -15,6 +16,10 @@ export default function GlobalHeader() {
 
     setShowMenu(false);
   };
+
+  useEffect(() => {
+    setShowMenu(false);
+  }, [location.key]);
 
   return (
     <>
@@ -27,7 +32,6 @@ export default function GlobalHeader() {
           alignItems: 'center',
           justifyContent: 'space-between',
           height: '64px',
-          padding: '0 18px',
           color: showMenu ? colors.WHITE : 'inherit',
         }}
       >
