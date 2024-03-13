@@ -27,7 +27,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
           AWS_EC2_METADATA_DISABLED: true
-        working-directory: ./build
+        working-directory: ./dist
         run: |
           aws s3 sync \ 
             --region $AWS_REGION \ 
