@@ -65,11 +65,22 @@ export default function ShareButton({ captureElement }: Props) {
           : { title, text },
       );
     } catch (error) {
-      // TODO: 복사되었습니다 modal 띄우기
+      // 사용자가 share 기능을 종료한 경우 === AbortError가 출력된 경우
+      if (
+        error &&
+        typeof error === 'object' &&
+        'name' in error &&
+        error.name === 'AbortError'
+      )
+        return;
+
+      // 그 밖의 에러 발생시
       try {
         await navigator.clipboard.writeText(text);
         setShowSuccessModal(true);
       } catch (error) {
+        // 클립보드 기능도 사용할 수 없을 경우
+        console.log(error);
         setShowErrorModal(true);
       }
     }
