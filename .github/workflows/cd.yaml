@@ -28,6 +28,6 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
         run: |
           aws s3 sync \ 
-            --region ${{ secrets.AWS_DEFAULT_REGION }} \ 
-            build s3://${{ secrets.AWS_S3_BUCKET_NAME }} \ 
+            --region $AWS_REGION \ 
+            build s3://$AWS_S3_BUCKET \ 
             --delete
