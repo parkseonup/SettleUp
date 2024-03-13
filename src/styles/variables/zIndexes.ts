@@ -1,0 +1,8 @@
+export const zIndexes = {
+  MODAL: 99999,
+  BACKDROP: 9999,
+  HEADER_TITLE: 999,
+  MENU_BUTTON: 1000,
+  MENU_WRAPPER: 999,
+  PORTAL: 99,
+};
