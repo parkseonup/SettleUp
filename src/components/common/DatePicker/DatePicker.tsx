@@ -120,6 +120,7 @@ export default function DatePicker({ seletedDate, onChange }: Props) {
                         justifyContent: 'center',
                         width: '32px',
                         height: '32px',
+                        margin: '0 auto',
                         color:
                           _seletedDate === fullDateString
                             ? colors.POINT
