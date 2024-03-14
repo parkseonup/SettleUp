@@ -4,11 +4,11 @@ import { Settlement } from '../types/Settlement';
 import SublistItem from '../components/common/SublistItem';
 import { separateComma } from '../utils/separateComma';
 import { colors } from '../styles/variables/colors';
-import ButtonWrapper from '../components/common/ButtonWrapper';
 import Button from '../components/common/Button';
 import { Link } from 'react-router-dom';
 import Modal from '../components/common/Modal/Modal';
 import { buttonColors, defaultButtonStyle } from '../styles/common/buttons';
+import ButtonWrapper from '../components/common/ButtonWrapper';
 
 export default function History() {
   const [list, setList] = useState<Settlement[]>([]);
@@ -24,7 +24,14 @@ export default function History() {
 
   return (
     <>
-      <PageLayout title="정산 목록">
+      <PageLayout
+        title="정산 목록"
+        description={
+          list.length > 0
+            ? '기기의 캐시를 삭제하면 저장된 정산 목록이 초기화되니 유의해주세요!'
+            : '저장된 정산 목록이 없습니다.'
+        }
+      >
         <ul
           css={{
             display: 'flex',
@@ -88,7 +95,7 @@ export default function History() {
           <Link
             css={{
               ...defaultButtonStyle,
-              ...buttonColors['fill'],
+              ...buttonColors['point'],
             }}
             to="/create"
           >
