@@ -1,4 +1,4 @@
-import { RouteObject, createBrowserRouter } from 'react-router-dom';
+import { Navigate, RouteObject, createBrowserRouter } from 'react-router-dom';
 import GeneralLayout from '../layout/GeneralLayout';
 import { historyDetailLoader } from './historyDetailLoader';
 import { lazy } from 'react';
@@ -12,28 +12,21 @@ const ResultErrorBoundary = lazy(
 );
 
 type RouterBase = RouteObject & {
-  label: string;
+  label?: string;
   showMenu: boolean;
 };
 
 const routerData: RouterBase[] = [
   {
     path: '/',
+    showMenu: false,
+    element: <Navigate to="/create" replace />,
+  },
+  {
+    path: '/create',
     label: '정산 만들기',
     showMenu: true,
     element: <Create />,
-    children: [
-      {
-        path: 'create',
-        element: <Create />,
-        children: [
-          {
-            path: ':stepIndex',
-            element: <Create />,
-          },
-        ],
-      },
-    ],
   },
   {
     path: '/result',
