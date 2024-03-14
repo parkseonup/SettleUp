@@ -4,8 +4,7 @@ import { SyntheticEvent } from 'react';
 import { colors } from '../../../styles/variables/colors';
 import Title from '../Title';
 import { visibilityHidden } from '../../../styles/common/displays';
-
-const days = ['일', '월', '화', '수', '목', '금', '토'];
+import { days } from '../../../variables/days';
 
 interface Props {
   seletedDate: string;

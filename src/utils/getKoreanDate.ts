@@ -1,6 +1,5 @@
 import { getDate, getDay, getMonth } from '@seonup/use-calendar';
-
-const days = ['일', '월', '화', '수', '목', '금', '토'];
+import { days } from '../variables/days';
 
 /**
  * @param date "YYYY-MM-DD" 형태의 문자열
