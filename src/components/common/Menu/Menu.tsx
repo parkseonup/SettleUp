@@ -3,7 +3,7 @@ import { zIndexes } from '../../../styles/variables/zIndexes';
 import { colors } from '../../../styles/variables/colors';
 import { visibilityHidden } from '../../../styles/common/displays';
 import { navData } from '../../../router/router';
-import { title } from '../../../styles/variables/font';
+import { title } from '../../../styles/common/font';
 import useBlockingScroll from '../../../hooks/useBlockingScroll';
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import { useRef } from 'react';

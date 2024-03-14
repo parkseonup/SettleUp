@@ -1,5 +1,5 @@
 import { HTMLAttributes, ReactNode } from 'react';
-import { title } from '../../styles/variables/font';
+import { title } from '../../styles/common/font';
 import { Style } from '../../types/Style';
 import { css } from '@emotion/react';
 
