@@ -2,7 +2,7 @@ import { MouseEvent, ReactNode, useState } from 'react';
 import Option from './Option';
 import MultiSelect from './MultiSelect';
 import { useMultiSelectContext } from './MultiSelectContext';
-import getChildComponent from '../../../utils/getChildComponent';
+import { getChildComponent } from '../../../utils/getChildComponent';
 import SublistItem from '../SublistItem';
 import { visibilityHidden } from '../../../styles/common/displays';
 
