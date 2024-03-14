@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from 'react';
 import { colors } from '../../../styles/variables/colors';
-import { buttonColors } from '../../../styles/common/colors';
+import { buttonColors } from '../../../styles/common/buttons';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   isActive: boolean;

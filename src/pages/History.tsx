@@ -6,11 +6,11 @@ import { separateComma } from '../utils/separateComma';
 import { colors } from '../styles/variables/colors';
 import ButtonWrapper from '../components/common/ButtonWrapper';
 import Button from '../components/common/Button';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Modal from '../components/common/Modal/Modal';
+import { buttonColors, defaultButtonStyle } from '../styles/common/buttons';
 
 export default function History() {
-  const navigate = useNavigate();
   const [list, setList] = useState<Settlement[]>([]);
   const [showResetModal, setShowResetModal] = useState(false);
 
@@ -22,7 +22,6 @@ export default function History() {
     if (localJSONData) setList(JSON.parse(localJSONData));
   }, []);
 
-  // TODO: id 만들기
   return (
     <>
       <PageLayout title="정산 목록">
@@ -86,14 +85,15 @@ export default function History() {
         </ul>
 
         <ButtonWrapper>
-          <Button
-            style="point"
-            onClick={() => {
-              navigate('/create');
+          <Link
+            css={{
+              ...defaultButtonStyle,
+              ...buttonColors['fill'],
             }}
+            to="/create"
           >
             정산 추가하기
-          </Button>
+          </Link>
           {list.length > 0 ? (
             <Button onClick={() => setShowResetModal(true)}>목록 초기화</Button>
           ) : null}

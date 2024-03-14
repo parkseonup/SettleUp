@@ -1,5 +1,16 @@
 import { colors } from '../variables/colors';
 
+export const defaultButtonStyle = {
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '100%',
+  height: '48px',
+  fontSize: '14px',
+  fontWeight: '400',
+  borderRadius: '100px',
+};
+
 type ButtonsColors = {
   [key in 'default' | 'point' | 'fill' | 'outline' | 'ghost']: {
     color: string;

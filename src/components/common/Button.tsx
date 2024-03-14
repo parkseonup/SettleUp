@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes } from 'react';
-import { buttonColors } from '../../styles/common/colors';
+import { buttonColors, defaultButtonStyle } from '../../styles/common/buttons';
 
 interface Props extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'style'> {
   style?: keyof typeof buttonColors;
@@ -10,14 +10,7 @@ export default function Button({ style = 'fill', children, ...props }: Props) {
     <button
       type="button"
       css={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        height: '48px',
-        fontSize: '14px',
-        fontWeight: '400',
-        borderRadius: '100px',
+        ...defaultButtonStyle,
         ...buttonColors[style],
       }}
       {...props}
