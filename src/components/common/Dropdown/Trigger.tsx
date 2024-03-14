@@ -10,7 +10,7 @@ interface Props {
 export default function Trigger({ children, ...props }: Props) {
   const { isActive, setIsActive } = useDropdownContext();
 
-  const onClick = (e: MouseEvent) => {
+  const onMouseDown = (e: MouseEvent) => {
     e.preventDefault();
     if (e.target) setIsActive(!isActive);
   };
@@ -23,7 +23,7 @@ export default function Trigger({ children, ...props }: Props) {
   };
 
   return (
-    <div onClick={onClick} onKeyDown={onKeydownEnter} {...props}>
+    <div onMouseDown={onMouseDown} onKeyDown={onKeydownEnter} {...props}>
       {typeof children === 'function' ? children({ isActive, setIsActive }) : children}
     </div>
   );
