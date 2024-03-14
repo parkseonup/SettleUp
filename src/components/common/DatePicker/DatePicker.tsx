@@ -129,6 +129,7 @@ export default function DatePicker({ seletedDate, onChange }: Props) {
                             : colors.LIGHT_GRAY,
                         backgroundColor: 'transparent',
                         borderRadius: '100px',
+                        cursor: 'pointer',
 
                         'input:checked + &': {
                           color: colors.WHITE,
