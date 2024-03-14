@@ -11,11 +11,14 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 
 export default function AmountInput({ amount, insideStyle, ...props }: Props) {
   const preventKeydown = (e: KeyboardEvent) => {
-    if (
-      ['e', 'E', '+', '-'].includes(e.key) ||
-      ((e.target as HTMLInputElement).value.length > 6 &&
-        Array.from({ length: 10 }, (_, i) => `${i}`).includes(e.key))
-    )
+    const availableKeys = [
+      'Backspace',
+      'Control',
+      'Meta',
+      ...Array.from({ length: 10 }, (_, i) => `${i}`),
+    ];
+
+    if (!availableKeys.includes(e.key) || (e.target as HTMLInputElement).value.length > 6)
       e.preventDefault();
   };
 
