@@ -93,6 +93,8 @@ export default function Payment({ data, dispatch }: Props) {
               />
               <SingleInput
                 type="number"
+                inputMode="numeric"
+                pattern="[0-9]*"
                 label="계좌번호"
                 value={bankTransfer.accountNumber || ''}
                 css={{

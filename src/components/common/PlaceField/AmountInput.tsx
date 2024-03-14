@@ -33,6 +33,8 @@ export default function AmountInput({ amount, insideStyle, ...props }: Props) {
     >
       <input
         type="number"
+        inputMode="numeric"
+        pattern="[0-9]*"
         css={{
           position: 'absolute',
           top: 0,
