@@ -6,6 +6,7 @@ import Section from '../common/Section';
 import PaymentDetails from './PaymentDefails';
 import PersonalAmountList from './PersonalAmountList';
 import { useResultContext } from './ResultContext';
+import { getKoreanDate } from '../../utils/getKoreanDate';
 
 export default forwardRef(function ResultMain(_props, ref: ForwardedRef<HTMLElement>) {
   const DECORATION_RADIUS = 4;
@@ -56,7 +57,7 @@ export default forwardRef(function ResultMain(_props, ref: ForwardedRef<HTMLElem
             color: colors.DARK_GRAY,
           }}
         >
-          {date}
+          {getKoreanDate(date)}
         </p>
       </div>
 

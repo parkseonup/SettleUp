@@ -6,6 +6,7 @@ import { separateComma } from '../../utils/separateComma';
 import { useResultContext } from './ResultContext';
 import { useState } from 'react';
 import Modal from '../common/Modal/Modal';
+import { getKoreanDate } from '../../utils/getKoreanDate';
 
 interface Props {
   captureElement: HTMLElement | null;
@@ -36,7 +37,9 @@ export default function ShareButton({ captureElement }: Props) {
   const onClick = async () => {
     // 공유될 텍스트
     const text =
-      `${date} ${title} 모임 정산 내용입니다.\n\n` +
+      `${title} 모임 정산 내용입니다.\n\n` +
+      '[모임 정보]\n' +
+      `- 일시: ${getKoreanDate(date)}\n\n` +
       '[송금 정보]\n' +
       `- 결제한 사람: ${payer}\n` +
       (hasAccount
