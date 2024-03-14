@@ -95,6 +95,14 @@ export default function Payment({ data, dispatch }: Props) {
                 type="number"
                 label="계좌번호"
                 value={bankTransfer.accountNumber || ''}
+                css={{
+                  appearance: 'none',
+
+                  '&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {
+                    margin: 0,
+                    appearance: 'none',
+                  },
+                }}
                 onChange={(e) => {
                   dispatch({
                     type: 'changeBankTransfer',
