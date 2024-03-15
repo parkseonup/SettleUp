@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { colors } from '../../styles/variables/colors';
-import { zIndexes } from '../../styles/variables/zIndexes';
-import Menu from './Menu/Menu';
-import Title from './Title';
+import { colors } from '../../../styles/variables/colors';
+import { zIndexes } from '../../../styles/variables/zIndexes';
+import Menu from './Menu';
+import Title from '../Title';
 import { BiMenu, BiX } from 'react-icons/bi';
 import { Link, useLocation } from 'react-router-dom';
 

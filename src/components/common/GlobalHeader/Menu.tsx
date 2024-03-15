@@ -1,4 +1,3 @@
-import Item from './Item';
 import { zIndexes } from '../../../styles/variables/zIndexes';
 import { colors } from '../../../styles/variables/colors';
 import { visibilityHidden } from '../../../styles/common/displays';
@@ -8,6 +7,7 @@ import useBlockingScroll from '../../../hooks/useBlockingScroll';
 import useOutsideClick from '../../../hooks/useOutsideClick';
 import { useRef } from 'react';
 import { screenSize } from '../../../styles/common/screenSize';
+import { Link } from 'react-router-dom';
 
 interface Props {
   onClose: (e: Event) => void;
@@ -50,16 +50,19 @@ export default function Menu({ onClose }: Props) {
           }}
         >
           {navData.map(({ path, label }) => (
-            <Item
+            <Link
               key={path}
               to={path}
               css={{
+                display: 'inline-block',
+                padding: '4px 8px',
+                marginLeft: '-8px',
                 ...title.size900,
                 color: colors.WHITE,
               }}
             >
               {label}
-            </Item>
+            </Link>
           ))}
         </ul>
       </nav>

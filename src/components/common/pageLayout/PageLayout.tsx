@@ -1,6 +1,6 @@
 import { screenSize } from '../../../styles/common/screenSize';
 import { colors } from '../../../styles/variables/colors';
-import GlobalHeader from '../GlobalHeader';
+import GlobalHeader from '../GlobalHeader/GlobalHeader';
 import PageTitle, { Props as TitleProps } from './PageTitle';
 
 interface Props extends TitleProps {
