@@ -1,24 +1,30 @@
 import { ReactNode, useMemo, useState } from 'react';
 import Modal from '../components/common/Modal/Modal';
 import { getId } from '../utils/getId';
+import { createPortal } from 'react-dom';
+import BackDrop from '../components/common/Modal/BackDrop';
 
-type ModalList = { id: string; content: ReactNode; show: boolean }[];
+type ModalList = { id: string; component: ReactNode; show: boolean }[];
 
-// TODO: 닫기, footer 추가 구현
 export default function useModal() {
   const [modalList, setModalList] = useState<ModalList>([]);
 
   const ModalComponent = useMemo(
     () =>
       function _Modal() {
-        const filteredModal = modalList.filter(({ show }) => show);
-        console.log('[NewModal]');
+        const showModalList = modalList
+          .filter(({ show }) => show)
+          .map(({ component }) => component);
 
-        return filteredModal.map(({ id, content, show }) => (
-          <Modal key={id} isOpen={show} onClose={() => {}}>
-            {content}
-          </Modal>
-        ));
+        return showModalList.length > 0
+          ? createPortal(
+              <>
+                {showModalList}
+                <BackDrop isOpen={true} />
+              </>,
+              document.body,
+            )
+          : null;
       },
     [modalList],
   );
@@ -29,11 +35,25 @@ export default function useModal() {
   ) => {
     const id = `modal_${getId()}`;
 
+    const _onClose = () => {
+      setModalList((prev) =>
+        prev.map((prevItem) =>
+          id === prevItem.id ? { ...prevItem, show: false } : prevItem,
+        ),
+      );
+
+      if (options?.onClose) options.onClose();
+    };
+
     setModalList((prev) => [
       ...prev,
       {
         id,
-        content,
+        component: (
+          <Modal key={id} onClose={_onClose} footer={options?.footer}>
+            {content}
+          </Modal>
+        ),
         show: true,
       },
     ]);
