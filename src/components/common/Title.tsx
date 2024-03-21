@@ -10,6 +10,7 @@ interface Props extends HTMLAttributes<HTMLHeadingElement> {
   children: ReactNode;
 }
 
+// NOTE: title ui
 export default function Title({
   as: Title,
   font,

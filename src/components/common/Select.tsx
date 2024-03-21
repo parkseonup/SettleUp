@@ -19,10 +19,6 @@ export default forwardRef(function Select(
 ) {
   const id = props.id ?? getId('input');
 
-  const onSelect = (value: Props['value']) => {
-    setValue(value);
-  };
-
   return (
     <Dropdown
       css={{
@@ -66,7 +62,7 @@ export default forwardRef(function Select(
           <Dropdown.Close key={option}>
             <button
               type="button"
-              onClick={() => onSelect(option)}
+              onClick={() => setValue(option)}
               css={{
                 display: 'flex',
                 alignItems: 'center',

@@ -1,13 +1,11 @@
 import { ReactNode } from 'react';
 import Title from './Title';
-import { Style } from '../../types/Style';
 import { colors } from '../../styles/variables/colors';
 import { css } from '@emotion/react';
 
 interface Props {
   title: string;
   type?: 'default' | 'underline';
-  insideStyle?: Style;
   children: ReactNode;
 }
 
@@ -16,14 +14,9 @@ const underlineStyle = {
   borderBottom: `1px solid ${colors.BLACK}`,
 };
 
-export default function Section({
-  title,
-  type = 'default',
-  insideStyle,
-  children,
-}: Props) {
+export default function Section({ title, type = 'default', children }: Props) {
   return (
-    <section css={insideStyle}>
+    <section>
       <Title
         as="h3"
         font="size100"
