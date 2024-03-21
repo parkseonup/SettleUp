@@ -6,13 +6,18 @@ import { separateComma } from '../utils/separateComma';
 import { colors } from '../styles/variables/colors';
 import Button from '../components/common/Button';
 import { Link } from 'react-router-dom';
-import Modal from '../components/common/Modal/Modal';
 import { buttonColors, defaultButtonStyle } from '../styles/common/buttons';
 import ButtonWrapper from '../components/common/ButtonWrapper';
+import useModal from '../hooks/useModal';
 
+// NOTE: 정산 목록 ui (정산 개별 내역)
+// NOTE: localstorage에서 데이터를 가져와서 정렬해서 출력
+// NOTE: 초기화 버튼 클릭시 모달창 관리
+// TODO: router loader에서 데이터 받아오는걸로 수정
+// TODO: 목록 개별 삭제 기능 추가
 export default function History() {
   const [list, setList] = useState<Settlement[]>([]);
-  const [showResetModal, setShowResetModal] = useState(false);
+  const { createModal, Modal } = useModal();
 
   list.sort((a, b) => +new Date(a.date) - +new Date(b.date));
 
@@ -21,6 +26,11 @@ export default function History() {
 
     if (localJSONData) setList(JSON.parse(localJSONData));
   }, []);
+
+  const reset = () => {
+    localStorage.removeItem('SETTLE_UP');
+    setList([]);
+  };
 
   return (
     <>
@@ -102,29 +112,24 @@ export default function History() {
             정산 추가하기
           </Link>
           {list.length > 0 ? (
-            <Button onClick={() => setShowResetModal(true)}>목록 초기화</Button>
+            <Button
+              onClick={() =>
+                createModal(<p>목록을 초기화 하시겠습니까?</p>, {
+                  buttomButtons: (
+                    <Button style="point" onClick={reset}>
+                      초기화 하기
+                    </Button>
+                  ),
+                })
+              }
+            >
+              목록 초기화
+            </Button>
           ) : null}
         </ButtonWrapper>
       </PageLayout>
 
-      <Modal
-        isOpen={showResetModal}
-        footer={
-          <Button
-            style="point"
-            onClick={() => {
-              localStorage.removeItem('SETTLE_UP');
-              setList([]);
-              setShowResetModal(false);
-            }}
-          >
-            초기화 하기
-          </Button>
-        }
-        onClose={() => setShowResetModal(false)}
-      >
-        <p>목록을 초기화 하시겠습니까?</p>
-      </Modal>
+      <Modal />
     </>
   );
 }
