@@ -1,21 +1,21 @@
-import { HTMLAttributes } from 'react';
 import Description from './Description';
 import Title from '../Title';
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface Props {
   title: string;
   description?: string;
 }
 
-export default function PageTitle({ title, description, ...props }: Props) {
+// NOTE: title ui
+export default function PageHeader({ title, description }: Props) {
   return (
     <div
       css={{
         display: 'flex',
         flexDirection: 'column',
         gap: '8px',
+        marginBottom: '40px',
       }}
-      {...props}
     >
       <Title
         as="h2"
@@ -26,7 +26,7 @@ export default function PageTitle({ title, description, ...props }: Props) {
       >
         {title}
       </Title>
-      <Description>{description}</Description>
+      {description ? <Description>{description}</Description> : null}
     </div>
   );
 }

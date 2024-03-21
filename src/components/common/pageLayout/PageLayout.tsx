@@ -1,44 +1,33 @@
+import { css } from '@emotion/react';
 import { screenSize } from '../../../styles/common/screenSize';
-import { colors } from '../../../styles/variables/colors';
 import GlobalHeader from '../GlobalHeader/GlobalHeader';
-import PageTitle, { Props as TitleProps } from './PageTitle';
+import PageHeader, { Props as TitleProps } from './PageHeader';
+import { ReactNode } from 'react';
+import { theme } from '../../../styles/common/theme';
 
 interface Props extends TitleProps {
   mode?: 'point' | 'default';
+  children: ReactNode;
 }
 
-const modeColor = {
-  default: {
-    color: colors.BLACK,
-    backgroundColor: colors.WHITE,
-  },
-  point: {
-    color: colors.WHITE,
-    backgroundColor: colors.POINT,
-  },
-};
-
+// NOTE: PageLayout ui
 export default function PageLayout({
   title,
   description,
   mode = 'default',
   children,
-  ...props
 }: Props) {
   return (
-    <div css={{ ...modeColor[mode], ...screenSize }} {...props}>
+    <div css={css(theme[mode], screenSize)}>
       <GlobalHeader />
+
       <div
         css={{
           padding: '20px 0',
         }}
       >
-        <PageTitle
-          title={title}
-          description={description}
-          css={{ marginBottom: '40px' }}
-        />
-        <div>{children}</div>
+        <PageHeader title={title} description={description} />
+        <main>{children}</main>
       </div>
     </div>
   );
