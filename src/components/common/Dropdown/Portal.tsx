@@ -3,13 +3,14 @@ import { UseDropdownContextValue, useDropdownContext } from './Context';
 import { zIndexes } from '../../../styles/variables/zIndexes';
 import { colors } from '../../../styles/variables/colors';
 
+type ChildFunction = ({ isActive, setIsActive }: UseDropdownContextValue) => ReactNode;
+
 interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   as?: ReactNode | (({ isActive, setIsActive }: UseDropdownContextValue) => ReactNode);
-  children:
-    | ReactNode
-    | (({ isActive, setIsActive }: UseDropdownContextValue) => ReactNode);
+  children: ReactNode | ChildFunction;
 }
 
+/** Portal UI */
 export default function Portal({ as, children, ...props }: Props) {
   const { isActive, setIsActive } = useDropdownContext();
 

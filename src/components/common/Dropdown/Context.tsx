@@ -11,6 +11,10 @@ export interface UseDropdownContextValue extends DropdownContextValue {
 
 export const DropdownContext = createContext<DropdownContextValue>({ isActive: false });
 
+/**
+ * - Context value 제공
+ * - context가 유효한지 체크
+ */
 export function useDropdownContext(): UseDropdownContextValue {
   const context = useContext(DropdownContext);
 

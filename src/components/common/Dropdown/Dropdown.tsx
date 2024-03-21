@@ -7,11 +7,15 @@ import useOutsideClick from '../../../hooks/useOutsideClick';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {}
 
+/**
+ * - Dropdown 열고 닫힘 관리
+ * - isActive, setIsActive 라는 ui 상태를 가진 Context 제공
+ */
 export default function Dropdown({ children, ...props }: Props) {
   const [isActive, setIsActive] = useState(false);
-  const modalRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  useOutsideClick(modalRef, () => {
+  useOutsideClick(containerRef, () => {
     setIsActive(false);
   });
 
@@ -20,14 +24,14 @@ export default function Dropdown({ children, ...props }: Props) {
   };
 
   const onBlur = (e: FocusEvent) => {
-    if (e.relatedTarget !== null && !modalRef.current?.contains(e.relatedTarget))
+    if (e.relatedTarget !== null && !containerRef.current?.contains(e.relatedTarget))
       setIsActive(false);
   };
 
   return (
     <DropdownContext.Provider value={{ isActive, setIsActive }}>
       <div
-        ref={modalRef}
+        ref={containerRef}
         css={{
           position: 'relative',
         }}

@@ -1,12 +1,16 @@
 import { MouseEvent, KeyboardEvent, ReactNode } from 'react';
 import { UseDropdownContextValue, useDropdownContext } from './Context';
 
+type ChildFunction = ({ isActive, setIsActive }: UseDropdownContextValue) => ReactNode;
+
 interface Props {
-  children:
-    | ReactNode
-    | (({ isActive, setIsActive }: UseDropdownContextValue) => ReactNode);
+  children: ReactNode | ChildFunction;
 }
 
+/**
+ * - Trigger UI
+ * - Dropdown 열고 닫힘 관리)
+ */
 export default function Trigger({ children, ...props }: Props) {
   const { isActive, setIsActive } = useDropdownContext();
 
