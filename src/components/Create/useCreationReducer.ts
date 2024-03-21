@@ -41,7 +41,7 @@ function CreactionReducer(settlement: Settlement, action: Action) {
           ...settlement.place,
           {
             id: `place_${getId()}`,
-            title: '',
+            name: '',
             amount: 0,
             participants: [],
             sub: [],
@@ -49,7 +49,7 @@ function CreactionReducer(settlement: Settlement, action: Action) {
         ],
       };
     }
-    case 'changePlaceTitle': {
+    case 'changePlaceName': {
       return {
         ...settlement,
         place: settlement.place.map((item) =>
@@ -107,7 +107,7 @@ function CreactionReducer(settlement: Settlement, action: Action) {
                   ...item.sub,
                   {
                     id: `place_sub_${getId()}`,
-                    title: action.subTitle ?? '',
+                    name: action.subName ?? '',
                     amount:
                       action.subAmount ??
                       substractNumbers(
@@ -122,7 +122,7 @@ function CreactionReducer(settlement: Settlement, action: Action) {
         ),
       };
     }
-    case 'changeSubPlaceTitle': {
+    case 'changeSubPlaceName': {
       return {
         ...settlement,
         place: settlement.place.map((item) =>
@@ -171,7 +171,7 @@ function CreactionReducer(settlement: Settlement, action: Action) {
                   action.subItem,
                   {
                     id: `place_sub_${getId()}`,
-                    title: '',
+                    name: '',
                     amount: remainderAmount,
                     participants: [],
                   },
@@ -302,7 +302,7 @@ const defaultSettlement: Settlement = {
   place: [
     {
       id: `place_${getId()}`,
-      title: '',
+      name: '',
       amount: 0,
       participants: [],
       sub: [],

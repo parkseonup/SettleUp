@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import AmountInput from './AmountInput';
-import TitleInput from './TitleInput';
+import NameInput from './NameInput';
 import DeleteButton from './DeleteButton';
 import { PlaceInfo } from '../../../types/Settlement';
 import { Action } from '../../Create/useCreationReducer.type';
@@ -15,6 +15,7 @@ interface Props {
   dispatch: Dispatch<Action>;
 }
 
+// NOTE: sub 정보 입력 ui
 export default function SubPlaceField({
   data,
   placeId,
@@ -30,15 +31,15 @@ export default function SubPlaceField({
         gridTemplateColumns: '80px 1fr 60px',
       }}
       as={
-        <TitleInput
-          name={`placeSubTitle-${placeId}-${data.id}`}
-          value={data.title}
+        <NameInput
+          id={`placeSubTitle-${placeId}-${data.id}`}
+          value={data.name}
           placeholder="분류명"
           onChange={(e) => {
             dispatch({
-              type: 'changeSubPlaceTitle',
+              type: 'changeSubPlaceName',
               id: placeId,
-              subItem: { ...data, title: e.target.value },
+              subItem: { ...data, name: e.target.value },
             });
           }}
           required={true}
@@ -46,7 +47,7 @@ export default function SubPlaceField({
       }
     >
       <AmountInput
-        name={`placeSubAmount-${placeId}-${data.id}`}
+        id={`placeSubAmount-${placeId}-${data.id}`}
         amount={data.amount}
         onChange={(e) => {
           dispatch({

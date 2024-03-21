@@ -1,6 +1,6 @@
 export interface PlaceInfo {
   id: string;
-  title: string;
+  name: string;
   amount: number;
   participants: string[];
 }

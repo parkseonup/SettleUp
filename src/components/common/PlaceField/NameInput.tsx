@@ -5,8 +5,7 @@ import { visibilityHidden } from '../../../styles/common/displays';
 interface Props extends InputHTMLAttributes<HTMLInputElement> {}
 
 // NOTE: 장소 이름 입력 input
-// TODO: title 말고 placeName 으로 변경하기 (데이터도)
-export default forwardRef(function TitleInput(
+export default forwardRef(function NameInput(
   props: Props,
   ref: ForwardedRef<HTMLInputElement>,
 ) {

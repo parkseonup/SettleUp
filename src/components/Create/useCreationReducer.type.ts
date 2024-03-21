@@ -7,12 +7,17 @@ import {
 
 type PlaceActions =
   | { type: 'addPlace' }
-  | { type: 'changePlaceTitle'; data: PlaceInfo }
+  | { type: 'changePlaceName'; data: PlaceInfo }
   | { type: 'changePlaceAmount'; data: PlaceInfo }
   | { type: 'toggleSelectedPlaceParticipant'; id: PlaceInfo['id']; participant: string }
   | { type: 'deletePlace'; id: PlaceInfo['id'] }
-  | { type: 'addSubPlace'; id: PlaceInfo['id']; subTitle?: PlaceInfo['title']; subAmount?: PlaceInfo['amount'] }
-  | { type: 'changeSubPlaceTitle'; id: PlaceInfo['id']; subItem: PlaceInfo }
+  | {
+      type: 'addSubPlace';
+      id: PlaceInfo['id'];
+      subName?: PlaceInfo['name'];
+      subAmount?: PlaceInfo['amount'];
+    }
+  | { type: 'changeSubPlaceName'; id: PlaceInfo['id']; subItem: PlaceInfo }
   | { type: 'changeSubPlaceAmount'; id: PlaceInfo['id']; subItem: PlaceInfo }
   | {
       type: 'toggleSelectedSubPlaceParticipant';

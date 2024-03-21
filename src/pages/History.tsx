@@ -91,7 +91,7 @@ export default function History() {
                   }}
                 >
                   {item.place.map((placeItem) => (
-                    <SublistItem key={placeItem.id} title={placeItem.title}>
+                    <SublistItem key={placeItem.id} title={placeItem.name}>
                       {separateComma(placeItem.amount)} 원
                     </SublistItem>
                   ))}

@@ -30,8 +30,10 @@ export default function AmountInput({ amount, insideStyle, ...props }: Props) {
     if (
       !availableKeys.includes(e.key) ||
       ((e.target as HTMLInputElement).value.length > 6 && !metaKeys.includes(e.key))
-    )
+    ) {
       e.preventDefault();
+      return;
+    }
   };
 
   return (

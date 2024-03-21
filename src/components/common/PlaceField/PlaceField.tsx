@@ -1,7 +1,7 @@
 import { Dispatch, FocusEvent, useEffect, useRef, useState } from 'react';
 import AmountInput from './AmountInput';
 import DeleteButton from './DeleteButton';
-import TitleInput from './TitleInput';
+import NameInput from './NameInput';
 import AddButton from './AddButton';
 import SubPlaceField from './SubPlaceField';
 import { PlaceItem } from '../../../types/Settlement';
@@ -53,15 +53,15 @@ export default function PlaceField({ data, disabledDelete, dispatch }: Props) {
           height: '48px',
         }}
       >
-        <TitleInput
+        <NameInput
           ref={titleInputRef}
           id={`placeTitle-${data.id}`}
-          value={data.title}
+          value={data.name}
           placeholder="장소명"
           onChange={(e) =>
             dispatch({
-              type: 'changePlaceTitle',
-              data: { ...data, title: e.target.value },
+              type: 'changePlaceName',
+              data: { ...data, name: e.target.value },
             })
           }
           required={true}

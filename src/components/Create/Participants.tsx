@@ -31,7 +31,7 @@ export default function Participants({ data, dispatch }: Props) {
             return (
               <MultiSelect
                 key={placeItem.id}
-                title={placeItem.title}
+                title={placeItem.name}
                 summary={placeItem.participants.length || null}
                 required={true}
               >
@@ -46,9 +46,9 @@ export default function Participants({ data, dispatch }: Props) {
                     })
                   }
                 >
-                  <MultiSelect.AddInput
+                  <MultiSelect.AddOptionInput
                     label="이름 입력"
-                    addOption={(participant) => {
+                    onSubmit={(participant) => {
                       dispatch({
                         type: 'toggleSelectedPlaceParticipant',
                         id: placeItem.id,
@@ -63,14 +63,14 @@ export default function Participants({ data, dispatch }: Props) {
             return (
               <MultiSelect
                 key={placeItem.id}
-                title={placeItem.title}
+                title={placeItem.name}
                 summary={allParticipants.length}
                 required={true}
               >
                 {placeItem.sub.map((subItem) => (
                   <MultiSelect.Content
                     key={subItem.id}
-                    title={subItem.title}
+                    title={subItem.name}
                     summary={subItem.participants.length || null}
                     options={allParticipants}
                     value={subItem.participants}
@@ -83,9 +83,9 @@ export default function Participants({ data, dispatch }: Props) {
                       })
                     }
                   >
-                    <MultiSelect.AddInput
+                    <MultiSelect.AddOptionInput
                       label="이름 입력"
-                      addOption={(participant) => {
+                      onSubmit={(participant) => {
                         dispatch({
                           type: 'toggleSelectedSubPlaceParticipant',
                           id: placeItem.id,

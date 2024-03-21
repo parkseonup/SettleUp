@@ -3,6 +3,8 @@ import Section from '../common/Section';
 import SublistItem from '../common/SublistItem';
 import { useResultContext } from './ResultContext';
 
+// NOTE: 결제 내역 ui
+// TODO: 장소명 + **원 구조 동일하니까 컴포넌트 분리
 export default function PaymentHistory() {
   const { place } = useResultContext();
 
@@ -16,7 +18,7 @@ export default function PaymentHistory() {
           padding: '0 8px',
         }}
       >
-        {place.map(({ id, title, amount, participants, sub }) => {
+        {place.map(({ id, name, amount, participants, sub }) => {
           if (sub.length === 0) {
             return (
               <li
@@ -27,7 +29,7 @@ export default function PaymentHistory() {
                 }}
               >
                 <p>
-                  {title} ({participants.length}명)
+                  {name} ({participants.length}명)
                 </p>
                 <p>{separateComma(amount)} 원</p>
               </li>
@@ -41,7 +43,7 @@ export default function PaymentHistory() {
                     justifyContent: 'space-between',
                   }}
                 >
-                  <p>{title}</p>
+                  <p>{name}</p>
                   <p>{separateComma(amount)} 원</p>
                 </div>
                 <ul
@@ -55,7 +57,7 @@ export default function PaymentHistory() {
                   {sub.map((subItem) => (
                     <li key={subItem.id}>
                       <SublistItem
-                        title={`${subItem.title} (${subItem.participants.length}명)`}
+                        title={`${subItem.name} (${subItem.participants.length}명)`}
                       >
                         <p>{separateComma(subItem.amount)} 원</p>
                       </SublistItem>
