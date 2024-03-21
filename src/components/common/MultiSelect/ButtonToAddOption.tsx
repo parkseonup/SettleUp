@@ -6,6 +6,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   isActive?: boolean;
 }
 
+// NOTE: addInput 하위 컴포넌트로, 추가 button ui
 export default function ButtonToAddOption({ isActive, ...props }: Props) {
   return (
     <button

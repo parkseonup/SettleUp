@@ -1,24 +1,14 @@
-import { ReactNode, createContext, useContext } from 'react';
-
-interface Props {
-  value: ContextValue;
-  children: ReactNode;
-}
+import { createContext, useContext } from 'react';
 
 interface ContextValue {
   required: boolean;
 }
 
-const MultiSelectContext = createContext<ContextValue>({
+export const MultiSelectContext = createContext<ContextValue>({
   required: false,
 });
 
-export function MultiSelectContextProvider({ value, children }: Props) {
-  return (
-    <MultiSelectContext.Provider value={value}>{children}</MultiSelectContext.Provider>
-  );
-}
-
+// NOTE: context value 제공
 export function useMultiSelectContext() {
   return useContext(MultiSelectContext);
 }

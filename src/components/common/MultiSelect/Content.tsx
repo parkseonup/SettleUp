@@ -1,10 +1,10 @@
 import { MouseEvent, ReactNode, useState } from 'react';
 import Option from './Option';
-import MultiSelect from './MultiSelect';
 import { useMultiSelectContext } from './MultiSelectContext';
 import { getChildComponent } from '../../../utils/getChildComponent';
 import SublistItem from '../SublistItem';
 import { visibilityHidden } from '../../../styles/common/displays';
+import AddOptionInput from './AddOptionInput';
 
 interface BasicProps {
   title?: string;
@@ -22,6 +22,7 @@ interface UseSummaryProps extends BasicProps {
 
 type Props = BasicProps | UseSummaryProps;
 
+// NOTE: multiselect content ui
 export default function Content({
   title,
   options,
@@ -30,13 +31,13 @@ export default function Content({
   onChange,
   ...props
 }: Props) {
-  const addInput = getChildComponent(children, MultiSelect.AddInput);
+  const addOptionInput = getChildComponent(children, AddOptionInput);
   const { required } = useMultiSelectContext();
-  const [inputKey, setInputKey] = useState<number>(() => Date.now());
+  const [inputKey, setInputKey] = useState<number>(() => Date.now()); // input의 defaultValue attirbute는 초기값을 유지한다. 따라서 변경된 value를 전달해도 요소 자체가 변경되지 않았기 때문에 defaultValue를 유지하려는 특성이 있어 required 상태인지 체크하기가 어렵다. required 상태를 올바르게 체크할 수 있도록 컴포넌트 key를 변경하여 input 요소 자체를 파기하고 새로 생성하도록 한다. -> attribute와 Property의 차이 + react의 재조정 알고리즘(key)
 
   const _onChange = (e: MouseEvent<HTMLButtonElement>) => {
-    setInputKey(Date.now());
     onChange((e.target as HTMLButtonElement).value);
+    setInputKey(Date.now());
   };
 
   return (
@@ -81,7 +82,7 @@ export default function Content({
           </Option>
         ))}
 
-        {addInput ?? null}
+        {addOptionInput ?? null}
       </div>
     </div>
   );

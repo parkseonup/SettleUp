@@ -1,7 +1,7 @@
-import AddInput from './AddInput';
+import AddOptionInput from './AddOptionInput';
 import { ReactNode } from 'react';
 import Content from './Content';
-import { MultiSelectContextProvider } from './MultiSelectContext';
+import { MultiSelectContext } from './MultiSelectContext';
 import { colors } from '../../../styles/variables/colors';
 import Title from '../Title';
 
@@ -12,6 +12,8 @@ interface Props {
   children?: ReactNode;
 }
 
+// NOTE: multiselect container (제목, 요약 포함) ui
+// NOTE: required 라는 필수요소 체크 상태를 Context로 제공
 export default function MultiSelect({
   title,
   summary,
@@ -19,7 +21,7 @@ export default function MultiSelect({
   children,
 }: Props) {
   return (
-    <MultiSelectContextProvider value={{ required }}>
+    <MultiSelectContext.Provider value={{ required }}>
       <div
         css={{
           position: 'relative',
@@ -47,9 +49,9 @@ export default function MultiSelect({
           <p>{summary ?? null}</p>
         </div>
       </div>
-    </MultiSelectContextProvider>
+    </MultiSelectContext.Provider>
   );
 }
 
 MultiSelect.Content = Content;
-MultiSelect.AddInput = AddInput;
+MultiSelect.AddOptionInput = AddOptionInput;
