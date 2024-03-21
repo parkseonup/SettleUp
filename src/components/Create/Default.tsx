@@ -3,8 +3,8 @@ import { Settlement } from '../../types/Settlement';
 import { Action } from './useCreationReducer.type';
 import Section from '../common/Section';
 import SingleInput from '../common/SingleInput';
-import Button from '../common/Button';
-import ButtonWrapper from '../common/ButtonWrapper';
+import Button from '../common/Button/Button';
+import ButtonWrapper from '../common/Button/ButtonWrapper';
 import DatePicker from '../common/DatePicker/DatePicker';
 import PlaceField from '../common/PlaceField/PlaceField';
 

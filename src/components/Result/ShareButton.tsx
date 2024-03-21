@@ -1,5 +1,5 @@
 import html2canvas from 'html2canvas';
-import Button from '../common/Button';
+import Button from '../common/Button/Button';
 import { convertCanvasToFile } from '../../utils/convertCanvasToFile';
 import { colors } from '../../styles/variables/colors';
 import { separateComma } from '../../utils/separateComma';

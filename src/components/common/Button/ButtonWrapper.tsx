@@ -4,6 +4,8 @@ interface Props {
   children: ReactNode;
 }
 
+// NOTE: buttonWrapper ui
+// TODO: button이랑 폴더 엮기
 export default function ButtonWrapper({ children }: Props) {
   return (
     <div

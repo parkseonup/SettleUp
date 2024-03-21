@@ -2,8 +2,8 @@ import { Dispatch } from 'react';
 import { Settlement } from '../../types/Settlement';
 import { Action } from './useCreationReducer.type';
 import Section from '../common/Section';
-import ButtonWrapper from '../common/ButtonWrapper';
-import Button from '../common/Button';
+import ButtonWrapper from '../common/Button/ButtonWrapper';
+import Button from '../common/Button/Button';
 import MultiSelect from '../common/MultiSelect/MultiSelect';
 
 interface Props {

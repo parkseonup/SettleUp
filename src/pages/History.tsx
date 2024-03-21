@@ -4,10 +4,10 @@ import { Settlement } from '../types/Settlement';
 import SublistItem from '../components/common/SublistItem';
 import { separateComma } from '../utils/separateComma';
 import { colors } from '../styles/variables/colors';
-import Button from '../components/common/Button';
+import Button from '../components/common/Button/Button';
 import { Link } from 'react-router-dom';
 import { buttonColors, defaultButtonStyle } from '../styles/common/buttons';
-import ButtonWrapper from '../components/common/ButtonWrapper';
+import ButtonWrapper from '../components/common/Button/ButtonWrapper';
 import useModal from '../hooks/useModal';
 
 // NOTE: 정산 목록 ui (정산 개별 내역)

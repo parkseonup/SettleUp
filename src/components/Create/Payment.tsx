@@ -1,7 +1,7 @@
 import { Dispatch, KeyboardEvent, useState } from 'react';
 import { Settlement } from '../../types/Settlement';
-import Button from '../common/Button';
-import ButtonWrapper from '../common/ButtonWrapper';
+import Button from '../common/Button/Button';
+import ButtonWrapper from '../common/Button/ButtonWrapper';
 import Section from '../common/Section';
 import Select from '../common/Select';
 import SingleInput from '../common/SingleInput';
