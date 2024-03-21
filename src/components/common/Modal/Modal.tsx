@@ -1,19 +1,23 @@
 import { ReactNode } from 'react';
-import { BiX } from 'react-icons/bi';
 import { zIndexes } from '../../../styles/variables/zIndexes';
 import { colors } from '../../../styles/variables/colors';
 import { screenSize } from '../../../styles/common/screenSize';
+import BottomButtons from './BottomButtons';
+import Content from './Content';
+import { getChildComponent } from '../../../utils/getChildComponent';
+import CloseButton from './CloseButton';
 
 interface Props {
   children: ReactNode;
-  footer?: ReactNode;
-  onClose: () => void;
 }
 
-// NOTE: modal ui
-// NOTE: backdrop 열고 닫힘 관리
-// TODO: Modal.Footer 만들기 -> onClick시 모달 close 되게 이벤트 붙이기
-export default function Modal({ footer, children, onClose }: Props) {
+export default function Modal({ children }: Props) {
+  const closeButton = getChildComponent(children, CloseButton);
+  const bottomButtons = getChildComponent(children, BottomButtons);
+  const content = getChildComponent(children, Content);
+
+  if (!content) throw new Error('Modal 내용이 없습니다.');
+
   return (
     <div
       css={{
@@ -28,6 +32,7 @@ export default function Modal({ footer, children, onClose }: Props) {
     >
       <div
         css={{
+          position: 'relative',
           display: 'flex',
           flexDirection: 'column',
           width: `100%`,
@@ -36,24 +41,14 @@ export default function Modal({ footer, children, onClose }: Props) {
           borderRadius: '20px',
         }}
       >
-        <button
-          css={{
-            marginLeft: 'auto',
-            fontSize: '24px',
-          }}
-          onClick={() => onClose()}
-        >
-          <BiX />
-        </button>
-        <div
-          css={{
-            padding: '24px 0 40px',
-          }}
-        >
-          {children}
-        </div>
-        {footer}
+        {content}
+        {closeButton ?? null}
+        {bottomButtons ?? null}
       </div>
     </div>
   );
 }
+
+Modal.Content = Content;
+Modal.CloseButton = CloseButton;
+Modal.BottomButtons = BottomButtons;

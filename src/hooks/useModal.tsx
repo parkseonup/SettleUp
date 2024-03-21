@@ -6,6 +6,11 @@ import BackDrop from '../components/common/Modal/BackDrop';
 
 type ModalList = { id: string; component: ReactNode; show: boolean }[];
 
+type CreateModal = (
+  content: ReactNode,
+  options?: { onClose?: () => void; buttomButtons?: ReactNode },
+) => void;
+
 export default function useModal() {
   const [modalList, setModalList] = useState<ModalList>([]);
 
@@ -29,20 +34,15 @@ export default function useModal() {
     [modalList],
   );
 
-  const createModal = (
-    content: ReactNode,
-    options?: { onClose?: () => void; footer?: ReactNode },
-  ) => {
+  const createModal: CreateModal = (content, options) => {
     const id = `modal_${getId()}`;
 
-    const _onClose = () => {
+    const hideModal = () => {
       setModalList((prev) =>
         prev.map((prevItem) =>
           id === prevItem.id ? { ...prevItem, show: false } : prevItem,
         ),
       );
-
-      if (options?.onClose) options.onClose();
     };
 
     setModalList((prev) => [
@@ -50,8 +50,14 @@ export default function useModal() {
       {
         id,
         component: (
-          <Modal key={id} onClose={_onClose} footer={options?.footer}>
-            {content}
+          <Modal key={id}>
+            <Modal.CloseButton onClick={hideModal} />
+            <Modal.Content>{content}</Modal.Content>
+            {options?.buttomButtons ? (
+              <Modal.BottomButtons onClick={hideModal}>
+                {options.buttomButtons}
+              </Modal.BottomButtons>
+            ) : null}
           </Modal>
         ),
         show: true,
