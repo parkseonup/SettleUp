@@ -3,73 +3,94 @@ import { css } from '@emotion/react';
 import { Style } from '../../../types/Style';
 import { colors } from '../../../styles/variables/colors';
 import { separateComma } from '../../../utils/separateComma';
+import { visibilityHidden } from '../../../styles/common/displays';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   amount: number;
   insideStyle?: Style;
 }
 
+// NOTE: 값 입력 input ui
+// NOTE: 숫자, 백스페이스, 컨트롤, 코멘드 키 외 입력 방지
 export default function AmountInput({ amount, insideStyle, ...props }: Props) {
   const preventKeydown = (e: KeyboardEvent) => {
-    const availableKeys = [
+    const metaKeys = [
       'Backspace',
       'Control',
       'Meta',
-      ...Array.from({ length: 10 }, (_, i) => `${i}`),
+      'ArrowUp',
+      'ArrowRight',
+      'ArrowDown',
+      'ArrowLeft',
+      'Shift',
+      'Tab',
     ];
+    const availableKeys = [...metaKeys, ...Array.from({ length: 10 }, (_, i) => `${i}`)];
 
-    if (!availableKeys.includes(e.key) || (e.target as HTMLInputElement).value.length > 6)
+    if (
+      !availableKeys.includes(e.key) ||
+      ((e.target as HTMLInputElement).value.length > 6 && !metaKeys.includes(e.key))
+    )
       e.preventDefault();
   };
 
   return (
     <div
       css={{
-        position: 'relative',
         display: 'flex',
         justifyContent: 'flex-end',
         gap: '4px',
       }}
     >
-      <input
-        type="number"
-        inputMode="numeric"
-        pattern="[0-9]*"
+      <div
         css={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          paddingRight: '16px',
-          color: 'transparent',
-          textAlign: 'right',
-          caretColor: colors.DARK_GRAY,
-          appearance: 'none',
-
-          '&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {
-            margin: 0,
-            appearance: 'none',
-          },
+          position: 'relative',
+          flexGrow: 1,
         }}
-        value={amount || ''}
-        onKeyDown={preventKeydown}
-        {...props}
-      />
-      <p
-        css={css(
-          {
-            width: '100%',
-            fontSize: '12px',
-            color: amount ? colors.DARK_GRAY : colors.LIGHT_GRAY,
-            textAlign: 'right',
-            pointerEvents: 'none',
-          },
-          insideStyle,
-        )}
       >
-        {separateComma(amount)}
-      </p>
+        <label htmlFor={props.id} css={visibilityHidden}>
+          금액
+        </label>
+        <input
+          type="number"
+          inputMode="numeric"
+          pattern="[0-9]*"
+          css={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            color: 'transparent',
+            textAlign: 'right',
+            caretColor: colors.DARK_GRAY,
+            appearance: 'none',
+
+            '&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {
+              margin: 0,
+              appearance: 'none',
+            },
+          }}
+          value={amount || ''}
+          onKeyDown={preventKeydown}
+          {...props}
+        />
+        <p
+          css={css(
+            {
+              width: '100%',
+              fontSize: '12px',
+              color: amount ? colors.DARK_GRAY : colors.LIGHT_GRAY,
+              textAlign: 'right',
+              pointerEvents: 'none',
+            },
+            insideStyle,
+          )}
+        >
+          {separateComma(amount)}
+        </p>
+      </div>
+
       <p
         css={css(
           {

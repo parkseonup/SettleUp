@@ -6,6 +6,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   isActive: boolean;
 }
 
+// NOTE: 제거 버튼 Ui
 export default function DeleteButton({ isActive, ...props }: Props) {
   return (
     <button

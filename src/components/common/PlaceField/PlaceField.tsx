@@ -14,6 +14,9 @@ interface Props {
   dispatch: Dispatch<Action>;
 }
 
+// NOTE: placeField ui
+// NOTE: 새 장소 추가, 삭제 로직
+// NOTE: 새 장소 추가 시 focus
 export default function PlaceField({ data, disabledDelete, dispatch }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isActive, setIsActive] = useState(false);
@@ -44,7 +47,7 @@ export default function PlaceField({ data, disabledDelete, dispatch }: Props) {
       <div
         css={{
           display: 'grid',
-          gridTemplateColumns: '80px 1fr 60px',
+          gridTemplateColumns: '72px 1fr 60px',
           gap: '16px',
           alignItems: 'center',
           height: '48px',
@@ -52,7 +55,7 @@ export default function PlaceField({ data, disabledDelete, dispatch }: Props) {
       >
         <TitleInput
           ref={titleInputRef}
-          name={`placeTitle-${data.id}`}
+          id={`placeTitle-${data.id}`}
           value={data.title}
           placeholder="장소명"
           onChange={(e) =>
@@ -64,7 +67,7 @@ export default function PlaceField({ data, disabledDelete, dispatch }: Props) {
           required={true}
         />
         <AmountInput
-          name={`placeAmount-${data.id}`}
+          id={`placeAmount-${data.id}`}
           amount={data.amount}
           insideStyle={{
             fontSize: '14px',

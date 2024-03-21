@@ -6,6 +6,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   isActive?: boolean;
 }
 
+// NOTE: addButton ui
 export default function AddButton({ isActive, ...props }: Props) {
   return (
     <button
