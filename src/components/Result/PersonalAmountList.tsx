@@ -1,5 +1,5 @@
 import { colors } from '../../styles/variables/colors';
-import { separateComma } from '../../utils/separateComma';
+import LabeledAmount from '../common/LabeledAmount';
 import { useResultContext } from './ResultContext';
 
 export default function PersonalAmountList() {
@@ -17,15 +17,8 @@ export default function PersonalAmountList() {
       }}
     >
       {Object.entries(personalAmountList).map(([person, amount]) => (
-        <li
-          key={person}
-          css={{
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}
-        >
-          <p>{person}</p>
-          <p>{separateComma(amount)} 원</p>
+        <li key={person}>
+          <LabeledAmount label={person} amount={amount} />
         </li>
       ))}
     </ul>
