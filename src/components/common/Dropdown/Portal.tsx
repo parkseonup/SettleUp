@@ -10,7 +10,6 @@ interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   children: ReactNode | ChildFunction;
 }
 
-/** Portal UI */
 export default function Portal({ as, children, ...props }: Props) {
   const { isActive, setIsActive } = useDropdownContext();
 

@@ -16,6 +16,13 @@ interface AsProps {
 
 export type Props = { children: ReactNode; insideStyle?: Style } & (TitleProps | AsProps);
 
+const titleStyle = {
+  fontSize: 'inherit',
+  fontWeight: 500,
+  color: colors.DARK_GRAY,
+};
+
+// THINK: sublistitem 구조 고민해보기..
 export default function SublistItem({ insideStyle, children, ...props }: Props) {
   return (
     <div
@@ -60,9 +67,3 @@ export default function SublistItem({ insideStyle, children, ...props }: Props) 
     </div>
   );
 }
-
-const titleStyle = {
-  fontSize: 'inherite',
-  fontWeight: 500,
-  color: colors.DARK_GRAY,
-};

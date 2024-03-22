@@ -10,7 +10,6 @@ interface Props extends TitleProps {
   children: ReactNode;
 }
 
-// NOTE: PageLayout ui
 export default function PageLayout({
   title,
   description,

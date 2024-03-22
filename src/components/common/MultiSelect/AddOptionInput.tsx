@@ -8,8 +8,6 @@ interface Props {
   onSubmit: (newOption: any) => void;
 }
 
-// NOTE: AddOptionInput ui
-// NOTE: isActive 상태 관리
 export default function AddOptionInput({ label, onSubmit }: Props) {
   const [isActive, setIsActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);

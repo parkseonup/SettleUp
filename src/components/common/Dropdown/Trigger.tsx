@@ -7,10 +7,6 @@ interface Props {
   children: ReactNode | ChildFunction;
 }
 
-/**
- * - Trigger UI
- * - Dropdown 열고 닫힘 관리)
- */
 export default function Trigger({ children, ...props }: Props) {
   const { isActive, setIsActive } = useDropdownContext();
 

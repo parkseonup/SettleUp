@@ -22,7 +22,6 @@ interface UseSummaryProps extends BasicProps {
 
 type Props = BasicProps | UseSummaryProps;
 
-// NOTE: multiselect content ui
 export default function Content({
   title,
   options,

@@ -5,7 +5,6 @@ interface Props {
   children: HTMLAttributes<HTMLDivElement>['children'];
 }
 
-/** dropdown 닫기 버튼 ui */
 export default function Close({ children }: Props) {
   const { setIsActive } = useDropdownContext();
 

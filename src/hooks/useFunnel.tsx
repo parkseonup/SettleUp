@@ -15,6 +15,13 @@ interface FunnelStepProps {
 
 type Delta = -1;
 
+/**
+ * - 단계별 컴포넌트 출력 기능
+ * - 컴포넌트 변경될 때 history도 변경
+ * - 컴포넌트들의 상태를 한 곳에 모음 -> loaction.state
+ * - 단계 변경 함수 제공 -> setStep
+ * - funnel 기능 사용을 위한 합성 컴포넌트 제공 -> Funnel
+ */
 export default function useFunnel(steps: Steps, locationState?: any) {
   const location = useLocation();
   const navigate = useNavigate();

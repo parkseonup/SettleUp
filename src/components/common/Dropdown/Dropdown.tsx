@@ -7,10 +7,6 @@ import useOutsideClick from '../../../hooks/useOutsideClick';
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {}
 
-/**
- * - Dropdown 열고 닫힘 관리
- * - isActive, setIsActive 라는 ui 상태를 가진 Context 제공
- */
 export default function Dropdown({ children, ...props }: Props) {
   const [isActive, setIsActive] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);

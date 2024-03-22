@@ -10,8 +10,6 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   insideStyle?: Style;
 }
 
-// NOTE: 값 입력 input ui
-// NOTE: 숫자, 백스페이스, 컨트롤, 코멘드 키 외 입력 방지
 export default function AmountInput({ amount, insideStyle, ...props }: Props) {
   const preventKeydown = (e: KeyboardEvent) => {
     const metaKeys = [

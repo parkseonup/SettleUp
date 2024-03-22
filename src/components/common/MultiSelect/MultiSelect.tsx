@@ -12,8 +12,6 @@ interface Props {
   children?: ReactNode;
 }
 
-// NOTE: multiselect container (제목, 요약 포함) ui
-// NOTE: required 라는 필수요소 체크 상태를 Context로 제공
 export default function MultiSelect({
   title,
   summary,

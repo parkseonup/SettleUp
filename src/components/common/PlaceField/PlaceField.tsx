@@ -14,9 +14,6 @@ interface Props {
   dispatch: Dispatch<Action>;
 }
 
-// NOTE: placeField ui
-// NOTE: 새 장소 추가, 삭제 로직
-// NOTE: 새 장소 추가 시 focus
 export default function PlaceField({ data, disabledDelete, dispatch }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isActive, setIsActive] = useState(false);

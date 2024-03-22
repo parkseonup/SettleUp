@@ -15,7 +15,6 @@ interface Props {
   dispatch: Dispatch<Action>;
 }
 
-// NOTE: sub 정보 입력 ui
 export default function SubPlaceField({
   data,
   placeId,

@@ -4,7 +4,6 @@ import { visibilityHidden } from '../../../styles/common/displays';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {}
 
-// NOTE: 장소 이름 입력 input
 export default forwardRef(function NameInput(
   props: Props,
   ref: ForwardedRef<HTMLInputElement>,

@@ -9,6 +9,11 @@ import useFunnel from '../hooks/useFunnel';
 
 const steps = ['기본정보', '참가자', '송금정보'] as const;
 
+/**
+ * - 정산 만들기 페이지 ui
+ * - input Enter키 입력시 submit 방지
+ * - submit 발생시 처리 로직
+ */
 export default function Create() {
   const location = useLocation();
   const navigate = useNavigate();
