@@ -1,5 +1,5 @@
 import { ForwardedRef, HTMLAttributes, ReactNode, forwardRef } from 'react';
-import { InputFieldContext } from './InputFieldContext';
+import { InputFieldContext } from './Context';
 import Label from './Label';
 import Input from './Input';
 import Slot from './Slot';
