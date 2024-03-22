@@ -6,7 +6,6 @@ export interface Props {
   description?: string;
 }
 
-// NOTE: title ui
 export default function PageHeader({ title, description }: Props) {
   return (
     <div
@@ -19,7 +18,7 @@ export default function PageHeader({ title, description }: Props) {
     >
       <Title
         as="h2"
-        font="size900"
+        font={900}
         insideStyle={{
           color: 'inherit',
         }}

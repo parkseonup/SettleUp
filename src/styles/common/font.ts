@@ -6,23 +6,23 @@ const titleBasic = {
 };
 
 export const title = {
-  size900: {
+  900: {
     ...titleBasic,
     fontSize: '24px',
   },
-  size500: {
+  500: {
     ...titleBasic,
     fontSize: '20px',
   },
-  size200: {
+  200: {
     ...titleBasic,
     fontSize: '16px',
   },
-  size100: {
+  100: {
     ...titleBasic,
     fontSize: '15px',
   },
-  size50: {
+  50: {
     ...titleBasic,
     fontSize: '14px',
   },

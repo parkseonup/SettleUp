@@ -57,7 +57,7 @@ export default function Menu({ onClose }: Props) {
                 display: 'inline-block',
                 padding: '4px 8px',
                 marginLeft: '-8px',
-                ...title.size900,
+                ...title[900],
                 color: colors.WHITE,
               }}
             >
