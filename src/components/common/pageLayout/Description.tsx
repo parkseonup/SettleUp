@@ -1,7 +1,9 @@
-import { HTMLAttributes } from 'react';
+import { ReactNode } from 'react';
 import { colors } from '../../../styles/variables/colors';
 
-interface Props extends HTMLAttributes<HTMLParagraphElement> {}
+interface Props {
+  children: ReactNode;
+}
 
 export default function Description({ children }: Props) {
   return (

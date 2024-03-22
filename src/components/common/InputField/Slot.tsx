@@ -1,9 +1,11 @@
 import { HTMLAttributes, ReactNode } from 'react';
-import { useInputFieldContext } from './InputFieldContext';
+import { useInputFieldContext } from './Context';
+
+type ChildFunction = (isActive: boolean) => ReactNode;
 
 interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   disabled?: boolean;
-  children: ReactNode | ((isActive: boolean) => ReactNode);
+  children: ReactNode | ChildFunction;
 }
 
 export default function Slot({ disabled, children, ...props }: Props) {
