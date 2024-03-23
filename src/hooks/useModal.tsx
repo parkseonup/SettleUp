@@ -8,7 +8,7 @@ type ModalList = { id: string; component: ReactNode; show: boolean }[];
 
 type CreateModal = (
   content: ReactNode,
-  options?: { onClose?: () => void; buttomButtons?: ReactNode },
+  options?: { onClose?: () => void; bottomButtons?: ReactNode },
 ) => void;
 
 export default function useModal() {
@@ -53,9 +53,9 @@ export default function useModal() {
           <Modal key={id}>
             <Modal.CloseButton onClick={hideModal} />
             <Modal.Content>{content}</Modal.Content>
-            {options?.buttomButtons ? (
+            {options?.bottomButtons ? (
               <Modal.BottomButtons onClick={hideModal}>
-                {options.buttomButtons}
+                {options.bottomButtons}
               </Modal.BottomButtons>
             ) : null}
           </Modal>

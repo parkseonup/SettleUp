@@ -115,7 +115,7 @@ export default function History() {
             <Button
               onClick={() =>
                 createModal(<p>목록을 초기화 하시겠습니까?</p>, {
-                  buttomButtons: (
+                  bottomButtons: (
                     <Button style="point" onClick={reset}>
                       초기화 하기
                     </Button>
