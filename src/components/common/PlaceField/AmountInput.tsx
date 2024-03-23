@@ -1,16 +1,17 @@
-import { InputHTMLAttributes, KeyboardEvent } from 'react';
+import { ChangeEvent, InputHTMLAttributes, KeyboardEvent } from 'react';
 import { css } from '@emotion/react';
 import { Style } from '../../../types/Style';
 import { colors } from '../../../styles/variables/colors';
 import { separateComma } from '../../../utils/separateComma';
 import { visibilityHidden } from '../../../styles/common/displays';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   amount: number;
   insideStyle?: Style;
+  onChange: (value: number) => void;
 }
 
-export default function AmountInput({ amount, insideStyle, ...props }: Props) {
+export default function AmountInput({ amount, insideStyle, onChange, ...props }: Props) {
   const preventKeydown = (e: KeyboardEvent) => {
     const metaKeys = [
       'Backspace',
@@ -27,11 +28,15 @@ export default function AmountInput({ amount, insideStyle, ...props }: Props) {
 
     if (
       !availableKeys.includes(e.key) ||
-      ((e.target as HTMLInputElement).value.length > 6 && !metaKeys.includes(e.key))
+      ((e.target as HTMLInputElement).value.length > 7 && !metaKeys.includes(e.key))
     ) {
       e.preventDefault();
       return;
     }
+  };
+
+  const _onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onChange(+e.target.value.replace(/,/g, ''));
   };
 
   return (
@@ -52,16 +57,15 @@ export default function AmountInput({ amount, insideStyle, ...props }: Props) {
           금액
         </label>
         <input
-          type="number"
+          type="text"
           inputMode="numeric"
-          pattern="[0-9]*"
+          pattern="[0-9,]*"
+          value={separateComma(amount) || ''}
+          onKeyDown={preventKeydown}
+          onChange={_onChange}
           css={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
             width: '100%',
             height: '100%',
-            color: 'transparent',
             textAlign: 'right',
             caretColor: colors.DARK_GRAY,
             appearance: 'none',
@@ -71,24 +75,8 @@ export default function AmountInput({ amount, insideStyle, ...props }: Props) {
               appearance: 'none',
             },
           }}
-          value={amount || ''}
-          onKeyDown={preventKeydown}
           {...props}
         />
-        <p
-          css={css(
-            {
-              width: '100%',
-              fontSize: '12px',
-              color: amount ? colors.DARK_GRAY : colors.LIGHT_GRAY,
-              textAlign: 'right',
-              pointerEvents: 'none',
-            },
-            insideStyle,
-          )}
-        >
-          {separateComma(amount)}
-        </p>
       </div>
 
       <p

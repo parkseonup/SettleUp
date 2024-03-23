@@ -69,10 +69,10 @@ export default function PlaceField({ data, disabledDelete, dispatch }: Props) {
           insideStyle={{
             fontSize: '14px',
           }}
-          onChange={(e) => {
+          onChange={(amount) => {
             dispatch({
               type: 'changePlaceAmount',
-              data: { ...data, amount: +e.target.value },
+              data: { ...data, amount },
             });
           }}
           required={true}

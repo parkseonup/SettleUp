@@ -48,11 +48,11 @@ export default function SubPlaceField({
       <AmountInput
         id={`placeSubAmount-${placeId}-${data.id}`}
         amount={data.amount}
-        onChange={(e) => {
+        onChange={(amount) => {
           dispatch({
             type: 'changeSubPlaceAmount',
             id: placeId,
-            subItem: { ...data, amount: +e.target.value },
+            subItem: { ...data, amount },
           });
         }}
         css={{
