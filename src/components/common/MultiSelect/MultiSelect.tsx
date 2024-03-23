@@ -28,7 +28,7 @@ export default function MultiSelect({
           borderRadius: '20px',
         }}
       >
-        <Title as="h4" font="size50">
+        <Title as="h4" font="50">
           {title}
         </Title>
 

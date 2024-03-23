@@ -38,7 +38,7 @@ export default function GlobalHeader() {
         <Link to="/create">
           <Title
             as="h1"
-            font="size200"
+            font="200"
             insideStyle={{
               color: 'inherit',
             }}

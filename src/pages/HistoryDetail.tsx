@@ -54,7 +54,7 @@ export default function HistoryDetail() {
         <ResultContextProvider value={data}>
           <Receipt ref={captureElementRef}>
             <div>
-              <Title as="h3" font={900}>
+              <Title as="h3" font="900">
                 {data.title}
               </Title>
               <p

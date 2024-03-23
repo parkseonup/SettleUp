@@ -19,7 +19,7 @@ export default function Section({ title, type = 'default', children }: Props) {
     <section>
       <Title
         as="h3"
-        font="size100"
+        font="100"
         css={css(
           {
             marginBottom: '16px',

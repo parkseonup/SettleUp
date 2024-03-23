@@ -29,7 +29,7 @@ export default function Result() {
       <ResultContextProvider value={location.state}>
         <Receipt ref={captureElementRef}>
           <div>
-            <Title as="h3" font={900}>
+            <Title as="h3" font="900">
               {data.title}
             </Title>
             <p

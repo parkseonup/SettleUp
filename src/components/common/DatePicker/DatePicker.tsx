@@ -38,7 +38,7 @@ export default function DatePicker({ seletedDate, onChange }: Props) {
           textAlign: 'center',
         }}
       >
-        <Title as="h4" font="size200">
+        <Title as="h4" font="200">
           {year}년 {month + 1}월
         </Title>
 

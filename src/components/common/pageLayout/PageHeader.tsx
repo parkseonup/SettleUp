@@ -18,7 +18,7 @@ export default function PageHeader({ title, description }: Props) {
     >
       <Title
         as="h2"
-        font={900}
+        font="900"
         insideStyle={{
           color: 'inherit',
         }}
