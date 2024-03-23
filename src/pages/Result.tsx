@@ -4,7 +4,6 @@ import ButtonWrapper from '../components/common/Button/ButtonWrapper';
 import Button from '../components/common/Button/Button';
 import { useRef } from 'react';
 import ShareButton from '../components/Result/ShareButton';
-import SaveButton from '../components/Result/SaveButton';
 import ResultContextProvider from '../components/Result/ResultContext';
 import Receipt from '../components/common/Receipt';
 import Title from '../components/common/Title';
@@ -71,7 +70,6 @@ export default function Result() {
         <ButtonWrapper>
           <ShareButton captureElementRef={captureElementRef} />
           <Button onClick={onClickEdit}>정산 수정하기</Button>
-          <SaveButton data={location.state} />
         </ButtonWrapper>
       </ResultContextProvider>
     </PageLayout>
