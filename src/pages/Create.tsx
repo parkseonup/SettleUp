@@ -6,20 +6,26 @@ import Participants from '../components/Create/Participants';
 import Payment from '../components/Create/Payment';
 import PageLayout from '../components/common/pageLayout/PageLayout';
 import useFunnel from '../hooks/useFunnel';
+import { Settlement } from '../apis/data';
+import lodash from 'lodash';
+import { crackAccountNumber } from '../utils/crackAccountNumber';
+import LocalStorageService from '../apis/LocalStorageService';
 
 const steps = ['기본정보', '참가자', '송금정보'] as const;
 
 /**
- * - 정산 만들기 페이지 ui
+ * - 정산 만들기 / 정산 수정 페이지 ui
  * - input Enter키 입력시 submit 방지
  * - submit 발생시 처리 로직
  */
+// TODO: 정산 만들기, 정산 수정 페이지 분리하기
 export default function Create() {
   const location = useLocation();
   const navigate = useNavigate();
   const [data, dispatch] = useCreationReducer(location.state);
   const { Funnel, step, setStep, hasNextStep } = useFunnel(steps, data);
   const stepLevel = steps.findIndex((_step) => _step === step) + 1;
+  const apiService = new LocalStorageService();
 
   /** input에서 Enter키 입력시 발생하는 submit 이벤트 방지 */
   useEffect(() => {
@@ -37,11 +43,25 @@ export default function Create() {
     e.preventDefault();
 
     if (hasNextStep) setStep();
-    else navigate('/result', { state: data });
+    else {
+      // 계좌번호 일부만 출력되도록 ** 처리
+      const copyData: Settlement = lodash.cloneDeep(data);
+      const { accountNumber } = copyData.payment.bankTransfer;
+      copyData.payment.bankTransfer.accountNumber = accountNumber
+        ? crackAccountNumber(accountNumber)
+        : '';
+
+      location.state ? apiService.changeItem(copyData) : apiService.addItem(data);
+      navigate('/result', { state: data });
+    }
   };
 
   return (
-    <PageLayout title={`정산 만들기 (${stepLevel}/${steps.length})`}>
+    <PageLayout
+      title={`${location.state ? '정산 결과 수정' : '정산 만들기'} (${stepLevel}/${
+        steps.length
+      })`}
+    >
       <form onSubmit={onSubmit}>
         <Funnel>
           <Funnel.Step name="기본정보">
