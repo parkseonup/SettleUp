@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import emotionNormalize from 'emotion-normalize';
 import { colors } from './variables/colors';
 
+// TODO: fontSize: '14px'로 기본값 지정하고, 따로 지정해둔 곳 제거하기
 export const globalStyle = css(emotionNormalize, {
   body: {
     fontFamily:
