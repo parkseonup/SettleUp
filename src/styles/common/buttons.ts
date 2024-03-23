@@ -8,6 +8,7 @@ export const defaultButtonStyle = {
   height: '48px',
   fontSize: '14px',
   fontWeight: '400',
+  border: '1px solid transparent',
   borderRadius: '100px',
 };
 
@@ -29,7 +30,7 @@ export const buttonColors: ButtonsColors = {
   default: defaultButtonColor,
   outline: {
     ...defaultButtonColor,
-    borderColor: colors.DARK_GRAY,
+    borderColor: colors.BLACK,
   },
   ghost: {
     ...defaultButtonColor,
