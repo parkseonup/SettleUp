@@ -35,13 +35,15 @@ export default function PaymentDetails() {
         },
       }}
     >
-      <li key={payer}>결제한 사람: {payer}</li>
+      <li key={payer}>결제자: {payer}</li>
       {hasAccount ? (
         <li key={bankName}>
           계좌번호: {bankName} {accountNumber}
         </li>
       ) : null}
-      <li key="payment_etc">{etcPaymentMethods.join(', ')} 가능</li>
+      {etcPaymentMethods.length > 0 ? (
+        <li key="payment_etc">{etcPaymentMethods.join(', ')} 가능</li>
+      ) : null}
     </ul>
   );
 }
