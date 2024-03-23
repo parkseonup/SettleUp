@@ -1,5 +1,5 @@
 import { Dispatch, KeyboardEvent, useState } from 'react';
-import { Settlement } from '../../types/Settlement';
+import { Settlement } from '../../apis/data';
 import Button from '../common/Button/Button';
 import ButtonWrapper from '../common/Button/ButtonWrapper';
 import Section from '../common/Section';

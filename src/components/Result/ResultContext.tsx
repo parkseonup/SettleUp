@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useContext, useMemo } from 'react';
-import { Payment, PlaceInfo, Settlement } from '../../types/Settlement';
+import { Payment, PlaceInfo, Settlement } from '../../apis/data';
 import { ceilToTen } from '../../utils/math';
 
 interface ContextValue extends Settlement {

@@ -1,5 +1,5 @@
 import { Dispatch } from 'react';
-import { Settlement } from '../../types/Settlement';
+import { Settlement } from '../../apis/data';
 import { Action } from './useCreationReducer.type';
 import Section from '../common/Section';
 import ButtonWrapper from '../common/Button/ButtonWrapper';

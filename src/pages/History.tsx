@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import PageLayout from '../components/common/pageLayout/PageLayout';
-import { Settlement } from '../types/Settlement';
+import { Settlement } from '../apis/data';
 import SublistItem from '../components/common/SublistItem';
 import { separateComma } from '../utils/separateComma';
 import { colors } from '../styles/variables/colors';

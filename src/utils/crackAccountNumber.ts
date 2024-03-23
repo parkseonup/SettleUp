@@ -1,4 +1,4 @@
-import { Payment } from '../types/Settlement';
+import { Payment } from '../apis/data';
 
 export const crackAccountNumber = (
   accountNumber: Payment['bankTransfer']['accountNumber'],

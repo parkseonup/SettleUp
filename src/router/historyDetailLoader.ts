@@ -1,5 +1,5 @@
 import { Params } from 'react-router-dom';
-import { Settlement } from '../types/Settlement';
+import { Settlement } from '../apis/data';
 
 export const historyDetailLoader = ({ params }: { params: Params<string> }) => {
   const localData = localStorage.getItem('SETTLE_UP');

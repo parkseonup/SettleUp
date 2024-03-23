@@ -1,5 +1,5 @@
 import { Dispatch, useReducer } from 'react';
-import { Settlement } from '../../types/Settlement';
+import { Settlement } from '../../apis/data';
 import { getId } from '../../utils/getId';
 import { substractNumbers } from '../../utils/math';
 import { Action } from './useCreationReducer.type';

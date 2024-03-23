@@ -1,9 +1,4 @@
-import {
-  BankTransfer,
-  PaymentMethods,
-  PlaceInfo,
-  Settlement,
-} from '../../types/Settlement';
+import { BankTransfer, PaymentMethods, PlaceInfo, Settlement } from '../../apis/data';
 
 type PlaceActions =
   | { type: 'addPlace' }

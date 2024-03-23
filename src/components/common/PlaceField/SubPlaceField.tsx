@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 import AmountInput from './AmountInput';
 import NameInput from './NameInput';
 import DeleteButton from './DeleteButton';
-import { PlaceInfo } from '../../../types/Settlement';
+import { PlaceInfo } from '../../../apis/data';
 import { Action } from '../../Create/useCreationReducer.type';
 import SublistItem from '../SublistItem';
 

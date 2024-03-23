@@ -1,6 +1,6 @@
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import PageLayout from '../components/common/pageLayout/PageLayout';
-import { PlaceInfo, Settlement } from '../types/Settlement';
+import { PlaceInfo, Settlement } from '../apis/data';
 import ButtonWrapper from '../components/common/Button/ButtonWrapper';
 import Button from '../components/common/Button/Button';
 import { useRef } from 'react';
