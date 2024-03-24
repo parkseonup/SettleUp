@@ -3,8 +3,8 @@ import AmountInput from './AmountInput';
 import NameInput from './NameInput';
 import DeleteButton from './DeleteButton';
 import { PlaceInfo } from '../../../apis/data';
-import { Action } from '../../Create/useCreationReducer.type';
 import SublistItem from '../SublistItem';
+import { Action } from '../../Write/useCreationReducer.type';
 
 interface Props {
   data: PlaceInfo;

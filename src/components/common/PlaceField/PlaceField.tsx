@@ -5,8 +5,8 @@ import NameInput from './NameInput';
 import AddButton from './AddButton';
 import SubPlaceField from './SubPlaceField';
 import { PlaceItem } from '../../../apis/data';
-import { Action } from '../../Create/useCreationReducer.type';
 import { colors } from '../../../styles/variables/colors';
+import { Action } from '../../Write/useCreationReducer.type';
 
 interface Props {
   data: PlaceItem;
