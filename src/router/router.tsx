@@ -4,6 +4,7 @@ import { historyDetailLoader } from './historyDetailLoader';
 import { lazy } from 'react';
 
 const Create = lazy(() => import('../pages/Create'));
+const Edit = lazy(() => import('../pages/Edit'));
 const Result = lazy(() => import('../pages/Result'));
 const History = lazy(() => import('../pages/History'));
 const HistoryDetail = lazy(() => import('../pages/HistoryDetail'));
@@ -51,6 +52,12 @@ const routerData: RouterBase[] = [
     showMenu: false,
     element: <HistoryDetail />,
     loader: historyDetailLoader,
+  },
+  {
+    path: '/edit',
+    label: '정산 내역 수정',
+    showMenu: false,
+    element: <Edit />,
   },
 ];
 

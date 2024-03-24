@@ -29,7 +29,7 @@ export default function HistoryDetail() {
   const { Modal, createModal } = useModal();
 
   const onClickEdit = () => {
-    navigate('/create', { state: data });
+    navigate('/edit', { state: data });
   };
 
   const onClickDelete = () => {
