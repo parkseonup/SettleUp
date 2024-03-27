@@ -4,7 +4,13 @@ import { getId } from '../utils/getId';
 import { createPortal } from 'react-dom';
 import BackDrop from '../components/common/Modal/BackDrop';
 
-type ModalList = { id: string; component: ReactNode; show: boolean }[];
+interface ModalInfo {
+  id: string;
+  component: ReactNode;
+  show: boolean;
+}
+
+type ModalList = ModalInfo[];
 
 type CreateModal = (
   content: ReactNode,
@@ -34,16 +40,16 @@ export default function useModal() {
     [modalList],
   );
 
+  const hideModal = (id: ModalInfo['id']) => {
+    setModalList((prev) =>
+      prev.map((prevItem) =>
+        id === prevItem.id ? { ...prevItem, show: false } : prevItem,
+      ),
+    );
+  };
+
   const createModal: CreateModal = (content, options) => {
     const id = `modal_${getId()}`;
-
-    const hideModal = () => {
-      setModalList((prev) =>
-        prev.map((prevItem) =>
-          id === prevItem.id ? { ...prevItem, show: false } : prevItem,
-        ),
-      );
-    };
 
     setModalList((prev) => [
       ...prev,
@@ -51,10 +57,10 @@ export default function useModal() {
         id,
         component: (
           <Modal key={id}>
-            <Modal.CloseButton onClick={hideModal} />
+            <Modal.CloseButton onClick={() => hideModal(id)} />
             <Modal.Content>{content}</Modal.Content>
             {options?.bottomButtons ? (
-              <Modal.BottomButtons onClick={hideModal}>
+              <Modal.BottomButtons onClick={() => hideModal(id)}>
                 {options.bottomButtons}
               </Modal.BottomButtons>
             ) : null}
