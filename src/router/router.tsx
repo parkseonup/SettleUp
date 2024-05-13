@@ -5,12 +5,8 @@ import { lazy } from 'react';
 
 const Create = lazy(() => import('../pages/Create'));
 const Edit = lazy(() => import('../pages/Edit'));
-const Result = lazy(() => import('../pages/Result'));
 const History = lazy(() => import('../pages/History'));
 const HistoryDetail = lazy(() => import('../pages/HistoryDetail'));
-const ResultErrorBoundary = lazy(
-  () => import('../components/Result/ResultErrorBoundary'),
-);
 
 type RouterBase = RouteObject & {
   label?: string;
@@ -28,17 +24,6 @@ const routerData: RouterBase[] = [
     label: '정산 만들기',
     showMenu: true,
     element: <Create />,
-  },
-  {
-    path: '/result',
-    label: '정산 결과',
-    showMenu: false,
-    element: <Result />,
-    errorElement: (
-      <GeneralLayout>
-        <ResultErrorBoundary />
-      </GeneralLayout>
-    ),
   },
   {
     path: '/history',

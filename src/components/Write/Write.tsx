@@ -1,21 +1,18 @@
 import { FormEvent, useEffect } from 'react';
 import useCreationReducer from './useCreationReducer';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Default from './Default';
 import Participants from './Participants';
 import Payment from './Payment';
 import PageLayout from '../common/pageLayout/PageLayout';
 import useFunnel from '../../hooks/useFunnel';
-import { Settlement } from '../../apis/data';
-import lodash from 'lodash';
-import { crackAccountNumber } from '../../utils/crackAccountNumber';
-import LocalStorageService from '../../apis/LocalStorageService';
+import Result from '../../pages/Result';
 
 interface Props {
   isEditMode?: boolean;
 }
 
-const steps = ['기본정보', '참가자', '송금정보'] as const;
+const steps = ['기본정보', '참가자', '송금정보', '결과'] as const;
 
 /**
  * - 정산 만들기 / 정산 수정 페이지 ui
@@ -25,11 +22,9 @@ const steps = ['기본정보', '참가자', '송금정보'] as const;
 // TODO: 정산 만들기, 정산 수정 분리하기
 export default function Write({ isEditMode = false }: Props) {
   const location = useLocation();
-  const navigate = useNavigate();
   const [data, dispatch] = useCreationReducer(location.state);
-  const { Funnel, step, setStep, hasNextStep } = useFunnel(steps, data);
+  const { Funnel, step, setStep, hasNextStep } = useFunnel(steps);
   const stepLevel = steps.findIndex((_step) => _step === step) + 1;
-  const apiService = new LocalStorageService();
 
   /** input에서 Enter키 입력시 발생하는 submit 이벤트 방지 */
   useEffect(() => {
@@ -45,26 +40,19 @@ export default function Write({ isEditMode = false }: Props) {
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-
-    if (hasNextStep) setStep();
-    else {
-      // 계좌번호 일부만 출력되도록 ** 처리
-      const copyData: Settlement = lodash.cloneDeep(data);
-      const { accountNumber } = copyData.payment.bankTransfer;
-      copyData.payment.bankTransfer.accountNumber = accountNumber
-        ? crackAccountNumber(accountNumber)
-        : '';
-
-      isEditMode ? apiService.changeItem(copyData) : apiService.addItem(data);
-      navigate('/result', { state: data });
-    }
+    setStep();
   };
 
   return (
     <PageLayout
-      title={`${isEditMode ? '정산 결과 수정' : '정산 만들기'} (${stepLevel}/${
-        steps.length
-      })`}
+      title={`${
+        hasNextStep
+          ? isEditMode
+            ? `정산 결과 수정 (${stepLevel}/${steps.length - 1})`
+            : `정산 만들기 (${stepLevel}/${steps.length - 1})`
+          : '정산 결과'
+      }`}
+      mode={hasNextStep ? 'default' : 'point'}
     >
       <form onSubmit={onSubmit}>
         <Funnel>
@@ -76,6 +64,9 @@ export default function Write({ isEditMode = false }: Props) {
           </Funnel.Step>
           <Funnel.Step name="송금정보">
             <Payment data={data} dispatch={dispatch} />
+          </Funnel.Step>
+          <Funnel.Step name="결과">
+            <Result data={data} />
           </Funnel.Step>
         </Funnel>
       </form>
