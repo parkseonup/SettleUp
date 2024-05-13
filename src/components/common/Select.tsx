@@ -29,13 +29,13 @@ export default forwardRef(function Select(
         {({ isActive }) => (
           <InputField isActive={isActive}>
             <InputField.Label htmlFor={id}>{label}</InputField.Label>
-            <InputField.Input
+            {/* <InputField.Input
               css={visibilityHidden}
               defaultValue={value}
               tabIndex={-1}
               {...props}
               id={id}
-            />
+            /> */}
             <InputField.Input
               ref={ref}
               value={value}
@@ -46,12 +46,16 @@ export default forwardRef(function Select(
               readOnly
             />
             <InputField.Slot css={{ pointerEvents: 'none' }}>
-              <BiChevronRight
-                css={{
-                  fontSize: '16px',
-                  color: colors.LIGHT_GRAY,
-                }}
-              />
+              {(isActive) => {
+                return (
+                  <BiChevronRight
+                    css={{
+                      fontSize: '16px',
+                      color: isActive ? colors.DARK_GRAY : colors.LIGHT_GRAY,
+                    }}
+                  />
+                );
+              }}
             </InputField.Slot>
           </InputField>
         )}
